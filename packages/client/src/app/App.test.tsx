@@ -3,6 +3,7 @@ import App from './App';
 
 const appContent = 'Вот тут будет жить ваше приложение :)';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 global.fetch = jest.fn(() => {
   return Promise.resolve({ json: () => Promise.resolve('hey') });
