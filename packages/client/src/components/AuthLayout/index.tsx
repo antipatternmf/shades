@@ -1,14 +1,17 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import Loader from '../Loader';
+import { PathTo } from '../../constants';
 
 export default function AuthLayout() {
-  const isAuth = true;
+  const isAuth = false;
   const navigate = useNavigate();
 
-  if (!isAuth) {
-    navigate('/sign-in');
-  }
+  useEffect(() => {
+    if (!isAuth) {
+      navigate(PathTo.SIGN_IN);
+    }
+  }, [isAuth, navigate]);
 
   return (
     <main>

@@ -1,37 +1,36 @@
-import { lazy, useEffect } from 'react';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout';
 import PublicLayout from '../components/PublicLayout';
+import { useFetchServerData } from '../hooks';
+import { PathTo } from '../constants';
 
-const Profile = lazy(() => import('../pages/profile'));
+const Main = lazy(() => import('../pages/Main'));
+const SignUp = lazy(() => import('../pages/SignUp'));
+const SignIn = lazy(() => import('../pages/SignIn'));
+const Profile = lazy(() => import('../pages/Profile'));
+const LeaderBoard = lazy(() => import('../pages/LeaderBoard'));
+const Forum = lazy(() => import('../pages/Forum'));
+const Game = lazy(() => import('../pages/Game'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 function App() {
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${SERVER_PORT}`;
-      const response = await fetch(url);
-      const data = await response.json();
-
-      // eslint-disable-next-line no-console
-      console.log(data);
-    };
-
-    fetchServerData();
-  }, []);
-
+  useFetchServerData();
   return (
     <Routes>
-      <Route path="/" element={<PublicLayout />}>
-        <Route index element={<p>sign-in</p>} />
-        <Route path="sign-up" element={<p>sign-up</p>} />
+      <Route path={PathTo.MAIN} element={<PublicLayout />}>
+        <Route index element={<Main />} />
+        <Route path={PathTo.SIGN_UP} element={<SignUp />} />
+        <Route path={PathTo.SIGN_IN} element={<SignIn />} />
       </Route>
 
       <Route element={<AuthLayout />}>
-        <Route path="profile" element={<Profile />} />
-        <Route path="forum" element={<p>forum</p>} />
-        <Route path="game" element={<p>game</p>} />
+        <Route path={PathTo.PROFILE} element={<Profile />} />
+        <Route path={PathTo.LEADERBOARD} element={<LeaderBoard />} />
+        <Route path={PathTo.FORUM} element={<Forum />} />
+        <Route path={PathTo.GAME} element={<Game />} />
       </Route>
-      <Route path={'/*'} element={<p>not found</p>} />
+      <Route path={PathTo.NOT_FOUND} element={<NotFound />} />
     </Routes>
   );
 }
