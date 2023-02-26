@@ -1,6 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Suspense, useEffect } from 'react';
-import Loader from '../Loader';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { PathTo } from '../../constants';
 
@@ -17,9 +16,7 @@ export default function AuthLayout() {
 
   return (
     <main>
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
+      <Outlet />
     </main>
   );
 }

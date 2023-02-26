@@ -1,7 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import App from './App';
-
-const appContent = 'Вот тут будет жить ваше приложение :)';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -10,6 +8,9 @@ global.fetch = jest.fn(() => {
 });
 
 test('Example test', async () => {
-  render(<App />);
-  expect(screen.getByText(appContent)).toBeDefined();
+  const { getByText } = render(<App />);
+
+  await waitFor(() => getByText('Main'));
+
+  expect(getByText('Main')).toBeDefined();
 });

@@ -4,6 +4,7 @@ import AuthLayout from '../components/AuthLayout';
 import PublicLayout from '../components/PublicLayout';
 import { useFetchServerData } from '../hooks';
 import { PathTo } from '../constants';
+import { withRedux, withRouter } from '../hocs';
 
 const Main = lazy(() => import('../pages/Main'));
 const SignUp = lazy(() => import('../pages/SignUp'));
@@ -35,4 +36,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(withRedux(App));
