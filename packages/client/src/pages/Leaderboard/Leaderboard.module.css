@@ -1,0 +1,12 @@
+.leaderboard {
+    width: 850px;
+}
+
+.leaderboard__list {
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: decimal;
+    row-gap: 30px;
+    column-gap: 60px;
+}
