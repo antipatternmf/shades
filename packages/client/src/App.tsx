@@ -1,18 +1,25 @@
-import { useEffect } from 'react'
-import './App.css'
+import React from "react";
 
-function App() {
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
+import Home from "./pages/Home";
+import { SignIn } from "./pages/Entry";
+import { SignUp } from "./pages/Entry";
+import Game from "./pages/Game";
+import Account from "./pages/Account";
+import Forum from "./pages/Forum";
+import Leaderboard from "./pages/Leaderboard";
 
-    fetchServerData()
-  }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
-}
+const App = () => {
+    return (
+        <>
+            <Home />
+            {/* <SignIn />
+            <SignUp />
+            <Game />
+            <Account />
+            <Leaderboard />
+            <Forum /> */}
+        </>
+    );
+};
 
-export default App
+export default App;

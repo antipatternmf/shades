@@ -1,0 +1,53 @@
+:root {
+    --main-background-color: #f0f0f0;
+    --main-red-color: #e61e1e;
+    --main-red-hover-color: #d31c1c;
+    --main-red-active-color: #b61111;
+    --main-blue-color: #2382ff;
+    --main-blue-hover-color: #1874ec;
+    --main-blue-active-color: #1169db;
+    --border-input-color: rgb(0, 0, 0);
+    --background-input-color: #fafafa;
+    --placeholder-input-color: #7f7f7f;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--main-background-color);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img,
+button {
+    display: block;
+}
+
+.wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    padding: 30px 40px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
