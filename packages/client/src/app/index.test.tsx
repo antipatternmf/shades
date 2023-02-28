@@ -1,5 +1,5 @@
 import { render, waitFor } from '@testing-library/react';
-import App from './App';
+import App from './index';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
