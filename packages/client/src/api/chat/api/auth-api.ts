@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * Swagger
  * Web middle chats API
@@ -12,47 +10,32 @@
  * Do not edit the class manually.
  */
 
-import type { Configuration } from '../configuration'
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios'
-import globalAxios from 'axios'
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
+import type { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
-// @ts-ignore
 import {
   DUMMY_BASE_URL,
   assertParamExists,
-  setApiKeyToObject,
-  setBasicAuthToObject,
-  setBearerAuthToObject,
-  setOAuthToObject,
   setSearchParams,
   serializeDataIfNeeded,
   toPathString,
   createRequestFunction,
-} from '../common'
-// @ts-ignore
+} from '../common';
 import {
   BASE_PATH,
-  COLLECTION_FORMATS,
   RequestArgs,
   BaseAPI,
-  RequiredError,
-} from '../base'
-// @ts-ignore
-import { BadRequestError } from '../models'
-// @ts-ignore
-import { SignInRequest } from '../models'
-// @ts-ignore
-import { SignUpRequest } from '../models'
-// @ts-ignore
-import { SignUpResponse } from '../models'
-// @ts-ignore
-import { UserResponse } from '../models'
+} from '../base';
+import {
+  SignInRequest, SignUpRequest, SignUpResponse, UserResponse,
+} from '../models';
 /**
  * AuthApi - axios parameter creator
  * @export
  */
 export const AuthApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -62,37 +45,36 @@ export const AuthApiAxiosParamCreator = function (
      * @throws {RequiredError}
      */
     authLogoutPost: async (
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      const localVarPath = `/auth/logout`
+      const localVarPath = '/auth/logout';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'POST',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -103,46 +85,45 @@ export const AuthApiAxiosParamCreator = function (
      */
     authSigninPost: async (
       signInRequest: SignInRequest,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'signInRequest' is not null or undefined
-      assertParamExists('authSigninPost', 'signInRequest', signInRequest)
-      const localVarPath = `/auth/signin`
+      assertParamExists('authSigninPost', 'signInRequest', signInRequest);
+      const localVarPath = '/auth/signin';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'POST',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      localVarHeaderParameter['Content-Type'] = 'application/json'
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         signInRequest,
         localVarRequestOptions,
-        configuration
-      )
+        configuration,
+      );
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -153,46 +134,45 @@ export const AuthApiAxiosParamCreator = function (
      */
     authSignupPost: async (
       signUpRequest: SignUpRequest,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'signUpRequest' is not null or undefined
-      assertParamExists('authSignupPost', 'signUpRequest', signUpRequest)
-      const localVarPath = `/auth/signup`
+      assertParamExists('authSignupPost', 'signUpRequest', signUpRequest);
+      const localVarPath = '/auth/signup';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'POST',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      localVarHeaderParameter['Content-Type'] = 'application/json'
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         signUpRequest,
         localVarRequestOptions,
-        configuration
-      )
+        configuration,
+      );
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -201,47 +181,46 @@ export const AuthApiAxiosParamCreator = function (
      * @throws {RequiredError}
      */
     authUserGet: async (
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      const localVarPath = `/auth/user`
+      const localVarPath = '/auth/user';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'GET',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
-  }
-}
+  };
+};
 
 /**
  * AuthApi - functional programming interface
  * @export
  */
 export const AuthApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration)
+  const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration);
   return {
     /**
      *
@@ -250,19 +229,19 @@ export const AuthApiFp = function (configuration?: Configuration) {
      * @throws {RequiredError}
      */
     async authLogoutPost(
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.authLogoutPost(
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -273,20 +252,20 @@ export const AuthApiFp = function (configuration?: Configuration) {
      */
     async authSigninPost(
       signInRequest: SignInRequest,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.authSigninPost(
         signInRequest,
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -297,20 +276,20 @@ export const AuthApiFp = function (configuration?: Configuration) {
      */
     async authSignupPost(
       signUpRequest: SignUpRequest,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SignUpResponse>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.authSignupPost(
         signUpRequest,
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -319,22 +298,22 @@ export const AuthApiFp = function (configuration?: Configuration) {
      * @throws {RequiredError}
      */
     async authUserGet(
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.authUserGet(
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
-  }
-}
+  };
+};
 
 /**
  * AuthApi - factory interface
@@ -343,9 +322,9 @@ export const AuthApiFp = function (configuration?: Configuration) {
 export const AuthApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
-  const localVarFp = AuthApiFp(configuration)
+  const localVarFp = AuthApiFp(configuration);
   return {
     /**
      *
@@ -356,7 +335,7 @@ export const AuthApiFactory = function (
     authLogoutPost(options?: any): AxiosPromise<void> {
       return localVarFp
         .authLogoutPost(options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -367,11 +346,11 @@ export const AuthApiFactory = function (
      */
     authSigninPost(
       signInRequest: SignInRequest,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .authSigninPost(signInRequest, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -382,11 +361,11 @@ export const AuthApiFactory = function (
      */
     authSignupPost(
       signUpRequest: SignUpRequest,
-      options?: any
+      options?: any,
     ): AxiosPromise<SignUpResponse> {
       return localVarFp
         .authSignupPost(signUpRequest, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -397,10 +376,10 @@ export const AuthApiFactory = function (
     authUserGet(options?: any): AxiosPromise<UserResponse> {
       return localVarFp
         .authUserGet(options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
-  }
-}
+  };
+};
 
 /**
  * AuthApi - interface
@@ -470,7 +449,7 @@ export class AuthApi extends BaseAPI implements AuthApiInterface {
   public authLogoutPost(options?: AxiosRequestConfig) {
     return AuthApiFp(this.configuration)
       .authLogoutPost(options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -483,11 +462,11 @@ export class AuthApi extends BaseAPI implements AuthApiInterface {
    */
   public authSigninPost(
     signInRequest: SignInRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) {
     return AuthApiFp(this.configuration)
       .authSigninPost(signInRequest, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -500,11 +479,11 @@ export class AuthApi extends BaseAPI implements AuthApiInterface {
    */
   public authSignupPost(
     signUpRequest: SignUpRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) {
     return AuthApiFp(this.configuration)
       .authSignupPost(signUpRequest, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -517,6 +496,6 @@ export class AuthApi extends BaseAPI implements AuthApiInterface {
   public authUserGet(options?: AxiosRequestConfig) {
     return AuthApiFp(this.configuration)
       .authUserGet(options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 }

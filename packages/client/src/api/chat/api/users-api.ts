@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * Swagger
  * Web middle chats API
@@ -12,47 +10,33 @@
  * Do not edit the class manually.
  */
 
-import type { Configuration } from '../configuration'
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios'
-import globalAxios from 'axios'
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
+import type { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
-// @ts-ignore
 import {
   DUMMY_BASE_URL,
   assertParamExists,
-  setApiKeyToObject,
-  setBasicAuthToObject,
-  setBearerAuthToObject,
-  setOAuthToObject,
   setSearchParams,
   serializeDataIfNeeded,
   toPathString,
   createRequestFunction,
-} from '../common'
-// @ts-ignore
+} from '../common';
 import {
   BASE_PATH,
-  COLLECTION_FORMATS,
   RequestArgs,
   BaseAPI,
-  RequiredError,
-} from '../base'
-// @ts-ignore
-import { BadRequestError } from '../models'
-// @ts-ignore
-import { ChangePasswordRequest } from '../models'
-// @ts-ignore
-import { FindUserRequest } from '../models'
-// @ts-ignore
-import { UserResponse } from '../models'
-// @ts-ignore
-import { UserUpdateRequest } from '../models'
+} from '../base';
+import {
+  ChangePasswordRequest, FindUserRequest, UserUpdateRequest, UserResponse,
+} from '../models';
+
 /**
  * UsersApi - axios parameter creator
  * @export
  */
 export const UsersApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -64,42 +48,41 @@ export const UsersApiAxiosParamCreator = function (
      */
     userIdGet: async (
       id: any,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'id' is not null or undefined
-      assertParamExists('userIdGet', 'id', id)
-      const localVarPath = `/user/{id}`.replace(
+      assertParamExists('userIdGet', 'id', id);
+      const localVarPath = '/user/{id}'.replace(
         `{${'id'}}`,
-        encodeURIComponent(String(id))
-      )
+        encodeURIComponent(String(id)),
+      );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'GET',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -110,50 +93,49 @@ export const UsersApiAxiosParamCreator = function (
      */
     userPasswordPut: async (
       changePasswordRequest: ChangePasswordRequest,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'changePasswordRequest' is not null or undefined
       assertParamExists(
         'userPasswordPut',
         'changePasswordRequest',
-        changePasswordRequest
-      )
-      const localVarPath = `/user/password`
+        changePasswordRequest,
+      );
+      const localVarPath = '/user/password';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'PUT',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      localVarHeaderParameter['Content-Type'] = 'application/json'
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         changePasswordRequest,
         localVarRequestOptions,
-        configuration
-      )
+        configuration,
+      );
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -164,49 +146,48 @@ export const UsersApiAxiosParamCreator = function (
      */
     userProfileAvatarPut: async (
       avatar: File,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'avatar' is not null or undefined
-      assertParamExists('userProfileAvatarPut', 'avatar', avatar)
-      const localVarPath = `/user/profile/avatar`
+      assertParamExists('userProfileAvatarPut', 'avatar', avatar);
+      const localVarPath = '/user/profile/avatar';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'PUT',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
-      const localVarFormParams = new ((configuration &&
-        configuration.formDataCtor) ||
-        FormData)()
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+      const localVarFormParams = new ((configuration
+          && configuration.formDataCtor)
+        || FormData)();
 
       if (avatar !== undefined) {
-        localVarFormParams.append('avatar', avatar as any)
+        localVarFormParams.append('avatar', avatar as any);
       }
 
-      localVarHeaderParameter['Content-Type'] = 'multipart/form-data'
+      localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
-      localVarRequestOptions.data = localVarFormParams
+      };
+      localVarRequestOptions.data = localVarFormParams;
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -217,46 +198,45 @@ export const UsersApiAxiosParamCreator = function (
      */
     userProfilePut: async (
       userRequest: UserUpdateRequest,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'userRequest' is not null or undefined
-      assertParamExists('userProfilePut', 'userRequest', userRequest)
-      const localVarPath = `/user/profile`
+      assertParamExists('userProfilePut', 'userRequest', userRequest);
+      const localVarPath = '/user/profile';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'PUT',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      localVarHeaderParameter['Content-Type'] = 'application/json'
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         userRequest,
         localVarRequestOptions,
-        configuration
-      )
+        configuration,
+      );
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -267,56 +247,55 @@ export const UsersApiAxiosParamCreator = function (
      */
     userSearchPost: async (
       findUserRequest: FindUserRequest,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'findUserRequest' is not null or undefined
-      assertParamExists('userSearchPost', 'findUserRequest', findUserRequest)
-      const localVarPath = `/user/search`
+      assertParamExists('userSearchPost', 'findUserRequest', findUserRequest);
+      const localVarPath = '/user/search';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'POST',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      localVarHeaderParameter['Content-Type'] = 'application/json'
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         findUserRequest,
         localVarRequestOptions,
-        configuration
-      )
+        configuration,
+      );
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
-  }
-}
+  };
+};
 
 /**
  * UsersApi - functional programming interface
  * @export
  */
 export const UsersApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration)
+  const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration);
   return {
     /**
      *
@@ -327,20 +306,20 @@ export const UsersApiFp = function (configuration?: Configuration) {
      */
     async userIdGet(
       id: any,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.userIdGet(
         id,
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -351,20 +330,20 @@ export const UsersApiFp = function (configuration?: Configuration) {
      */
     async userPasswordPut(
       changePasswordRequest: ChangePasswordRequest,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.userPasswordPut(
         changePasswordRequest,
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -375,18 +354,18 @@ export const UsersApiFp = function (configuration?: Configuration) {
      */
     async userProfileAvatarPut(
       avatar: File,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>
-    > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.userProfileAvatarPut(avatar, options)
+      > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator
+        .userProfileAvatarPut(avatar, options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -397,20 +376,20 @@ export const UsersApiFp = function (configuration?: Configuration) {
      */
     async userProfilePut(
       userRequest: UserUpdateRequest,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.userProfilePut(
         userRequest,
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -421,26 +400,26 @@ export const UsersApiFp = function (configuration?: Configuration) {
      */
     async userSearchPost(
       findUserRequest: FindUserRequest,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<Array<UserResponse>>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.userSearchPost(
         findUserRequest,
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
-  }
-}
+  };
+};
 
 /**
  * UsersApi - factory interface
@@ -449,9 +428,9 @@ export const UsersApiFp = function (configuration?: Configuration) {
 export const UsersApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
-  const localVarFp = UsersApiFp(configuration)
+  const localVarFp = UsersApiFp(configuration);
   return {
     /**
      *
@@ -463,7 +442,7 @@ export const UsersApiFactory = function (
     userIdGet(id: any, options?: any): AxiosPromise<UserResponse> {
       return localVarFp
         .userIdGet(id, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -474,11 +453,11 @@ export const UsersApiFactory = function (
      */
     userPasswordPut(
       changePasswordRequest: ChangePasswordRequest,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .userPasswordPut(changePasswordRequest, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -489,11 +468,11 @@ export const UsersApiFactory = function (
      */
     userProfileAvatarPut(
       avatar: File,
-      options?: any
+      options?: any,
     ): AxiosPromise<UserResponse> {
       return localVarFp
         .userProfileAvatarPut(avatar, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -504,11 +483,11 @@ export const UsersApiFactory = function (
      */
     userProfilePut(
       userRequest: UserUpdateRequest,
-      options?: any
+      options?: any,
     ): AxiosPromise<UserResponse> {
       return localVarFp
         .userProfilePut(userRequest, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -519,14 +498,14 @@ export const UsersApiFactory = function (
      */
     userSearchPost(
       findUserRequest: FindUserRequest,
-      options?: any
+      options?: any,
     ): AxiosPromise<Array<UserResponse>> {
       return localVarFp
         .userSearchPost(findUserRequest, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
-  }
-}
+  };
+};
 
 /**
  * UsersApi - interface
@@ -544,7 +523,7 @@ export interface UsersApiInterface {
    */
   userIdGet(id: any, options?: AxiosRequestConfig): AxiosPromise<UserResponse>
 
-  /**
+  ;/**
    *
    * @summary Change user password
    * @param {ChangePasswordRequest} changePasswordRequest Password request
@@ -554,10 +533,10 @@ export interface UsersApiInterface {
    */
   userPasswordPut(
     changePasswordRequest: ChangePasswordRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): AxiosPromise<void>
 
-  /**
+  ; /**
    *
    * @summary Change user avatar
    * @param {File} avatar Avatar
@@ -567,10 +546,10 @@ export interface UsersApiInterface {
    */
   userProfileAvatarPut(
     avatar: File,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): AxiosPromise<UserResponse>
 
-  /**
+  ; /**
    *
    * @summary Change user profile
    * @param {UserUpdateRequest} userRequest User data
@@ -580,9 +559,9 @@ export interface UsersApiInterface {
    */
   userProfilePut(
     userRequest: UserUpdateRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): AxiosPromise<UserResponse>
-
+  ;
   /**
    *
    * @summary Search for user by login (max 10)
@@ -593,8 +572,8 @@ export interface UsersApiInterface {
    */
   userSearchPost(
     findUserRequest: FindUserRequest,
-    options?: AxiosRequestConfig
-  ): AxiosPromise<Array<UserResponse>>
+    options?: AxiosRequestConfig,
+  ): AxiosPromise<Array<UserResponse>>;
 }
 
 /**
@@ -615,7 +594,7 @@ export class UsersApi extends BaseAPI implements UsersApiInterface {
   public userIdGet(id: any, options?: AxiosRequestConfig) {
     return UsersApiFp(this.configuration)
       .userIdGet(id, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -628,11 +607,11 @@ export class UsersApi extends BaseAPI implements UsersApiInterface {
    */
   public userPasswordPut(
     changePasswordRequest: ChangePasswordRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) {
     return UsersApiFp(this.configuration)
       .userPasswordPut(changePasswordRequest, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -646,7 +625,7 @@ export class UsersApi extends BaseAPI implements UsersApiInterface {
   public userProfileAvatarPut(avatar: File, options?: AxiosRequestConfig) {
     return UsersApiFp(this.configuration)
       .userProfileAvatarPut(avatar, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -659,11 +638,11 @@ export class UsersApi extends BaseAPI implements UsersApiInterface {
    */
   public userProfilePut(
     userRequest: UserUpdateRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) {
     return UsersApiFp(this.configuration)
       .userProfilePut(userRequest, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -676,10 +655,10 @@ export class UsersApi extends BaseAPI implements UsersApiInterface {
    */
   public userSearchPost(
     findUserRequest: FindUserRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) {
     return UsersApiFp(this.configuration)
       .userSearchPost(findUserRequest, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 }

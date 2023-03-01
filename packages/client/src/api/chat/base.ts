@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * Swagger
  * Web middle chats API
@@ -12,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import type { Configuration } from './configuration'
 // Some imports not used depending on template conditions
-// @ts-ignore
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios'
-import globalAxios from 'axios'
+// eslint-disable-next-line max-classes-per-file
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
+import type { Configuration } from './configuration';
 
-export const BASE_PATH = 'https://ya-praktikum.tech/api/v2'.replace(/\/+$/, '')
+export const BASE_PATH = 'https://ya-praktikum.tech/api/v2'.replace(/\/+$/, '');
 
 /**
  *
@@ -29,7 +27,7 @@ export const COLLECTION_FORMATS = {
   ssv: ' ',
   tsv: '\t',
   pipes: '|',
-}
+};
 
 /**
  *
@@ -47,16 +45,16 @@ export interface RequestArgs {
  * @class BaseAPI
  */
 export class BaseAPI {
-  protected configuration: Configuration | undefined
+  protected configuration: Configuration | undefined;
 
   constructor(
     configuration?: Configuration,
     protected basePath: string = BASE_PATH,
-    protected axios: AxiosInstance = globalAxios
+    protected axios: AxiosInstance = globalAxios,
   ) {
     if (configuration) {
-      this.configuration = configuration
-      this.basePath = configuration.basePath || this.basePath
+      this.configuration = configuration;
+      this.basePath = configuration.basePath || this.basePath;
     }
   }
 }
@@ -69,7 +67,7 @@ export class BaseAPI {
  */
 export class RequiredError extends Error {
   constructor(public field: string, msg?: string) {
-    super(msg)
-    this.name = 'RequiredError'
+    super(msg);
+    this.name = 'RequiredError';
   }
 }

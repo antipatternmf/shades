@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * Swagger
  * Web middle chats API
@@ -12,43 +10,31 @@
  * Do not edit the class manually.
  */
 
-import type { Configuration } from '../configuration'
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios'
-import globalAxios from 'axios'
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
+import type { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
-// @ts-ignore
 import {
   DUMMY_BASE_URL,
   assertParamExists,
-  setApiKeyToObject,
-  setBasicAuthToObject,
-  setBearerAuthToObject,
-  setOAuthToObject,
   setSearchParams,
   serializeDataIfNeeded,
   toPathString,
   createRequestFunction,
-} from '../common'
-// @ts-ignore
+} from '../common';
 import {
   BASE_PATH,
-  COLLECTION_FORMATS,
   RequestArgs,
   BaseAPI,
-  RequiredError,
-} from '../base'
-// @ts-ignore
-import { BadRequestError } from '../models'
-// @ts-ignore
-import { OauthSignInRequest } from '../models'
-// @ts-ignore
-import { ServiceId } from '../models'
+} from '../base';
+import { OauthSignInRequest, ServiceId } from '../models';
+
 /**
  * OauthApi - axios parameter creator
  * @export
  */
 export const OauthApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -60,50 +46,49 @@ export const OauthApiAxiosParamCreator = function (
      */
     oauthYandexPost: async (
       oauthSignInRequest: OauthSignInRequest,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'oauthSignInRequest' is not null or undefined
       assertParamExists(
         'oauthYandexPost',
         'oauthSignInRequest',
-        oauthSignInRequest
-      )
-      const localVarPath = `/oauth/yandex`
+        oauthSignInRequest,
+      );
+      const localVarPath = '/oauth/yandex';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'POST',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-      localVarHeaderParameter['Content-Type'] = 'application/json'
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         oauthSignInRequest,
         localVarRequestOptions,
-        configuration
-      )
+        configuration,
+      );
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
     /**
      *
@@ -114,51 +99,50 @@ export const OauthApiAxiosParamCreator = function (
      */
     oauthYandexServiceIdGet: async (
       redirectUri?: string,
-      options: AxiosRequestConfig = {}
+      options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      const localVarPath = `/oauth/yandex/service-id`
+      const localVarPath = '/oauth/yandex/service-id';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL)
-      let baseOptions
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
       if (configuration) {
-        baseOptions = configuration.baseOptions
+        baseOptions = configuration.baseOptions;
       }
 
       const localVarRequestOptions = {
         method: 'GET',
         ...baseOptions,
         ...options,
-      }
-      const localVarHeaderParameter = {} as any
-      const localVarQueryParameter = {} as any
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
       if (redirectUri !== undefined) {
-        localVarQueryParameter['redirect_uri'] = redirectUri
+        localVarQueryParameter.redirect_uri = redirectUri;
       }
 
-      setSearchParams(localVarUrlObj, localVarQueryParameter)
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {}
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
         ...options.headers,
-      }
+      };
 
       return {
         url: toPathString(localVarUrlObj),
         options: localVarRequestOptions,
-      }
+      };
     },
-  }
-}
+  };
+};
 
 /**
  * OauthApi - functional programming interface
  * @export
  */
 export const OauthApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = OauthApiAxiosParamCreator(configuration)
+  const localVarAxiosParamCreator = OauthApiAxiosParamCreator(configuration);
   return {
     /**
      *
@@ -169,20 +153,20 @@ export const OauthApiFp = function (configuration?: Configuration) {
      */
     async oauthYandexPost(
       oauthSignInRequest: OauthSignInRequest,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-    > {
+      > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.oauthYandexPost(
         oauthSignInRequest,
-        options
-      )
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
     /**
      *
@@ -193,24 +177,23 @@ export const OauthApiFp = function (configuration?: Configuration) {
      */
     async oauthYandexServiceIdGet(
       redirectUri?: string,
-      options?: AxiosRequestConfig
+      options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceId>
-    > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.oauthYandexServiceIdGet(
-          redirectUri,
-          options
-        )
+      > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.oauthYandexServiceIdGet(
+        redirectUri,
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
-      )
+        configuration,
+      );
     },
-  }
-}
+  };
+};
 
 /**
  * OauthApi - factory interface
@@ -219,9 +202,9 @@ export const OauthApiFp = function (configuration?: Configuration) {
 export const OauthApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
-  const localVarFp = OauthApiFp(configuration)
+  const localVarFp = OauthApiFp(configuration);
   return {
     /**
      *
@@ -232,11 +215,11 @@ export const OauthApiFactory = function (
      */
     oauthYandexPost(
       oauthSignInRequest: OauthSignInRequest,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .oauthYandexPost(oauthSignInRequest, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
     /**
      *
@@ -247,14 +230,14 @@ export const OauthApiFactory = function (
      */
     oauthYandexServiceIdGet(
       redirectUri?: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<ServiceId> {
       return localVarFp
         .oauthYandexServiceIdGet(redirectUri, options)
-        .then(request => request(axios, basePath))
+        .then((request) => request(axios, basePath));
     },
-  }
-}
+  };
+};
 
 /**
  * OauthApi - interface
@@ -272,9 +255,9 @@ export interface OauthApiInterface {
    */
   oauthYandexPost(
     oauthSignInRequest: OauthSignInRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ): AxiosPromise<void>
-
+  ;
   /**
    *
    * @summary Get service id
@@ -285,8 +268,8 @@ export interface OauthApiInterface {
    */
   oauthYandexServiceIdGet(
     redirectUri?: string,
-    options?: AxiosRequestConfig
-  ): AxiosPromise<ServiceId>
+    options?: AxiosRequestConfig,
+  ): AxiosPromise<ServiceId>;
 }
 
 /**
@@ -306,11 +289,11 @@ export class OauthApi extends BaseAPI implements OauthApiInterface {
    */
   public oauthYandexPost(
     oauthSignInRequest: OauthSignInRequest,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) {
     return OauthApiFp(this.configuration)
       .oauthYandexPost(oauthSignInRequest, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 
   /**
@@ -323,10 +306,10 @@ export class OauthApi extends BaseAPI implements OauthApiInterface {
    */
   public oauthYandexServiceIdGet(
     redirectUri?: string,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) {
     return OauthApiFp(this.configuration)
       .oauthYandexServiceIdGet(redirectUri, options)
-      .then(request => request(this.axios, this.basePath))
+      .then((request) => request(this.axios, this.basePath));
   }
 }

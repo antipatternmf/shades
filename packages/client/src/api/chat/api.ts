@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * Swagger
  * Web middle chats API
@@ -12,12 +10,6 @@
  * Do not edit the class manually.
  */
 
-export * from './api/auth-api'
-export * from './api/charts-api'
-export * from './api/chats-api'
-export * from './api/leaderboard-api'
-export * from './api/oauth-api'
-export * from './api/resources-api'
-export * from './api/stickers-api'
-export * from './api/users-api'
-export * from './api/videos-api'
+export * from './api/auth-api';
+export * from './api/oauth-api';
+export * from './api/users-api';
