@@ -1,1 +1,0 @@
-export { PathTo } from './pathTo';

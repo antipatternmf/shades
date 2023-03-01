@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout';
 import PublicLayout from '../components/PublicLayout';
 import { useFetchServerData } from '../hooks';
-import { PathTo } from '../constants';
 import { withRedux, withRouter } from '../hocs';
 
 const Main = lazy(() => import('../pages/Main'));
@@ -19,19 +18,19 @@ function App() {
   useFetchServerData();
   return (
     <Routes>
-      <Route path={PathTo.MAIN} element={<PublicLayout />}>
+      <Route path="/" element={<PublicLayout />}>
         <Route index element={<Main />} />
-        <Route path={PathTo.SIGN_UP} element={<SignUp />} />
-        <Route path={PathTo.SIGN_IN} element={<SignIn />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="sign-in" element={<SignIn />} />
       </Route>
 
       <Route element={<AuthLayout />}>
-        <Route path={PathTo.PROFILE} element={<Profile />} />
-        <Route path={PathTo.LEADERBOARD} element={<LeaderBoard />} />
-        <Route path={PathTo.FORUM} element={<Forum />} />
-        <Route path={PathTo.GAME} element={<Game />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="leaderboard" element={<LeaderBoard />} />
+        <Route path="forum" element={<Forum />} />
+        <Route path="game" element={<Game />} />
       </Route>
-      <Route path={PathTo.NOT_FOUND} element={<NotFound />} />
+      <Route path={'/*'} element={<NotFound />} />
     </Routes>
   );
 }
