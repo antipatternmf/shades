@@ -1,1 +1,0 @@
-export { useFetchServerData } from './useFetchServerData';

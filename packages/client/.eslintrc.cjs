@@ -25,6 +25,10 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/react-in-jsx-scope': 0,
-    '@typescript-eslint/ban-ts-comment': 1
+    '@typescript-eslint/ban-ts-comment': 1,
+    "react/jsx-boolean-value": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
   },
 };

@@ -1,0 +1,34 @@
+.leaderboard {
+  &__user {
+    position: relative;
+    flex-basis: calc(50% - 30px);
+    display: flex;
+    align-items: center;
+  }
+  
+  &__userCount {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  &__userLogo {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin-left: 35px;
+    margin-right: 15px;
+    border-radius: 50%;
+    background-color: var(--main-background-color);
+  }
+  
+  &__userName {
+    flex: 1;
+    font-size: 16px;
+  }
+  
+  &__userScore {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}

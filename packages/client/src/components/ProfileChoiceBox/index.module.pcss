@@ -1,0 +1,42 @@
+.profile {
+  &__choiceBox {
+    margin-top: 30px;
+    margin-left: 15px;
+  }
+
+  &__choiceWrapp:not(:first-child) {
+    margin-top: 5px;
+  }
+
+  &__choiceLink {
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  &__choiceLink.exit {
+    color: var(--main-red-color);
+  }
+
+  &__choiceLink.exit:hover {
+    color: var(--main-red-hover-color);
+  }
+
+  &__choiceLink.exit:active {
+    color: var(--main-red-active-color);
+  }
+
+  &__choiceLink {
+    color: var(--main-blue-color);
+  }
+
+  &__choiceLink:hover {
+    color: var(--main-blue-hover-color);
+    text-decoration: underline;
+  }
+
+  &__choiceLink:active {
+    color: var(--main-blue-active-color);
+    text-decoration: none;
+  }
+}

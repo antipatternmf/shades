@@ -1,15 +1,12 @@
-import classNames from 'classnames/bind';
-
 import React from 'react';
-import styles from './style.module.pcss';
-
-const cx = classNames.bind(styles);
+import SideBar from '../../components/SideBar';
+// import styled from "./index.module.pcss";
 
 function Game() {
   return (
-    <div className={cx('container')}>
-      Game
-    </div>
+    <main className="wrapper">
+      <SideBar path="/" />
+    </main>
   );
 }
 

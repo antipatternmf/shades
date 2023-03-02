@@ -1,15 +1,70 @@
-import classNames from 'classnames/bind';
-
 import React from 'react';
-import styles from './style.module.pcss';
-
-const cx = classNames.bind(styles);
+import LeaderBoardUser from '../../components/LeaderBoardUser';
+import SideBar from '../../components/SideBar';
+import styled from './index.module.pcss';
 
 function LeaderBoard() {
+  const arr = [
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+    {
+      nickname: 'Nick_Name',
+      score: 10000,
+    },
+  ];
+
   return (
-    <div className={cx('container')}>
-      LeaderBoard
-    </div>
+    <main className="wrapper">
+      <div className={['container', styled.leaderboard].join(' ')}>
+        <ul className={styled.leaderboard__list}>
+          {
+            arr.map((user, count) => (
+              <LeaderBoardUser
+                key={Math.random()}
+                count={count + 1}
+                nickname={user.nickname}
+                score={user.score}
+              />
+            ))
+          }
+        </ul>
+      </div>
+      <SideBar path="/" />
+    </main>
   );
 }
 
