@@ -1,18 +1,19 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AuthLayout from '../components/AuthLayout';
-import PublicLayout from '../components/PublicLayout';
-import { useFetchServerData } from '../hooks';
-import { withRedux, withRouter } from '../hocs';
+import PublicLayout from 'components/PublicLayout';
+import AuthLayout from 'components/AuthLayout';
 
-const Main = lazy(() => import('../pages/Main'));
-const SignUp = lazy(() => import('../pages/SignUp'));
-const SignIn = lazy(() => import('../pages/SignIn'));
-const Profile = lazy(() => import('../pages/Profile'));
-const LeaderBoard = lazy(() => import('../pages/LeaderBoard'));
-const Forum = lazy(() => import('../pages/Forum'));
-const Game = lazy(() => import('../pages/Game'));
-const NotFound = lazy(() => import('../pages/NotFound'));
+import { useFetchServerData } from 'hooks';
+import { withRedux, withRouter } from 'hocs';
+
+const Main = lazy(() => import('pages/Main'));
+const SignUp = lazy(() => import('pages/SignUp'));
+const SignIn = lazy(() => import('pages/SignIn'));
+const Profile = lazy(() => import('pages/Profile'));
+const LeaderBoard = lazy(() => import('pages/LeaderBoard'));
+const Forum = lazy(() => import('pages/Forum'));
+const Game = lazy(() => import('pages/Game'));
+const NotFound = lazy(() => import('pages/NotFound'));
 
 function App() {
   useFetchServerData();
