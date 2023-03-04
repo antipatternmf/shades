@@ -5,7 +5,7 @@ import PublicLayout from '../components/PublicLayout';
 import { useFetchServerData } from '../hooks';
 import { withRedux, withRouter } from '../hocs';
 
-const Home = lazy(() => import('../pages/Home'));
+const Main = lazy(() => import('../pages/Main'));
 const SignUp = lazy(() => import('../pages/Entry/SignUp'));
 const SignIn = lazy(() => import('../pages/Entry/SignIn'));
 const Profile = lazy(() => import('../pages/Profile'));
@@ -19,7 +19,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<PublicLayout />}>
-        <Route index element={<Home />} />
+        <Route index element={<Main />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="sign-in" element={<SignIn />} />
       </Route>
