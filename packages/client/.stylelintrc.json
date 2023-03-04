@@ -1,7 +1,7 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "color-hex-case": "upper",
+    "color-hex-case": "lower",
     "color-hex-length": "long",
     "import-notation": "string",
     "indentation":  2,
