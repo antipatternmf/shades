@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useAppSelector } from 'store';
 import { selectUser } from 'reducers/user';
 
-export default function AuthLayout() {
+export function AuthLayout() {
   const navigate = useNavigate();
   const location = useLocation();
 

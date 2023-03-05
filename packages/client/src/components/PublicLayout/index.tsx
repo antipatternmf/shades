@@ -7,7 +7,7 @@ import { selectUser, userGet } from 'reducers/user';
 
 const withoutRequest = ['/', '/sign-up', '/sign-in'];
 
-function PublicLayout() {
+export function PublicLayout() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,5 +33,3 @@ function PublicLayout() {
     </main>
   );
 }
-
-export default PublicLayout;
