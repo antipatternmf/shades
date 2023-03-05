@@ -2,9 +2,9 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PublicLayout from 'components/PublicLayout';
 import AuthLayout from 'components/AuthLayout';
-
-import { useFetchServerData } from 'hooks';
-import { withRedux, withRouter } from 'hocs';
+import { useFetchServerData } from 'hooks/useFetchServerData';
+import { withRouter } from 'hocs/withRouter';
+import { withRedux } from 'hocs/withRedux';
 
 const Main = lazy(() => import('pages/Main'));
 const SignUp = lazy(() => import('pages/SignUp'));
@@ -19,8 +19,8 @@ function App() {
   useFetchServerData();
   return (
     <Routes>
-      <Route path="/" element={<PublicLayout />}>
-        <Route index element={<Main />} />
+      <Route path="/" element={<Main />} />
+      <Route element={<PublicLayout />}>
         <Route path="sign-up" element={<SignUp />} />
         <Route path="sign-in" element={<SignIn />} />
       </Route>
