@@ -25,6 +25,8 @@
       "pages/*": ["pages/*"],
       "reducers/*": ["reducers/*"],
       "store/*": ["store/*"],
+      "constants/*": ["constants/*"],
+      "utils/*": ["utils/*"]
     }
   },
   "include": ["src"],

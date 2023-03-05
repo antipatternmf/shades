@@ -22,6 +22,8 @@ export default defineConfig({
       pages: '/src/pages',
       reducers: '/src/reducers',
       store: '/src/store',
+      constants: 'src/constants',
+      utils: 'src/utils',
     },
   },
   plugins: [react()],
