@@ -1,10 +1,10 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useFetchServerData } from 'hooks/useFetchServerData';
-import { withRouter } from 'hocs/withRouter';
-import { withRedux } from 'hocs/withRedux';
+
 import { PublicLayout } from 'components/PublicLayout';
 import { AuthLayout } from 'components/AuthLayout';
+import { useFetchServerData } from 'hooks';
+import { withRedux, withRouter } from 'hocs';
 
 const Main = lazy(() => import('pages/Main'));
 const SignUp = lazy(() => import('pages/SignUp'));
