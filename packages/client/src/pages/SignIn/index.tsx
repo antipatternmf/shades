@@ -2,12 +2,12 @@ import classNames from 'classnames/bind';
 
 import React from 'react';
 import { useAppDispatch } from 'store/hooks';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import InputTmp from 'components/InputTmp';
 import { SignInFields, signInFields, signInSchema as schema } from 'pages/SignIn/config/config';
 import { signIn } from 'reducers/user/thunks';
 import { Link, useLocation } from 'react-router-dom';
+import { InputTmp } from 'components/InputTmp';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
@@ -17,7 +17,7 @@ function SignIn() {
 
   const dispatch = useAppDispatch();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<SignInFields>({
+  const { handleSubmit, control } = useForm<SignInFields>({
     resolver: yupResolver(schema),
   });
 
@@ -31,12 +31,20 @@ function SignIn() {
       <form onSubmit={handleSubmit(onSubmitHandle)}>
         {signInFields.map(({ name, type }) => {
           return (
-            <InputTmp
+            <Controller
               key={name}
-              label={name}
-              error={errors[name]?.message}
-              register={register}
-              type={type}
+              defaultValue=""
+              control={control}
+              render={({ field: { ref, ...rest }, fieldState: { error } }) => (
+                <InputTmp
+                  placeholder={name}
+                  innerRef={ref}
+                  error={error?.message}
+                  type={type}
+                  {...rest}
+                />
+              )}
+              name={name}
             />
           );
         })}

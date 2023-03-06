@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import InputTmp from 'components/InputTmp';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { InputTmp } from 'components/InputTmp';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUp } from 'reducers/user';
 import { useAppDispatch } from 'store/hooks';
@@ -16,7 +16,7 @@ function SignUp() {
 
   const dispatch = useAppDispatch();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<SignUpFields>({
+  const { control, handleSubmit } = useForm<SignUpFields>({
     resolver: yupResolver(schema),
   });
 
@@ -30,12 +30,20 @@ function SignUp() {
       <form onSubmit={handleSubmit(onSubmitHandle)}>
         {signUpFields.map(({ name, type }) => {
           return (
-            <InputTmp
+            <Controller
               key={name}
-              label={name}
-              error={errors[name]?.message}
-              register={register}
-              type={type}
+              defaultValue=""
+              control={control}
+              render={({ field: { ref, ...rest }, fieldState: { error } }) => (
+                <InputTmp
+                  placeholder={name}
+                  innerRef={ref}
+                  error={error?.message}
+                  type={type}
+                  {...rest}
+                />
+              )}
+              name={name}
             />
           );
         })}
