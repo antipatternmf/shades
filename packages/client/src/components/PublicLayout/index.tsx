@@ -1,34 +1,16 @@
-import {
-  Link, Outlet, useLocation, useNavigate,
-} from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { useEffect } from 'react';
-import { selectUser, userGet } from 'reducers/user';
-
-const withoutRequest = ['/', '/sign-up', '/sign-in'];
+import { Navigate, Outlet } from 'react-router-dom';
+import { useAppSelector } from 'store/hooks';
+import { selectUser } from 'reducers/user';
 
 export function PublicLayout() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const isAuth = useAppSelector(selectUser.isAuth);
 
-  const dispatch = useAppDispatch();
-
-  const userInfo = useAppSelector(selectUser.info);
-  const status = useAppSelector(selectUser.status);
-
-  useEffect(() => {
-    if (!userInfo && !withoutRequest.includes(location.state?.from.pathname)) {
-      dispatch(userGet());
-    } else if (userInfo) {
-      navigate('/');
-    }
-  }, [dispatch, userInfo, navigate, location.state]);
-
-  if (status === 'pending') return null;
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <main>
-      <Link to="/" state={{ from: location }}>Main</Link>
       <Outlet />
     </main>
   );
