@@ -1,4 +1,4 @@
-export { name, setUserIsAuth, default as userReducer } from './reducer';
+export { name, default as userReducer } from './reducer';
 export {
   signUp, signIn, userGet, userLogout,
 } from './thunks';
