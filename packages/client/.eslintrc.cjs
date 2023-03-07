@@ -20,6 +20,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'off',
     'no-param-reassign': 'off',
     'arrow-body-style': 0,
     'class-methods-use-this': 0,

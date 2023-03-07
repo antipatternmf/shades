@@ -15,7 +15,20 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "api/*": ["api/*"],
+      "assets/*": ["assets/*"],
+      "components/*": ["components/*"],
+      "hocs/*": ["hocs/*"],
+      "hooks/*": ["hooks/*"],
+      "pages/*": ["pages/*"],
+      "reducers/*": ["reducers/*"],
+      "store/*": ["store/*"],
+      "constants/*": ["constants/*"],
+      "utils/*": ["utils/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

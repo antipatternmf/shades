@@ -30,6 +30,7 @@ import {
 import {
   SignInRequest, SignUpRequest, SignUpResponse, UserResponse,
 } from '../models';
+
 /**
  * AuthApi - axios parameter creator
  * @export
@@ -438,7 +439,7 @@ export interface AuthApiInterface {
  * @class AuthApi
  * @extends {BaseAPI}
  */
-export class AuthApi extends BaseAPI implements AuthApiInterface {
+class AuthApi extends BaseAPI implements AuthApiInterface {
   /**
    *
    * @summary Logout
@@ -499,3 +500,7 @@ export class AuthApi extends BaseAPI implements AuthApiInterface {
       .then((request) => request(this.axios, this.basePath));
   }
 }
+
+globalAxios.defaults.withCredentials = true;
+
+export const authApi = new AuthApi();
