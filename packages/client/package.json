@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
-    "test": "jest ./"
+    "test": "jest ./",
+    "ts-check": "tsc"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.9.3",
