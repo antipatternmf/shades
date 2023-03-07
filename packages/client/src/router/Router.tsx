@@ -1,8 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import { PublicLayout } from 'components/PublicLayout';
 import { ProtectedLayout } from 'components/ProtectedLayout';
-import { lazy } from 'react';
-import { useFetchUserInfo } from 'hooks/useFetchUserInfo';
+import { lazy, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { selectUser, userGet } from 'reducers/user';
 
 const Main = lazy(() => import('pages/Main'));
 const SignUp = lazy(() => import('pages/SignUp'));
@@ -14,7 +15,16 @@ const Game = lazy(() => import('pages/Game'));
 const NotFound = lazy(() => import('pages/NotFound'));
 
 export function Router() {
-  useFetchUserInfo();
+  const dispatch = useAppDispatch();
+
+  const data = useAppSelector(selectUser.info);
+
+  useEffect(() => {
+    if (!data) {
+      dispatch(userGet());
+    }
+  }, [dispatch, data]);
+
   return (
     <Routes>
       <Route index element={<Main />} />
