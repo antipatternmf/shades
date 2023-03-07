@@ -1,3 +1,39 @@
-.container {
-    border: 1px solid;
+.forum {
+  width: 700px;
+  padding: 5px 30px;
+
+  & table {
+    width: 100%;
+    border-spacing: 10px 25px;
+  }
+  
+  & th {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  & th:first-child {
+    padding-left: 15px;
+  }
+  
+  & td {
+    font-size: 18px;
+    height: 60px;
+    padding: 0px 15px;
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 25px;
+  }
+  
+  & th:first-child,
+  & td:first-child {
+    text-align: left;
+  }
+  
+  & th:not(:first-child),
+  & td:not(:first-child) {
+    width: 120px;
+    text-align: center;
+  }
 }
