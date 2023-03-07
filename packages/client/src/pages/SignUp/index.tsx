@@ -3,29 +3,35 @@ import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { InputTmp } from 'components/InputTmp';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signUp } from 'reducers/user';
+import { signUp, userGet } from 'reducers/user';
 import { useAppDispatch } from 'store/hooks';
 import { SignUpFields, signUpFields, signUpSchema as schema } from 'pages/SignUp/config/config';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
 function SignUp() {
-  const location = useLocation();
-
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { control, handleSubmit } = useForm<SignUpFields>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandle: SubmitHandler<SignUpFields> = (data) => {
-    dispatch(signUp(data));
+  const onSubmitHandle: SubmitHandler<SignUpFields> = async (data) => {
+    try {
+      await dispatch(signUp(data)).unwrap();
+      await dispatch(userGet()).unwrap();
+      navigate('/');
+    } catch {
+      //
+    }
   };
 
   return (
     <div className={cx('container')}>
+      <Link to="/">Main</Link>
       <h2>SignUp</h2>
       <form onSubmit={handleSubmit(onSubmitHandle)}>
         {signUpFields.map(({ name, type }) => {
@@ -49,7 +55,7 @@ function SignUp() {
         })}
         <input type="submit" />
       </form>
-      <Link to="/sign-in" state={{ from: location }}>Have account? Sign in</Link>
+      <Link to="/sign-in">Have account? Sign in</Link>
     </div>
   );
 }
