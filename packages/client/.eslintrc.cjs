@@ -26,6 +26,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/react-in-jsx-scope': 0,
+    'class-methods-use-this': 0,
     '@typescript-eslint/ban-ts-comment': 1
   },
 };
