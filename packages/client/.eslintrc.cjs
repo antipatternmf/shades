@@ -26,7 +26,11 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/react-in-jsx-scope': 0,
-    'class-methods-use-this': 0,
-    '@typescript-eslint/ban-ts-comment': 1
+    '@typescript-eslint/ban-ts-comment': 1,
+    'react/require-default-props': 0,
+    'react/button-has-type': 0,
+    'jsx-a11y/label-has-associated-control': 0,
+    'react/jsx-props-no-spreading': 0,
+    'object-curly-newline': 0
   },
 };
