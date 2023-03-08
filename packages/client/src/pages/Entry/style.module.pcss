@@ -1,0 +1,33 @@
+.entry {
+  width: 500px;
+
+  & h2 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  & h2,
+  &__list {
+    margin-bottom: 27px;
+  }
+
+  &__choiceBox {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  &__choiceLink {
+    font-size: 14px;
+    color: var(--main-blue-color);
+  }
+
+  &__choiceLink:hover {
+    color: var(--main-blue-hover-color);
+    text-decoration: underline;
+  }
+
+  &__choiceLink:active {
+    color: var(--main-blue-active-color);
+    text-decoration: none;
+  }
+}
