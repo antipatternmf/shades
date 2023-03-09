@@ -10,7 +10,10 @@
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview",
+    "ts-check": "lerna run ts-check",
+    "ts-check:client": "lerna run ts-check --scope=client",
+    "ts-check:server": "lerna run ts-check --scope=server"
   },
   "license": "MIT",
   "workspaces": [
