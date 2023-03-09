@@ -1,22 +1,23 @@
 import classNames from 'classnames/bind';
-
-import React, { InputHTMLAttributes, RefCallback } from 'react';
+import { InputHTMLAttributes, RefCallback } from 'react';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  innerRef?: RefCallback<HTMLInputElement>,
-  error?: string,
+interface InputTmpProps extends InputHTMLAttributes<HTMLInputElement> {
+  subtitle?: string;
+  innerRef?: RefCallback<HTMLInputElement>;
+  error?: string;
 }
-// TODO This is a temporary component, remove later
-export function InputTmp({
-  type, error, innerRef, ...props
-}:InputProps) {
+
+function InputTmp({ type, subtitle, error, innerRef, ...props }: InputTmpProps) {
   return (
-    <div className={cx('container')}>
-      <input type={type} {...props} ref={innerRef} />
-      {error && <span style={{ color: 'red' }}>{error}</span>}
+    <div className={cx(styles.field)}>
+      {subtitle && <span className={cx(styles.field__subtitle)}>{subtitle}</span>}
+      <input className={cx(styles.field__input)} type={type} {...props} ref={innerRef} />
+      {error && <span className={cx(styles.field__error)}>{error}</span>}
     </div>
   );
 }
+
+export default InputTmp;
