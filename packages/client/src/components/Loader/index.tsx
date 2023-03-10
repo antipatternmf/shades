@@ -5,7 +5,11 @@ const cx = classNames.bind(styles);
 
 function Loader() {
   return (
-    <div className={cx('container')}>Loading...</div>
+    <div className={cx('wrapper')}>
+      <span className={cx(styles.loader)}>
+        Loading...
+      </span>
+    </div>
   );
 }
 

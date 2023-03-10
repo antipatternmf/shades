@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectUser, userGet } from 'reducers/user';
 
 const Main = lazy(() => import('pages/Main'));
-const SignUp = lazy(() => import('pages/SignUp'));
-const SignIn = lazy(() => import('pages/SignIn'));
+const SignUp = lazy(() => import('pages/Entry/SignUp'));
+const SignIn = lazy(() => import('pages/Entry/SignIn'));
 const Profile = lazy(() => import('pages/Profile'));
 const LeaderBoard = lazy(() => import('pages/LeaderBoard'));
 const Forum = lazy(() => import('pages/Forum'));

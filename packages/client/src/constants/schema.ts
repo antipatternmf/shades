@@ -9,13 +9,13 @@ export interface Fields extends SignUpRequest {
 type FieldsRules = { [key in Fields as string]: StringSchema };
 
 const locales: { [key in Fields as string]: string } = {
-  email: 'Email',
+  email: 'Почта',
   login: 'Логин',
   first_name: 'Имя',
   second_name: 'Фамилия',
-  phone: 'Номер телефона',
+  phone: 'Телефон',
   password: 'Пароль',
-  confirmPassword: 'Пароль',
+  confirmPassword: 'Повторите пароль',
 };
 
 setLocale({
@@ -39,8 +39,8 @@ const spec: FieldsRules = {
   email: required.email('Введите валидный адрес'),
   login: loginValidateRules(required),
   password: required.min(8).max(40).matches(/[A-Z0-9]/g, 'Пароль должен содержать одну заглавную букву и одну цифру'),
-  confirmPassword: required.oneOf([yup.ref('password')], 'Пароль не совпадают'),
-  phone: required.matches(/^(\+|\d)\d+$/g, 'Ввеедите валидный номер').min(10).max(15),
+  confirmPassword: required.oneOf([yup.ref('password')], 'Пароли не совпадают'),
+  phone: required.matches(/^(\+|\d)\d+$/g, 'Введите валидный номер').min(10).max(15),
   second_name: nameValidateRules(required, 'Фамилия'),
   first_name: nameValidateRules(required, 'Имя'),
 };
