@@ -10,11 +10,24 @@ interface InputTmpProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-function InputTmp({ type, subtitle, error, innerRef, ...props }: InputTmpProps) {
+function InputTmp({
+  type,
+  subtitle,
+  error,
+  innerRef,
+  ...props
+}: InputTmpProps) {
   return (
     <div className={cx(styles.field)}>
-      {subtitle && <span className={cx(styles.field__subtitle)}>{subtitle}</span>}
-      <input className={cx(styles.field__input)} type={type} {...props} ref={innerRef} />
+      {subtitle && (
+        <span className={cx(styles.field__subtitle)}>{subtitle}</span>
+      )}
+      <input
+        className={cx(styles.field__input)}
+        type={type}
+        {...props}
+        ref={innerRef}
+      />
       {error && <span className={cx(styles.field__error)}>{error}</span>}
     </div>
   );

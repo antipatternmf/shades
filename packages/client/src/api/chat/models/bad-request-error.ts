@@ -21,5 +21,5 @@ export interface BadRequestError {
    * @type {string}
    * @memberof BadRequestError
    */
-  reason: string
+  reason: string;
 }

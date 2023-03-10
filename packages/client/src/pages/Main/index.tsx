@@ -29,8 +29,20 @@ function Main() {
   return (
     <div className={cx('container')}>
       Main
-      <button type="button" onClick={onClickHandle}>{isAuth ? 'Play' : 'Sign in'}</button>
-      {isAuth && (<button type="button" onClick={onClickLogout}>logout</button>)}
+      <button
+        type="button"
+        onClick={onClickHandle}
+      >
+        {isAuth ? 'Play' : 'Sign in'}
+      </button>
+      {isAuth && (
+        <button
+          type="button"
+          onClick={onClickLogout}
+        >
+          logout
+        </button>
+      )}
     </div>
   );
 }

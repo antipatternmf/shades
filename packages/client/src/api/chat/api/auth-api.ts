@@ -22,13 +22,12 @@ import {
   toPathString,
   createRequestFunction,
 } from '../common';
+import { BASE_PATH, RequestArgs, BaseAPI } from '../base';
 import {
-  BASE_PATH,
-  RequestArgs,
-  BaseAPI,
-} from '../base';
-import {
-  SignInRequest, SignUpRequest, SignUpResponse, UserResponse,
+  SignInRequest,
+  SignUpRequest,
+  SignUpResponse,
+  UserResponse,
 } from '../models';
 
 /**
@@ -395,7 +394,7 @@ export interface AuthApiInterface {
    * @throws {RequiredError}
    * @memberof AuthApiInterface
    */
-  authLogoutPost(options?: AxiosRequestConfig): AxiosPromise<void>
+  authLogoutPost(options?: AxiosRequestConfig): AxiosPromise<void>;
 
   /**
    *
@@ -407,8 +406,8 @@ export interface AuthApiInterface {
    */
   authSigninPost(
     signInRequest: SignInRequest,
-    options?: AxiosRequestConfig
-  ): AxiosPromise<void>
+    options?: AxiosRequestConfig,
+  ): AxiosPromise<void>;
 
   /**
    *
@@ -420,8 +419,8 @@ export interface AuthApiInterface {
    */
   authSignupPost(
     signUpRequest: SignUpRequest,
-    options?: AxiosRequestConfig
-  ): AxiosPromise<SignUpResponse>
+    options?: AxiosRequestConfig,
+  ): AxiosPromise<SignUpResponse>;
 
   /**
    *
@@ -430,7 +429,7 @@ export interface AuthApiInterface {
    * @throws {RequiredError}
    * @memberof AuthApiInterface
    */
-  authUserGet(options?: AxiosRequestConfig): AxiosPromise<UserResponse>
+  authUserGet(options?: AxiosRequestConfig): AxiosPromise<UserResponse>;
 }
 
 /**

@@ -15,17 +15,17 @@ export interface ConfigurationParameters {
   | string
   | Promise<string>
   | ((name: string) => string)
-  | ((name: string) => Promise<string>)
-  username?: string
-  password?: string
+  | ((name: string) => Promise<string>);
+  username?: string;
+  password?: string;
   accessToken?:
   | string
   | Promise<string>
   | ((name?: string, scopes?: string[]) => string)
-  | ((name?: string, scopes?: string[]) => Promise<string>)
-  basePath?: string
-  baseOptions?: any
-  formDataCtor?: new () => any
+  | ((name?: string, scopes?: string[]) => Promise<string>);
+  basePath?: string;
+  baseOptions?: any;
+  formDataCtor?: new () => any;
 }
 
 export class Configuration {

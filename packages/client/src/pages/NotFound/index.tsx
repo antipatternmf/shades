@@ -6,11 +6,7 @@ import styles from './style.module.pcss';
 const cx = classNames.bind(styles);
 
 function NotFound() {
-  return (
-    <div className={cx('container')}>
-      NotFound
-    </div>
-  );
+  return <div className={cx('container')}>NotFound</div>;
 }
 
 export default NotFound;

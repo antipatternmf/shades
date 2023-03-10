@@ -10,7 +10,10 @@ type ButtonProps = {
 
 function ButtonTmp({ children }: ButtonProps) {
   return (
-    <button className={cx(styles.button)} type="submit">
+    <button
+      className={cx(styles.button)}
+      type="submit"
+    >
       {children}
     </button>
   );

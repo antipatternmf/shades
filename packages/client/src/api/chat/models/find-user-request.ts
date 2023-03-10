@@ -21,5 +21,5 @@ export interface FindUserRequest {
    * @type {string}
    * @memberof FindUserRequest
    */
-  login: string
+  login: string;
 }

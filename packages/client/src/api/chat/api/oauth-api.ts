@@ -22,11 +22,7 @@ import {
   toPathString,
   createRequestFunction,
 } from '../common';
-import {
-  BASE_PATH,
-  RequestArgs,
-  BaseAPI,
-} from '../base';
+import { BASE_PATH, RequestArgs, BaseAPI } from '../base';
 import { OauthSignInRequest, ServiceId } from '../models';
 
 /**
@@ -256,8 +252,7 @@ export interface OauthApiInterface {
   oauthYandexPost(
     oauthSignInRequest: OauthSignInRequest,
     options?: AxiosRequestConfig,
-  ): AxiosPromise<void>
-  ;
+  ): AxiosPromise<void>;
   /**
    *
    * @summary Get service id

@@ -21,11 +21,11 @@ export interface ChangePasswordRequest {
    * @type {string}
    * @memberof ChangePasswordRequest
    */
-  oldPassword: string
+  oldPassword: string;
   /**
    * New password
    * @type {string}
    * @memberof ChangePasswordRequest
    */
-  newPassword: string
+  newPassword: string;
 }

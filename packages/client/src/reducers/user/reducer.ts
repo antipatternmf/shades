@@ -5,10 +5,10 @@ import { UserResponse } from 'api/chat';
 type User = UserResponse;
 
 interface InitialState {
-  isAuth: boolean,
-  data: User | null,
-  status: Status,
-  error?: string,
+  isAuth: boolean;
+  data: User | null;
+  status: Status;
+  error?: string;
 }
 
 const initialState: InitialState = {

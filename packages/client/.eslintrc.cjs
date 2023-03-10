@@ -20,8 +20,6 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    'react/jsx-props-no-spreading': 'off',
-    'react/require-default-props': 'off',
     'no-param-reassign': 'off',
     'arrow-body-style': 0,
     'class-methods-use-this': 0,
@@ -33,6 +31,6 @@ module.exports = {
     'react/button-has-type': 0,
     'jsx-a11y/label-has-associated-control': 0,
     'react/jsx-props-no-spreading': 0,
-    'object-curly-newline': 0
+    'object-curly-newline': 0,
   },
 };

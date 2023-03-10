@@ -22,13 +22,12 @@ import {
   toPathString,
   createRequestFunction,
 } from '../common';
+import { BASE_PATH, RequestArgs, BaseAPI } from '../base';
 import {
-  BASE_PATH,
-  RequestArgs,
-  BaseAPI,
-} from '../base';
-import {
-  ChangePasswordRequest, FindUserRequest, UserUpdateRequest, UserResponse,
+  ChangePasswordRequest,
+  FindUserRequest,
+  UserUpdateRequest,
+  UserResponse,
 } from '../models';
 
 /**
@@ -166,7 +165,7 @@ export const UsersApiAxiosParamCreator = function (
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
       const localVarFormParams = new ((configuration
-          && configuration.formDataCtor)
+        && configuration.formDataCtor)
         || FormData)();
 
       if (avatar !== undefined) {
@@ -358,8 +357,8 @@ export const UsersApiFp = function (configuration?: Configuration) {
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>
       > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator
-        .userProfileAvatarPut(avatar, options);
+      // eslint-disable-next-line max-len
+      const localVarAxiosArgs = await localVarAxiosParamCreator.userProfileAvatarPut(avatar, options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -521,9 +520,9 @@ export interface UsersApiInterface {
    * @throws {RequiredError}
    * @memberof UsersApiInterface
    */
-  userIdGet(id: any, options?: AxiosRequestConfig): AxiosPromise<UserResponse>
+  userIdGet(id: any, options?: AxiosRequestConfig): AxiosPromise<UserResponse>;
 
-  ;/**
+  /**
    *
    * @summary Change user password
    * @param {ChangePasswordRequest} changePasswordRequest Password request
@@ -534,9 +533,9 @@ export interface UsersApiInterface {
   userPasswordPut(
     changePasswordRequest: ChangePasswordRequest,
     options?: AxiosRequestConfig,
-  ): AxiosPromise<void>
+  ): AxiosPromise<void>;
 
-  ; /**
+  /**
    *
    * @summary Change user avatar
    * @param {File} avatar Avatar
@@ -547,9 +546,9 @@ export interface UsersApiInterface {
   userProfileAvatarPut(
     avatar: File,
     options?: AxiosRequestConfig,
-  ): AxiosPromise<UserResponse>
+  ): AxiosPromise<UserResponse>;
 
-  ; /**
+  /**
    *
    * @summary Change user profile
    * @param {UserUpdateRequest} userRequest User data
@@ -560,8 +559,8 @@ export interface UsersApiInterface {
   userProfilePut(
     userRequest: UserUpdateRequest,
     options?: AxiosRequestConfig,
-  ): AxiosPromise<UserResponse>
-  ;
+  ): AxiosPromise<UserResponse>;
+
   /**
    *
    * @summary Search for user by login (max 10)

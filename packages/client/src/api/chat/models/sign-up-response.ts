@@ -21,5 +21,5 @@ export interface SignUpResponse {
    * @type {number}
    * @memberof SignUpResponse
    */
-  id: number
+  id: number;
 }

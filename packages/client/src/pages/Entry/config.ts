@@ -24,7 +24,11 @@ export const signUpFields: Array<{
   { name: 'second_name', type: 'text', placeholder: 'Фамилия' },
   { name: 'phone', type: 'phone', placeholder: 'Телефон' },
   { name: 'password', type: 'password', placeholder: 'Пароль' },
-  { name: 'confirmPassword', type: 'password', placeholder: 'Повторите пароль' },
+  {
+    name: 'confirmPassword',
+    type: 'password',
+    placeholder: 'Повторите пароль',
+  },
 ];
 
 export const signInSchema = schema.pick(['login', 'password']);
