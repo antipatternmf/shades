@@ -2,7 +2,16 @@ import { Fields, schema } from 'constants/schema';
 import { HTMLInputTypeAttribute } from 'react';
 
 export type SignInFields = Pick<Fields, 'login' | 'password'>;
-export type SignUpFields = Fields;
+export type SignUpFields = Pick<
+  Fields,
+  | 'email'
+  | 'login'
+  | 'first_name'
+  | 'second_name'
+  | 'phone'
+  | 'password'
+  | 'confirmPassword'
+>;
 
 export const signInFields: Array<{
   name: keyof SignInFields;
@@ -32,4 +41,4 @@ export const signUpFields: Array<{
 ];
 
 export const signInSchema = schema.pick(['login', 'password']);
-export const signUpSchema = schema;
+export const signUpSchema = schema.pick(signUpFields.map(({ name }) => name));

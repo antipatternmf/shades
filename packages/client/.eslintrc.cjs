@@ -32,5 +32,8 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 0,
     'react/jsx-props-no-spreading': 0,
     'object-curly-newline': 0,
+    '@typescript-eslint/indent': 0,
+    'operator-linebreak': 0,
+    'implicit-arrow-linebreak': 0,
   },
 };

@@ -1,0 +1,51 @@
+.protected-layout {
+  display: flex;
+  min-height: 100vh;
+  padding-left: 50px;
+  background: var(--main-background-color);
+
+  &__go-back {
+    &__column {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    &__button {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      border: none;
+      padding: 8px;
+      margin: 0;
+      box-sizing: border-box;
+      background: var(--main-blue-color);
+      cursor: pointer;
+
+      & > svg {
+        display: block;
+        width: 14px;
+        height: 14px;
+        color: white;
+        transform: rotate(180deg);
+      }
+
+      &:hover {
+        background: var(--main-blue-hover-color);
+      }
+
+      &:active {
+        background: var(--main-blue-active-color);
+      }
+    }
+  }
+
+  &__main {
+    flex-grow: 1;
+  }
+}
