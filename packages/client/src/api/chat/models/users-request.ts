@@ -21,11 +21,11 @@ export interface UsersRequest {
    * @type {Array<number>}
    * @memberof UsersRequest
    */
-  users: Array<number>
+  users: Array<number>;
   /**
    * Chat id
    * @type {number}
    * @memberof UsersRequest
    */
-  chatId: number
+  chatId: number;
 }

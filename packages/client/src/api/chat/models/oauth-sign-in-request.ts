@@ -21,11 +21,11 @@ export interface OauthSignInRequest {
    * @type {string}
    * @memberof OauthSignInRequest
    */
-  code: string
+  code: string;
   /**
    * Redirect uri that you are using for oauth
    * @type {string}
    * @memberof OauthSignInRequest
    */
-  redirect_uri: string
+  redirect_uri: string;
 }

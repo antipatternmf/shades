@@ -5,9 +5,7 @@ import { Router } from '../router';
 
 function App() {
   useFetchServerData();
-  return (
-    <Router />
-  );
+  return <Router />;
 }
 
 export default withRouter(withRedux(App));

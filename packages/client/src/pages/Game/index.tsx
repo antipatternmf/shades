@@ -9,7 +9,11 @@ const cx = classNames.bind(styles);
 
 function Game() {
   const circle = new CanvasCircle({
-    x: 300, y: 300, color: 'red', secondaryColor: 'pink', radius: 25,
+    x: 300,
+    y: 300,
+    color: 'red',
+    secondaryColor: 'pink',
+    radius: 25,
   });
 
   return (

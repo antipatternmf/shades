@@ -27,19 +27,46 @@ export function Router() {
 
   return (
     <Routes>
-      <Route index element={<Main />} />
-      <Route path="/" element={<PublicLayout />}>
-        <Route path="sign-in" element={<SignIn />} />
-        <Route path="sign-up" element={<SignUp />} />
+      <Route
+        index
+        element={<Main />}
+      />
+      <Route
+        path="/"
+        element={<PublicLayout />}
+      >
+        <Route
+          path="sign-in"
+          element={<SignIn />}
+        />
+        <Route
+          path="sign-up"
+          element={<SignUp />}
+        />
       </Route>
 
       <Route element={<ProtectedLayout />}>
-        <Route path="profile" element={<Profile />} />
-        <Route path="leaderboard" element={<LeaderBoard />} />
-        <Route path="forum" element={<Forum />} />
-        <Route path="game" element={<Game />} />
+        <Route
+          path="profile"
+          element={<Profile />}
+        />
+        <Route
+          path="leaderboard"
+          element={<LeaderBoard />}
+        />
+        <Route
+          path="forum"
+          element={<Forum />}
+        />
+        <Route
+          path="game"
+          element={<Game />}
+        />
       </Route>
-      <Route path={'/*'} element={<NotFound />} />
+      <Route
+        path={'/*'}
+        element={<NotFound />}
+      />
     </Routes>
   );
 }

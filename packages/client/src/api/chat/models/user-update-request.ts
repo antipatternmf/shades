@@ -21,35 +21,35 @@ export interface UserUpdateRequest {
    * @type {string}
    * @memberof UserUpdateRequest
    */
-  first_name: string
+  first_name: string;
   /**
    * Second name
    * @type {string}
    * @memberof UserUpdateRequest
    */
-  second_name: string
+  second_name: string;
   /**
    * Display Name
    * @type {string}
    * @memberof UserUpdateRequest
    */
-  display_name: string
+  display_name: string;
   /**
    * User login - unique
    * @type {string}
    * @memberof UserUpdateRequest
    */
-  login: string
+  login: string;
   /**
    * Email
    * @type {string}
    * @memberof UserUpdateRequest
    */
-  email: string
+  email: string;
   /**
    * Phone
    * @type {string}
    * @memberof UserUpdateRequest
    */
-  phone: string
+  phone: string;
 }

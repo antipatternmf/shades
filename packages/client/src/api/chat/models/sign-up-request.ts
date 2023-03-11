@@ -21,35 +21,35 @@ export interface SignUpRequest {
    * @type {string}
    * @memberof SignUpRequest
    */
-  first_name: string
+  first_name: string;
   /**
    * Second name
    * @type {string}
    * @memberof SignUpRequest
    */
-  second_name: string
+  second_name: string;
   /**
    * User login - unique
    * @type {string}
    * @memberof SignUpRequest
    */
-  login: string
+  login: string;
   /**
    * Email /^\\S+@\\S+$/
    * @type {string}
    * @memberof SignUpRequest
    */
-  email: string
+  email: string;
   /**
    * Password
    * @type {string}
    * @memberof SignUpRequest
    */
-  password: string
+  password: string;
   /**
    * Phone /^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$/
    * @type {string}
    * @memberof SignUpRequest
    */
-  phone: string
+  phone: string;
 }

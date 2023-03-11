@@ -21,11 +21,11 @@ export interface SignInRequest {
    * @type {string}
    * @memberof SignInRequest
    */
-  login: string
+  login: string;
   /**
    * Password
    * @type {string}
    * @memberof SignInRequest
    */
-  password: string
+  password: string;
 }

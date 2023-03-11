@@ -2,7 +2,11 @@ import classNames from 'classnames/bind';
 import { useAppDispatch } from 'store/hooks';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SignUpFields, signUpFields, signUpSchema as schema } from 'pages/Entry/config';
+import {
+  SignUpFields,
+  signUpFields,
+  signUpSchema as schema,
+} from 'pages/Entry/config';
 import { signUp, userGet } from 'reducers/user';
 import { Link, useNavigate } from 'react-router-dom';
 import InputTmp from 'components/InputTmp';
@@ -42,7 +46,10 @@ function SignUp() {
                   key={name}
                   defaultValue=""
                   control={control}
-                  render={({ field: { ref, ...rest }, fieldState: { error } }) => (
+                  render={({
+                    field: { ref, ...rest },
+                    fieldState: { error },
+                  }) => (
                     <InputTmp
                       type={type}
                       placeholder={placeholder}
@@ -58,13 +65,14 @@ function SignUp() {
           </div>
           <div>
             <div className={cx(styles.entry__choiceBox)}>
-              <Link className={cx(styles.entry__choiceLink)} to="/sign-in">
+              <Link
+                className={cx(styles.entry__choiceLink)}
+                to="/sign-in"
+              >
                 У вас уже есть аккаунт? Авторизуйтесь
               </Link>
             </div>
-            <ButtonTmp>
-              Зарегистрироваться
-            </ButtonTmp>
+            <ButtonTmp>Зарегистрироваться</ButtonTmp>
           </div>
         </form>
       </div>

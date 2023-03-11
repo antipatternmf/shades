@@ -21,5 +21,5 @@ export interface ServiceId {
    * @type {string}
    * @memberof ServiceId
    */
-  service_id: string
+  service_id: string;
 }

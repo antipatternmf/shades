@@ -73,7 +73,12 @@ export default function CanvasComponent(props: CanvasProps) {
 
   return (
     <div>
-      <canvas id="canvas" ref={ref} width={width} height={height} />
+      <canvas
+        id="canvas"
+        ref={ref}
+        width={width}
+        height={height}
+      />
     </div>
   );
 }

@@ -21,47 +21,47 @@ export interface UserResponse {
    * @type {number}
    * @memberof UserResponse
    */
-  id: number
+  id: number;
   /**
    * First name
    * @type {string}
    * @memberof UserResponse
    */
-  first_name: string
+  first_name: string;
   /**
    * Second name
    * @type {string}
    * @memberof UserResponse
    */
-  second_name: string
+  second_name: string;
   /**
    * Display name
    * @type {string}
    * @memberof UserResponse
    */
-  display_name: string
+  display_name: string;
   /**
    * User login - unique
    * @type {string}
    * @memberof UserResponse
    */
-  login: string
+  login: string;
   /**
    * Email
    * @type {string}
    * @memberof UserResponse
    */
-  email: string
+  email: string;
   /**
    * Phone
    * @type {string}
    * @memberof UserResponse
    */
-  phone: string
+  phone: string;
   /**
    * Avatar
    * @type {string}
    * @memberof UserResponse
    */
-  avatar: string
+  avatar: string;
 }
