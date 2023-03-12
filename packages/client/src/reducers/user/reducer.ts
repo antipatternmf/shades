@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userGet, userLogout } from 'reducers/user/thunks';
+import {
+  userGet,
+  userLogout,
+  updateAvatar,
+  updatePassword,
+  updateProfile,
+} from 'reducers/user/thunks';
 import { UserResponse } from 'api/chat';
 
 type User = UserResponse;
@@ -35,6 +41,44 @@ const slice = createSlice({
           state.isAuth = true;
           state.data = action.payload;
           state.status = 'fulfilled';
+        }
+      })
+      .addCase(updateProfile.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(updateProfile.rejected, (state, { payload }) => {
+        state.error = payload as string;
+        state.status = 'rejected';
+      })
+      .addCase(updateProfile.fulfilled, (state, { payload }) => {
+        state.status = 'fulfilled';
+
+        if (payload) {
+          state.data = payload;
+        }
+      })
+      .addCase(updatePassword.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(updatePassword.rejected, (state, { payload }) => {
+        state.error = payload as string;
+        state.status = 'rejected';
+      })
+      .addCase(updatePassword.fulfilled, (state) => {
+        state.status = 'fulfilled';
+      })
+      .addCase(updateAvatar.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(updateAvatar.rejected, (state, { payload }) => {
+        state.error = payload as string;
+        state.status = 'rejected';
+      })
+      .addCase(updateAvatar.fulfilled, (state, { payload }) => {
+        state.status = 'fulfilled';
+
+        if (payload) {
+          state.data = payload;
         }
       });
     builder.addCase(userLogout.fulfilled, () => {

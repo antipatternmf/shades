@@ -1,9 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import { PublicLayout } from 'components/PublicLayout';
 import { ProtectedLayout } from 'components/ProtectedLayout';
-import { lazy, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { selectUser, userGet } from 'reducers/user';
+import { lazy } from 'react';
+import { useRestoreAuthSession } from 'hooks/auth';
+import { selectUser } from 'reducers/user';
+import { useAppSelector } from 'store/hooks';
+import LoadingOverlay from 'components/LoadingOverlay';
 
 const Main = lazy(() => import('pages/Main'));
 const SignUp = lazy(() => import('pages/Entry/SignUp'));
@@ -15,15 +17,14 @@ const Game = lazy(() => import('pages/Game'));
 const NotFound = lazy(() => import('pages/NotFound'));
 
 export function Router() {
-  const dispatch = useAppDispatch();
+  const isAuthorized = useAppSelector(selectUser.status);
+  const userSliceStatus = useAppSelector(selectUser.status);
 
-  const data = useAppSelector(selectUser.info);
+  useRestoreAuthSession();
 
-  useEffect(() => {
-    if (!data) {
-      dispatch(userGet());
-    }
-  }, [dispatch, data]);
+  if (userSliceStatus === 'pending' && !isAuthorized) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <Routes>
