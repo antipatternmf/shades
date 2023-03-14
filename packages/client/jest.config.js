@@ -7,7 +7,7 @@ const moduleNameMapper = {
   '^assets/(.*)$': '<rootDir>/src/assets/$1',
   '^components/(.*)$': '<rootDir>/src/components/$1',
   '^hocs(.*)$': '<rootDir>/src/hocs',
-  '^hooks(.*)$': '<rootDir>/src/hooks',
+  '^hooks/(.*)$': '<rootDir>/src/hooks/$1',
   '^pages/(.*)$': '<rootDir>/src/pages/$1',
   '^reducers/(.*)$': '<rootDir>/src/reducers/$1',
   '^store(.*)$': '<rootDir>/src/store',

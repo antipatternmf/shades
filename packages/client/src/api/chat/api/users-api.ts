@@ -71,7 +71,8 @@ export const UsersApiAxiosParamCreator = function (
       const localVarQueryParameter = {} as any;
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
-      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      const headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
@@ -119,7 +120,8 @@ export const UsersApiAxiosParamCreator = function (
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
-      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      const headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
@@ -220,7 +222,8 @@ export const UsersApiAxiosParamCreator = function (
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
-      const headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      const headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
@@ -308,7 +311,7 @@ export const UsersApiFp = function (configuration?: Configuration) {
       options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>
-      > {
+    > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.userIdGet(
         id,
         options,
@@ -332,7 +335,7 @@ export const UsersApiFp = function (configuration?: Configuration) {
       options?: AxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-      > {
+    > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.userPasswordPut(
         changePasswordRequest,
         options,
@@ -357,8 +360,8 @@ export const UsersApiFp = function (configuration?: Configuration) {
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>
       > {
-      // eslint-disable-next-line max-len
-      const localVarAxiosArgs = await localVarAxiosParamCreator.userProfileAvatarPut(avatar, options);
+      const localVarAxiosArgs = await localVarAxiosParamCreator
+        .userProfileAvatarPut(avatar, options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -520,9 +523,9 @@ export interface UsersApiInterface {
    * @throws {RequiredError}
    * @memberof UsersApiInterface
    */
-  userIdGet(id: any, options?: AxiosRequestConfig): AxiosPromise<UserResponse>;
+  userIdGet(id: any, options?: AxiosRequestConfig): AxiosPromise<UserResponse>
 
-  /**
+  ;/**
    *
    * @summary Change user password
    * @param {ChangePasswordRequest} changePasswordRequest Password request
@@ -533,9 +536,9 @@ export interface UsersApiInterface {
   userPasswordPut(
     changePasswordRequest: ChangePasswordRequest,
     options?: AxiosRequestConfig,
-  ): AxiosPromise<void>;
+  ): AxiosPromise<void>
 
-  /**
+  ; /**
    *
    * @summary Change user avatar
    * @param {File} avatar Avatar
@@ -661,3 +664,7 @@ export class UsersApi extends BaseAPI implements UsersApiInterface {
       .then((request) => request(this.axios, this.basePath));
   }
 }
+
+globalAxios.defaults.withCredentials = true;
+
+export const usersApi = new UsersApi();
