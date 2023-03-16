@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames/bind';
+import getMouseCoordinates from 'utils/getMouseCoordinates';
 import CanvasDrawable from './CanvasDrawable';
+import styles from './style.module.pcss';
+
+const cx = classNames.bind(styles);
 
 export type CanvasProps = {
   width: number | string;
   height: number | string;
-  draggable?: boolean;
   drawables: CanvasDrawable[];
+  obstacleContext?: CanvasRenderingContext2D;
+  obstacles: CanvasDrawable[];
+  targetContext?: CanvasRenderingContext2D;
+  targets: CanvasDrawable[];
 };
-
-function getMouseCoordinates(canvas: HTMLCanvasElement, event: MouseEvent) {
-  const canvasCoords = canvas.getBoundingClientRect();
-  return {
-    x: event.pageX - canvasCoords.left,
-    y: event.pageY - canvasCoords.top,
-  };
-}
 
 function animate(canvas: HTMLCanvasElement, drawables: CanvasDrawable[]) {
   const ctx = canvas.getContext('2d');
@@ -36,12 +36,12 @@ export default function CanvasComponent(props: CanvasProps) {
     if (context) {
       setCtx(context);
     }
-    const { drawables } = props;
+    const { drawables, obstacleContext, obstacles, targetContext, targets } =
+      props;
 
     drawables.forEach((drawable) => {
       if (ctx instanceof CanvasRenderingContext2D && ref.current) {
         drawable.draw(ctx);
-        // TODO: accept mouse callbacks as props
         ref.current?.addEventListener('mousedown', (e) => {
           const mouse = getMouseCoordinates(ctx.canvas, e);
           if (drawable.pointInDrawable(mouse.x, mouse.y)) {
@@ -52,9 +52,22 @@ export default function CanvasComponent(props: CanvasProps) {
         ref.current?.addEventListener('mouseup', () => {
           drawable.disable();
         });
+
         ref.current?.addEventListener('mousemove', (e) => {
           const mouse = getMouseCoordinates(ctx.canvas, e);
           if (drawable.active) {
+            if (
+              obstacles.some((it) =>
+                obstacleContext?.isPointInPath(it.path, mouse.x, mouse.y))
+            ) {
+              drawable.setColor('green', 'yellowgreen');
+            }
+            if (
+              targets.some((it) =>
+                targetContext?.isPointInPath(it.path, mouse.x, mouse.y))
+            ) {
+              console.log('game over');
+            }
             const newX = e.offsetX;
             const newY = e.offsetY;
             ctx.beginPath();
@@ -72,13 +85,12 @@ export default function CanvasComponent(props: CanvasProps) {
   }, [props, ctx]);
 
   return (
-    <div>
-      <canvas
-        id="canvas"
-        ref={ref}
-        width={width}
-        height={height}
-      />
-    </div>
+    <canvas
+      id="canvas"
+      className={cx('canvas-obstacles')}
+      ref={ref}
+      width={width}
+      height={height}
+    />
   );
 }

@@ -15,10 +15,12 @@ export default class CanvasCircle extends CanvasDrawable {
 
   draw(context: CanvasRenderingContext2D | null | undefined) {
     if (context) {
+      this.path = new Path2D();
       context.beginPath();
-      context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-      context.fillStyle = this.active ? 'pink' : 'red';
-      context.fill();
+      context.fillStyle = this.color;
+      this.path.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+      context.fill(this.path);
+      context.closePath();
     }
   }
 
