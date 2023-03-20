@@ -6,6 +6,8 @@ export type CanvasDrawableProps = {
 };
 
 export default class CanvasDrawable {
+  path: Path2D;
+
   active: boolean;
 
   offsetX: number;
@@ -21,6 +23,7 @@ export default class CanvasDrawable {
   secondaryColor: string;
 
   constructor(props: CanvasDrawableProps) {
+    this.path = new Path2D();
     this.active = false;
     this.offsetX = 0;
     this.offsetY = 0;
@@ -51,6 +54,12 @@ export default class CanvasDrawable {
   setCoords(x: number, y: number) {
     this.x = x;
     this.y = y;
+    this.path.moveTo(x, y);
+  }
+
+  setColor(color: string, secondaryColor: string) {
+    this.color = color;
+    this.secondaryColor = secondaryColor;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
