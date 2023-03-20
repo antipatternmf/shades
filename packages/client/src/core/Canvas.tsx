@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import getMouseCoordinates from 'utils/getMouseCoordinates';
+import { useAppDispatch } from 'store/hooks';
+import { setGameStatus } from 'reducers/game';
 import CanvasDrawable from './CanvasDrawable';
 import styles from './style.module.pcss';
+import { CanvasTargetCircle } from './CanvasTargetCircle';
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +16,7 @@ export type CanvasProps = {
   obstacleContext?: CanvasRenderingContext2D;
   obstacles: CanvasDrawable[];
   targetContext?: CanvasRenderingContext2D;
-  targets: CanvasDrawable[];
+  targets: CanvasTargetCircle[];
 };
 
 function animate(canvas: HTMLCanvasElement, drawables: CanvasDrawable[]) {
@@ -27,17 +30,26 @@ function animate(canvas: HTMLCanvasElement, drawables: CanvasDrawable[]) {
 }
 
 export default function CanvasComponent(props: CanvasProps) {
+  const {
+    width,
+    height,
+    targets,
+    drawables,
+    obstacleContext,
+    obstacles,
+    targetContext,
+  } = props;
+
+  const dispatch = useAppDispatch();
+
   const ref = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D>();
-  const { width, height } = props;
 
   useEffect(() => {
     const context = ref.current?.getContext('2d');
     if (context) {
       setCtx(context);
     }
-    const { drawables, obstacleContext, obstacles, targetContext, targets } =
-      props;
 
     drawables.forEach((drawable) => {
       if (ctx instanceof CanvasRenderingContext2D && ref.current) {
@@ -60,19 +72,31 @@ export default function CanvasComponent(props: CanvasProps) {
               obstacles.some((it) =>
                 obstacleContext?.isPointInPath(it.path, mouse.x, mouse.y))
             ) {
-              drawable.setColor('green', 'yellowgreen');
+              drawable.setColor('darkgreen', 'yellowgreen');
             }
             if (
               targets.some((it) =>
                 targetContext?.isPointInPath(it.path, mouse.x, mouse.y))
             ) {
-              console.log('game over');
+              const target = targets.find((it) =>
+                targetContext?.isPointInPath(it.path, mouse.x, mouse.y));
+
+              if (targets.every((it) => it.getIsDone())) {
+                dispatch(setGameStatus('win'));
+              }
+
+              if (target?.color === drawable.color) {
+                target.setIsDone();
+              } else {
+                dispatch(setGameStatus('lose'));
+              }
             }
             const newX = e.offsetX;
             const newY = e.offsetY;
             ctx.beginPath();
             ctx.strokeStyle = drawable.secondaryColor;
             ctx.lineWidth = 50;
+            ctx.globalAlpha = 0.01;
             ctx.moveTo(drawable.x, drawable.y);
             ctx.lineTo(newX, newY);
             ctx.stroke();
@@ -82,7 +106,16 @@ export default function CanvasComponent(props: CanvasProps) {
         animate(ref.current, drawables);
       }
     });
-  }, [props, ctx]);
+  }, [
+    props,
+    ctx,
+    dispatch,
+    drawables,
+    obstacles,
+    targets,
+    obstacleContext,
+    targetContext,
+  ]);
 
   return (
     <canvas

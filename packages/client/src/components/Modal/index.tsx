@@ -7,8 +7,8 @@ import styles from './style.module.pcss';
 const cx = classNames.bind(styles);
 
 type ModalProps = {
-  isOpen: boolean,
-  children: React.ReactNode,
+  isOpen: boolean;
+  children: React.ReactNode;
 };
 
 function Modal({ isOpen, children }: ModalProps) {
@@ -17,12 +17,9 @@ function Modal({ isOpen, children }: ModalProps) {
   return (
     <Portal>
       <div className={cx('modal-container')}>
-        <div className={cx('modal-content')}>
-          {children}
-        </div>
+        <div className={cx('modal-content')}>{children}</div>
       </div>
     </Portal>
-
   );
 }
 

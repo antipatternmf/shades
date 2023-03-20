@@ -3,9 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type GameStatus = 'idle' | 'started' | 'pause' | 'win' | 'lose';
 
 export interface GameInitialState {
-  gameStatus: GameStatus,
-  targets?: null,
-  obstacles?: null,
+  gameStatus: GameStatus;
+  targets?: null;
+  obstacles?: null;
 }
 
 const initialState: GameInitialState = {
