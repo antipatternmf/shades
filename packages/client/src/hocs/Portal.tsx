@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 type PortalProps = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 function Portal({ children }: PortalProps) {
@@ -15,7 +15,7 @@ function Portal({ children }: PortalProps) {
     };
   }, [container]);
 
-  return (ReactDOM.createPortal(children, container));
+  return ReactDOM.createPortal(children, container);
 }
 
 export default Portal;
