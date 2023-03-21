@@ -87,5 +87,6 @@ const slice = createSlice({
   },
 });
 
-export default slice.reducer;
-export const { name } = slice;
+export const { name, reducer } = slice;
+
+export type UserReducer = ReturnType<typeof reducer>;

@@ -1,4 +1,4 @@
-export { name, default as userReducer } from './reducer';
+export { name, reducer as userReducer } from './reducer';
 export {
   signUp,
   signIn,

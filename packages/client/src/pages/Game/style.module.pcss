@@ -1,4 +1,26 @@
 .container {
-  border: 1px solid;
   position: relative;
+}
+
+.end-game-modal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: 20px;
+
+  &__title {
+    justify-self: center;
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
+
+  &__button-restart {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  &__button-menu {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
 }

@@ -29,7 +29,7 @@ export default function CanvasObstacles(props: CanvasObstaclesProps) {
         drawable.draw(ctx);
       }
     });
-  }, [props, ctx]);
+  }, [props, ctx, ref]);
 
   return (
     <canvas
