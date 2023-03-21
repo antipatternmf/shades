@@ -7,14 +7,24 @@ import { selectUser } from 'reducers/user';
 import { useAppSelector } from 'store/hooks';
 import LoadingOverlay from 'components/LoadingOverlay';
 
-const Main = lazy(() => import('pages/Main'));
-const SignUp = lazy(() => import('pages/Entry/SignUp'));
-const SignIn = lazy(() => import('pages/Entry/SignIn'));
-const Profile = lazy(() => import('pages/Profile'));
-const LeaderBoard = lazy(() => import('pages/LeaderBoard'));
-const Forum = lazy(() => import('pages/Forum'));
-const Game = lazy(() => import('pages/Game'));
-const NotFound = lazy(() => import('pages/NotFound'));
+const MainPage = lazy(() => import('pages/Main'));
+const SignUpPage = lazy(() => import('pages/Entry/SignUp'));
+const SignInPage = lazy(() => import('pages/Entry/SignIn'));
+const ProfilePage = lazy(() => import('pages/Profile'));
+const LeaderBoardPage = lazy(() => import('pages/LeaderBoard'));
+const ForumPage = lazy(() => import('pages/Forum'));
+const GamePage = lazy(() => import('pages/Game'));
+const NotFoundPage = lazy(() => import('pages/NotFound'));
+
+export enum Paths {
+  Root = '/',
+  SignIn = 'sign-in',
+  SignUp = 'sign-up',
+  Profile = 'profile',
+  Leaderboard = 'leaderboard',
+  Forum = 'forum',
+  Game = 'game',
+}
 
 export function Router() {
   const isAuthorized = useAppSelector(selectUser.status);
@@ -30,43 +40,44 @@ export function Router() {
     <Routes>
       <Route
         index
-        element={<Main />}
+        element={<MainPage />}
       />
+
       <Route
-        path="/"
+        path={Paths.Root}
         element={<PublicLayout />}
       >
         <Route
-          path="sign-in"
-          element={<SignIn />}
+          path={Paths.SignIn}
+          element={<SignInPage />}
         />
         <Route
-          path="sign-up"
-          element={<SignUp />}
+          path={Paths.SignUp}
+          element={<SignUpPage />}
         />
       </Route>
 
       <Route element={<ProtectedLayout />}>
         <Route
-          path="profile"
-          element={<Profile />}
+          path={Paths.Profile}
+          element={<ProfilePage />}
         />
         <Route
-          path="leaderboard"
-          element={<LeaderBoard />}
+          path={Paths.Leaderboard}
+          element={<LeaderBoardPage />}
         />
         <Route
-          path="forum"
-          element={<Forum />}
+          path={Paths.Forum}
+          element={<ForumPage />}
         />
         <Route
-          path="game"
-          element={<Game />}
+          path={Paths.Game}
+          element={<GamePage />}
         />
       </Route>
       <Route
         path={'/*'}
-        element={<NotFound />}
+        element={<NotFoundPage />}
       />
     </Routes>
   );
