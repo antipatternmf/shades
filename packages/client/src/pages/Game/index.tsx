@@ -1,91 +1,55 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-import CanvasComponent from '../../core/Canvas';
-import CanvasObstacles from '../../core/CanvasObstacles';
-import CanvasPaintableCircle from '../../core/CanvasPaintableCircle';
-import CanvasCircle from '../../core/CanvasCircle';
+import { useEffect } from 'react';
+import Modal from 'components/Modal';
+import { useSetGameStatus } from 'reducers/game/useSetGameStatus';
+import Button from 'components/Button';
+import GameCanvas from 'pages/Game/ui/GameCanvas';
+import {
+  drawablesConfig,
+  obstaclesConfig,
+  targetsConfig,
+} from 'pages/Game/lib/config/gameElements';
+import { useNavigate } from 'react-router-dom';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
 function Game() {
-  const circle = new CanvasPaintableCircle({
-    x: 300,
-    y: 300,
-    color: 'blue',
-    secondaryColor: 'dodgerblue',
-    radius: 25,
-  });
-  const circle0 = new CanvasPaintableCircle({
-    x: 400,
-    y: 300,
-    color: 'blue',
-    secondaryColor: 'dodgerblue',
-    radius: 25,
-  });
-  const circle2 = new CanvasCircle({
-    x: 700,
-    y: 300,
-    color: 'yellow',
-    secondaryColor: 'yellow',
-    radius: 50,
-  });
-  const circle3 = new CanvasCircle({
-    x: 350,
-    y: 700,
-    color: 'darkgreen',
-    secondaryColor: 'darkgreen',
-    radius: 50,
-  });
-  const circle4 = new CanvasCircle({
-    x: 450,
-    y: 700,
-    color: 'blue',
-    secondaryColor: 'dodgerblue',
-    radius: 50,
-  });
+  const { gameStatus, onSetGameStatus } = useSetGameStatus();
 
-  const [ctxObstacle, setCtxObstacle] = useState<CanvasRenderingContext2D>();
-  const [ctxTarget, setCtxTarget] = useState<CanvasRenderingContext2D>();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    return () => {
-      const obstacleContext = (
-        document.getElementById('obstacles') as HTMLCanvasElement
-      ).getContext('2d');
-      const targetContext = (
-        document.getElementById('targets') as HTMLCanvasElement
-      ).getContext('2d');
-      if (obstacleContext && targetContext) {
-        setCtxObstacle(obstacleContext);
-        setCtxTarget(targetContext);
-      }
-    };
-  }, []);
+    onSetGameStatus('started');
+  }, [onSetGameStatus]);
 
   return (
     <div className={cx('container')}>
-      <CanvasObstacles
-        id="obstacles"
-        width={window.innerWidth}
-        height={window.innerHeight}
-        drawables={[circle2]}
-      />
-      <CanvasObstacles
-        id="targets"
-        width={window.innerWidth}
-        height={window.innerHeight}
-        drawables={[circle3, circle4]}
-      />
-      <CanvasComponent
-        width={window.innerWidth}
-        height={window.innerHeight}
-        drawables={[circle0, circle]}
-        obstacleContext={ctxObstacle}
-        obstacles={[circle2]}
-        targetContext={ctxTarget}
-        targets={[circle3, circle4]}
-      />
+      <Modal isOpen={gameStatus !== 'started'}>
+        <div className={cx('end-game-modal')}>
+          <p className={cx('end-game-modal__title')}>{`You ${gameStatus}`}</p>
+          <Button
+            className={cx('end-game-modal__button-restart')}
+            onClick={() => onSetGameStatus('started')}
+          >
+            Restart
+          </Button>
+          <Button
+            className={cx('end-game-modal__button-menu')}
+            onClick={() => navigate('/')}
+          >
+            Main menu
+          </Button>
+        </div>
+      </Modal>
+
+      {gameStatus === 'started' && (
+        <GameCanvas
+          drawablesConfig={drawablesConfig}
+          obstaclesConfig={obstaclesConfig}
+          targetsConfig={targetsConfig}
+        />
+      )}
     </div>
   );
 }

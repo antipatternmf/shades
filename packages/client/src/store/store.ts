@@ -3,6 +3,8 @@ import * as process from 'process';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
+import { GameReducer } from 'reducers/game/reducer';
+import { UserReducer } from 'reducers/user/reducer';
 import { rootReducer } from './rootReducer';
 
 const logger = createLogger({
@@ -28,11 +30,15 @@ if (isDevMode) {
 const store = configureStore({
   reducer: rootReducer,
   devTools: isDevMode,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
 });
 
 export default store;
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = {
+  user: UserReducer;
+  game: GameReducer;
+};
 
 export type AppDispatch = typeof store.dispatch;
