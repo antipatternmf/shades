@@ -1,48 +1,48 @@
 import classNames from 'classnames/bind';
 
 import React from 'react';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { useNavigate } from 'react-router-dom';
-import { selectUser, userLogout } from 'reducers/user';
+import { useAppSelector } from 'store/hooks';
+import { Link } from 'react-router-dom';
+import { selectUser } from 'reducers/user';
+import Header from 'components/Header';
 import styles from './style.module.pcss';
+import { Paths } from '../../router';
 
 const cx = classNames.bind(styles);
 
 function Main() {
-  const navigate = useNavigate();
+  const title = 'Shades.';
 
-  const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectUser.isAuth);
 
-  const onClickHandle = () => {
-    let path = '/sign-in';
-    if (isAuth) {
-      path = '/game';
-    }
-    navigate(path);
-  };
+  const authButton = (
+    <>
+      <Link className={cx('default-button')} to={Paths.SignIn}> Авторизоваться </Link>
+      <Link className={cx('default-button')} to={Paths.SignUp}> Зарегистрироваться </Link>
+    </>
+  );
 
-  const onClickLogout = () => {
-    dispatch(userLogout());
-  };
+  const mainWindow = (
+    <>
+      <Link className={cx('default-button', styles.mainButton, styles.mainButtonGame)} to={Paths.Game}> Играть </Link>
+      <Link className={cx('default-button', styles.mainButton, styles.mainButtonLeaderboard)} to={Paths.Leaderboard}> Таблица лидеров </Link>
+      <Link className={cx('default-button', styles.mainButton, styles.mainButtonForum)} to={Paths.Forum}> Форум </Link>
+      <Link className={cx('default-button', styles.mainButton, styles.mainButtonProfile)} to={Paths.Profile}> Профиль </Link>
+    </>
+  );
 
   return (
-    <div className={cx('container')}>
-      Main
-      <button
-        type="button"
-        onClick={onClickHandle}
-      >
-        {isAuth ? 'Play' : 'Sign in'}
-      </button>
-      {isAuth && (
-        <button
-          type="button"
-          onClick={onClickLogout}
-        >
-          logout
-        </button>
-      )}
+    <div className={cx(styles.main)}>
+
+      <div className={cx(styles.mainContainer)}>
+        <Header title={title} isShowBackButton={false} />
+
+        <div className={cx(styles.mainBox)}>
+
+          {isAuth ? mainWindow : authButton}
+        </div>
+
+      </div>
     </div>
   );
 }
