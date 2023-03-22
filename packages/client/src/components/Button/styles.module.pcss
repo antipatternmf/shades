@@ -1,26 +1,25 @@
 .button {
+  &_primary {
+    background-color: var(--fawn);
 
-    &_primary {
-        background-color: var(--fawn);
-
-        &:hover {
-            background-color: var(--fawn-active);
-        }
-
-        &:disabled {
-            background-color: var(--fawn-disabled);
-        }
+    &:hover {
+      background-color: var(--fawn-active);
     }
 
-    &_secondary {
-        background-color: var(--jasmine);
-
-        &:hover {
-            background-color: var(--jasmine-active);
-        }
-
-        &:disabled {
-            background-color: var(--jasmine-disabled);
-        }
+    &:disabled {
+      background-color: var(--fawn-disabled);
     }
+  }
+
+  &_secondary {
+    background-color: var(--jasmine);
+
+    &:hover {
+      background-color: var(--jasmine-active);
+    }
+
+    &:disabled {
+      background-color: var(--jasmine-disabled);
+    }
+  }
 }
