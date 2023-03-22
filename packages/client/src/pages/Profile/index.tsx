@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Header from 'components/Header';
 import styles from './styles.module.pcss';
 import InfoSheet from './InfoSheet';
 import EditInfoForm from './EditInfoForm';
@@ -9,6 +10,8 @@ import AvatarUploader from './AvatarUploader';
 const cx = classNames.bind(styles);
 
 export default function Profile() {
+  const title = 'Профиль';
+
   const [currentScreen, setCurrentScreen] = useState<
     'info' | 'edit-info' | 'edit-password'
   >('info');
@@ -34,7 +37,11 @@ export default function Profile() {
 
   return (
     <div className={cx(styles.profilePage)}>
-      <div className={cx(styles.profilePageContentContainerOuter)}>
+      <Header title={title} />
+
+      <div
+        className={cx(styles.profilePageContentContainerOuter, 'page-content')}
+      >
         <div className={cx(styles.profilePageHeader)} />
         <div className={cx(styles.profilePageContentContainerInner)}>
           <div className={cx(styles.profilePageAvatarWrapper)}>
