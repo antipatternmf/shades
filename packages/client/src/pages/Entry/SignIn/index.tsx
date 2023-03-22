@@ -10,12 +10,16 @@ import {
 import { signIn, userGet } from 'reducers/user/thunks';
 import { Link, useNavigate } from 'react-router-dom';
 import EntryTmp from 'components/InputTmp';
-import ButtonTmp from 'components/ButtonTmp';
+import Button from 'components/Button';
+import Header from 'components/Header';
+import React from 'react';
 import styles from '../style.module.pcss';
 
 const cx = classNames.bind(styles);
 
 function SignIn() {
+  const title = 'Авторизация';
+
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
@@ -35,10 +39,11 @@ function SignIn() {
   };
 
   return (
-    <div className={cx('wrapper')}>
-      <Link to="/">Main</Link>
+    <div className={cx(styles.sign)}>
+      <Header title={title} />
+
+      {/* <Link to="/">Main</Link> */}
       <div className={cx(styles.entry, 'container')}>
-        <h2>Авторизация</h2>
         <form onSubmit={handleSubmit(onSubmitHandle)}>
           <div className={cx(styles.entry__list)}>
             {signInFields.map(({ name, type, placeholder }) => {
@@ -73,7 +78,7 @@ function SignIn() {
                 У вас нет аккаунта? Зарегистрируйтесь
               </Link>
             </div>
-            <ButtonTmp>Авторизоваться</ButtonTmp>
+            <Button>Авторизоваться</Button>
           </div>
         </form>
       </div>

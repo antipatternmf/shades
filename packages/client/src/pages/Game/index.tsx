@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Modal from 'components/Modal';
 import { useSetGameStatus } from 'reducers/game/useSetGameStatus';
 import Button from 'components/Button';
@@ -10,11 +10,13 @@ import {
   targetsConfig,
 } from 'pages/Game/lib/config/gameElements';
 import { useNavigate } from 'react-router-dom';
+import Header from 'components/Header';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
 function Game() {
+  const title = 'The best game ♡';
   const { gameStatus, onSetGameStatus } = useSetGameStatus();
 
   const navigate = useNavigate();
@@ -24,7 +26,8 @@ function Game() {
   }, [onSetGameStatus]);
 
   return (
-    <div className={cx('container')}>
+    <div className={cx(styles.game)}>
+      <Header title={title} />
       <Modal isOpen={gameStatus !== 'started'}>
         <div className={cx('end-game-modal')}>
           <p className={cx('end-game-modal__title')}>{`You ${gameStatus}`}</p>

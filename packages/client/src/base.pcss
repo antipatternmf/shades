@@ -41,3 +41,29 @@
   border: 1px solid var(--dark);
   box-shadow: 4px 4px 0 var(--dark);
 }
+
+.default-button {
+  border-radius: 30px;
+  border: 1px solid var(--dark);
+  box-shadow: 4px 4px 0 var(--dark);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--fawn);
+  user-select: none;
+  cursor: pointer;
+  color: var(--dark);
+  outline: none;
+  font-size: 16px;
+  padding: 0 32px;
+  margin: 0 auto;
+
+  &:hover {
+    background-color: var(--fawn-active);
+  }
+
+  &:disabled {
+    background-color: var(--fawn-disabled);
+  }
+}

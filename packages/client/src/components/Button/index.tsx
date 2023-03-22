@@ -21,6 +21,7 @@ export default function Button({
 }: ButtonProps) {
   const classList = cx(
     styles.button,
+    'default-button',
     { [styles.button_primary]: variant === 'primary' },
     { [styles.button_secondary]: variant === 'secondary' },
     className,
