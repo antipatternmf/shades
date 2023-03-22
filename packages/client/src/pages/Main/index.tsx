@@ -17,31 +17,77 @@ function Main() {
 
   const authButton = (
     <>
-      <Link className={cx('default-button')} to={Paths.SignIn}> Авторизоваться </Link>
-      <Link className={cx('default-button')} to={Paths.SignUp}> Зарегистрироваться </Link>
+      <Link
+        className={cx('default-button')}
+        to={Paths.SignIn}
+      >
+        Авторизоваться
+      </Link>
+      <Link
+        className={cx('default-button')}
+        to={Paths.SignUp}
+      >
+        Зарегистрироваться
+      </Link>
     </>
   );
 
   const mainWindow = (
     <>
-      <Link className={cx('default-button', styles.mainButton, styles.mainButtonGame)} to={Paths.Game}> Играть </Link>
-      <Link className={cx('default-button', styles.mainButton, styles.mainButtonLeaderboard)} to={Paths.Leaderboard}> Таблица лидеров </Link>
-      <Link className={cx('default-button', styles.mainButton, styles.mainButtonForum)} to={Paths.Forum}> Форум </Link>
-      <Link className={cx('default-button', styles.mainButton, styles.mainButtonProfile)} to={Paths.Profile}> Профиль </Link>
+      <Link
+        className={cx(
+          'default-button',
+          styles.mainButton,
+          styles.mainButtonGame,
+        )}
+        to={Paths.Game}
+      >
+        Играть
+      </Link>
+      <Link
+        className={cx(
+          'default-button',
+          styles.mainButton,
+          styles.mainButtonLeaderboard,
+        )}
+        to={Paths.Leaderboard}
+      >
+        Таблица лидеров
+      </Link>
+      <Link
+        className={cx(
+          'default-button',
+          styles.mainButton,
+          styles.mainButtonForum,
+        )}
+        to={Paths.Forum}
+      >
+        Форум
+      </Link>
+      <Link
+        className={cx(
+          'default-button',
+          styles.mainButton,
+          styles.mainButtonProfile,
+        )}
+        to={Paths.Profile}
+      >
+        Профиль
+      </Link>
     </>
   );
 
   return (
     <div className={cx(styles.main)}>
-
       <div className={cx(styles.mainContainer)}>
-        <Header title={title} isShowBackButton={false} />
+        <Header
+          title={title}
+          isShowBackButton={false}
+        />
 
         <div className={cx(styles.mainBox)}>
-
           {isAuth ? mainWindow : authButton}
         </div>
-
       </div>
     </div>
   );
