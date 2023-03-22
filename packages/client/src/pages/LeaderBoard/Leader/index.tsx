@@ -5,7 +5,7 @@ import styles from './styles.module.pcss';
 
 export type LeaderProps = {
   score: number;
-  user: UserResponse
+  user: UserResponse;
 };
 
 const cx = classNames.bind(styles);
@@ -13,7 +13,10 @@ const cx = classNames.bind(styles);
 export default function Leader({ score, user }: LeaderProps) {
   return (
     <div className={cx(styles.leader, 'list-item')}>
-      <Avatar size="small" src={user.avatar} />
+      <Avatar
+        size="small"
+        src={user.avatar}
+      />
       <div>
         {user.first_name}
         {' '}

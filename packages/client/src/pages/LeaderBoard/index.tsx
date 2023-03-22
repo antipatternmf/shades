@@ -16,7 +16,8 @@ const user: UserResponse = {
   login: 'login',
   email: 'mail@mail.com',
   phone: '8800900000',
-  avatar: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png',
+  avatar:
+    'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png',
 };
 const leaders: LeaderProps[] = [];
 for (let i = 0; i < 10; i += 1) {
@@ -43,14 +44,15 @@ function LeaderBoard() {
 
       <div className={cx('page-content')}>
         <LeaderList>
-          {
-            leadersList.map((leader: LeaderProps) =>
-              <Leader key={leader.user.id} score={leader.score} user={leader.user} />)
-          }
-
+          {leadersList.map((leader: LeaderProps) => (
+            <Leader
+              key={leader.user.id}
+              score={leader.score}
+              user={leader.user}
+            />
+          ))}
         </LeaderList>
       </div>
-
     </div>
   );
 }

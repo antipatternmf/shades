@@ -9,9 +9,5 @@ type LeaderListProps = {
 const cx = classNames.bind(styles);
 
 export default function LeaderList({ children }: LeaderListProps) {
-  return (
-    <div className={cx(styles.leaderList)}>
-      {children}
-    </div>
-  );
+  return <div className={cx(styles.leaderList)}>{children}</div>;
 }
