@@ -18,15 +18,13 @@ export default function Header({
   return (
     <header className={cx(styles.header)}>
       <div>
-        {isShowBackButton ? (
+        {isShowBackButton && (
           <button
             className={cx(styles.headerBackButton, 'shadow')}
             onClick={() => navigate(-1)}
           >
             &#8592;
           </button>
-        ) : (
-          ''
         )}
       </div>
       <h1 className={cx(styles.headerTitle)}>{title}</h1>

@@ -7,7 +7,7 @@ import { UserResponse } from 'api/chat';
 import Leader, { LeaderProps } from 'pages/LeaderBoard/Leader';
 import styles from './style.module.pcss';
 
-// ONLY FOR DEMO (START)
+// TODO: ONLY FOR DEMO (START)
 const user: UserResponse = {
   id: 0,
   first_name: 'First',
@@ -29,7 +29,7 @@ for (let i = 0; i < 10; i += 1) {
     score: Math.floor(Math.random() * 100),
   });
 }
-// ONLY FOR DEMO (END)
+// TODO: ONLY FOR DEMO (END)
 
 const cx = classNames.bind(styles);
 
