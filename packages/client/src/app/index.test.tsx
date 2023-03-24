@@ -10,7 +10,7 @@ global.fetch = jest.fn(() => {
 test('Example test', async () => {
   const { getByText } = render(<App />);
 
-  await waitFor(() => getByText('Main'));
+  await waitFor(() => getByText('Shades.'));
 
-  expect(getByText('Main')).toBeDefined();
+  expect(getByText('Shades.')).toBeDefined();
 });
