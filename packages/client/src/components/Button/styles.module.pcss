@@ -1,20 +1,25 @@
 .button {
-  padding: 14px 38px;
-  border: none;
-  border-radius: 25px;
-  font-family: Roboto, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 21px;
-  cursor: pointer;
-
   &_primary {
-    color: white;
-    background: #2382ff;
+    background-color: var(--fawn);
+
+    &:hover {
+      background-color: var(--fawn-active);
+    }
+
+    &:disabled {
+      background-color: var(--fawn-disabled);
+    }
   }
 
   &_secondary {
-    color: black;
-    background: white;
+    background-color: var(--jasmine);
+
+    &:hover {
+      background-color: var(--jasmine-active);
+    }
+
+    &:disabled {
+      background-color: var(--jasmine-disabled);
+    }
   }
 }

@@ -17,10 +17,11 @@ export default function Button({
   onClick,
   variant,
   className,
-  type,
+  type = 'submit',
 }: ButtonProps) {
   const classList = cx(
     styles.button,
+    'default-button',
     { [styles.button_primary]: variant === 'primary' },
     { [styles.button_secondary]: variant === 'secondary' },
     className,

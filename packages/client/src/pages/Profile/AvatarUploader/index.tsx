@@ -24,7 +24,7 @@ export default function AvatarUploader() {
   return (
     <>
       <label
-        className={cx(styles.avatarUploader)}
+        className={cx(styles.avatarUploader, 'shadow')}
         style={{ backgroundImage: `url(${avatarSrc})` }}
       >
         <input

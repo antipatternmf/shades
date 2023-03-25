@@ -10,7 +10,7 @@ export function Profile() {
   return (
     <div className={cx(styles.profilePage)}>
       <div className={cx(styles.profilePageContentContainerOuter)}>
-        <div className={cx(styles.profilePageHeader)} />
+        {/* <div className={cx(styles.profilePageHeader)} /> */}
         <div className={cx(styles.profilePageContentContainerInner)}>
           <AvatarUploader />
         </div>

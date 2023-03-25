@@ -10,12 +10,16 @@ import {
 import { signUp, userGet } from 'reducers/user';
 import { Link, useNavigate } from 'react-router-dom';
 import InputTmp from 'components/InputTmp';
-import ButtonTmp from 'components/ButtonTmp';
+import Button from 'components/Button';
+import Header from 'components/Header';
+import React from 'react';
 import styles from '../style.module.pcss';
 
 const cx = classNames.bind(styles);
 
 function SignUp() {
+  const title = 'Регистрация';
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -34,10 +38,10 @@ function SignUp() {
   };
 
   return (
-    <div className={cx('wrapper')}>
-      <Link to="/">Main</Link>
+    <div className={cx(styles.sign)}>
+      <Header title={title} />
+      {/* <Link to="/">Main</Link> */}
       <div className={cx(styles.entry, 'container')}>
-        <h2>Регистрация</h2>
         <form onSubmit={handleSubmit(onSubmitHandle)}>
           <div className={cx(styles.entry__list)}>
             {signUpFields.map(({ name, type, placeholder }) => {
@@ -72,7 +76,7 @@ function SignUp() {
                 У вас уже есть аккаунт? Авторизуйтесь
               </Link>
             </div>
-            <ButtonTmp>Зарегистрироваться</ButtonTmp>
+            <Button>Зарегистрироваться</Button>
           </div>
         </form>
       </div>
