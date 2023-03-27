@@ -13,3 +13,4 @@
 export * from './api/auth-api';
 export * from './api/oauth-api';
 export * from './api/users-api';
+export * from './api/leaderboard-api';
