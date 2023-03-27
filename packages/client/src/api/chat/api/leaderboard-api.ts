@@ -89,7 +89,11 @@ export const LeaderboardApiAxiosParamCreator = function (configuration?: Configu
       options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'leaderboardNewLeaderRequest' is not null or undefined
-      assertParamExists('leaderboardPost', 'leaderboardNewLeaderRequest', leaderboardNewLeaderRequest);
+      assertParamExists(
+        'leaderboardPost',
+        'leaderboardNewLeaderRequest',
+        leaderboardNewLeaderRequest,
+      );
       const localVarPath = '/leaderboard';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -109,12 +113,13 @@ export const LeaderboardApiAxiosParamCreator = function (configuration?: Configu
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
-        ...options.headers };
+        ...options.headers,
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         leaderboardNewLeaderRequest,
         localVarRequestOptions,
         configuration,
-);
+      );
 
       return {
         url: toPathString(localVarUrlObj),
@@ -140,8 +145,10 @@ export const LeaderboardApiAxiosParamCreator = function (configuration?: Configu
       assertParamExists('leaderboardTeamNamePost', 'teamName', teamName);
       // verify required parameter 'leaderboardRequest' is not null or undefined
       assertParamExists('leaderboardTeamNamePost', 'leaderboardRequest', leaderboardRequest);
-      const localVarPath = '/leaderboard/{teamName}'
-        .replace(`{${'teamName'}}`, encodeURIComponent(String(teamName)));
+      const localVarPath = '/leaderboard/{teamName}'.replace(
+        `{${'teamName'}}`,
+        encodeURIComponent(String(teamName)),
+      );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -160,12 +167,13 @@ export const LeaderboardApiAxiosParamCreator = function (configuration?: Configu
       localVarRequestOptions.headers = {
         ...localVarHeaderParameter,
         ...headersFromBaseOptions,
-        ...options.headers };
+        ...options.headers,
+      };
       localVarRequestOptions.data = serializeDataIfNeeded(
         leaderboardRequest,
         localVarRequestOptions,
         configuration,
-);
+      );
 
       return {
         url: toPathString(localVarUrlObj),
@@ -193,8 +201,10 @@ export const LeaderboardApiFp = function (configuration?: Configuration) {
       leaderboardRequest: LeaderboardRequest,
       options?: AxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator
-        .leaderboardAllPost(leaderboardRequest, options);
+      const localVarAxiosArgs = await localVarAxiosParamCreator.leaderboardAllPost(
+        leaderboardRequest,
+        options,
+      );
       return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
     },
     /**
@@ -208,8 +218,10 @@ export const LeaderboardApiFp = function (configuration?: Configuration) {
       leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest,
       options?: AxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator
-        .leaderboardPost(leaderboardNewLeaderRequest, options);
+      const localVarAxiosArgs = await localVarAxiosParamCreator.leaderboardPost(
+        leaderboardNewLeaderRequest,
+        options,
+      );
       return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
     },
     /**
@@ -227,8 +239,11 @@ export const LeaderboardApiFp = function (configuration?: Configuration) {
       leaderboardRequest: LeaderboardRequest,
       options?: AxiosRequestConfig,
     ): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-      const localVarAxiosArgs = await localVarAxiosParamCreator
-        .leaderboardTeamNamePost(teamName, leaderboardRequest, options);
+      const localVarAxiosArgs = await localVarAxiosParamCreator.leaderboardTeamNamePost(
+        teamName,
+        leaderboardRequest,
+        options,
+      );
       return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
     },
   };
@@ -252,10 +267,7 @@ export const LeaderboardApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    leaderboardAllPost(
-      leaderboardRequest: LeaderboardRequest,
-      options?: any,
-): AxiosPromise<void> {
+    leaderboardAllPost(leaderboardRequest: LeaderboardRequest, options?: any): AxiosPromise<void> {
       return localVarFp
         .leaderboardAllPost(leaderboardRequest, options)
         .then((request) => request(axios, basePath));
@@ -270,7 +282,7 @@ export const LeaderboardApiFactory = function (
     leaderboardPost(
       leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest,
       options?: any,
-): AxiosPromise<void> {
+    ): AxiosPromise<void> {
       return localVarFp
         .leaderboardPost(leaderboardNewLeaderRequest, options)
         .then((request) => request(axios, basePath));
@@ -289,7 +301,7 @@ export const LeaderboardApiFactory = function (
       teamName: any,
       leaderboardRequest: LeaderboardRequest,
       options?: any,
-): AxiosPromise<void> {
+    ): AxiosPromise<void> {
       return localVarFp
         .leaderboardTeamNamePost(teamName, leaderboardRequest, options)
         .then((request) => request(axios, basePath));
@@ -313,7 +325,8 @@ export interface LeaderboardApiInterface {
    */
   leaderboardAllPost(
     leaderboardRequest: LeaderboardRequest,
-    options?: AxiosRequestConfig): AxiosPromise<void>;
+    options?: AxiosRequestConfig,
+  ): AxiosPromise<void>;
 
   /**
    *
@@ -325,7 +338,8 @@ export interface LeaderboardApiInterface {
    */
   leaderboardPost(
     leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest,
-    options?: AxiosRequestConfig): AxiosPromise<void>;
+    options?: AxiosRequestConfig,
+  ): AxiosPromise<void>;
 
   /**
    *
@@ -341,8 +355,8 @@ export interface LeaderboardApiInterface {
   leaderboardTeamNamePost(
     teamName: any,
     leaderboardRequest: LeaderboardRequest,
-    options?: AxiosRequestConfig): AxiosPromise<void>;
-
+    options?: AxiosRequestConfig,
+  ): AxiosPromise<void>;
 }
 
 /**
@@ -377,7 +391,7 @@ export class LeaderboardApi extends BaseAPI implements LeaderboardApiInterface {
   public leaderboardPost(
     leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest,
     options?: AxiosRequestConfig,
-) {
+  ) {
     return LeaderboardApiFp(this.configuration)
       .leaderboardPost(leaderboardNewLeaderRequest, options)
       .then((request) => request(this.axios, this.basePath));
@@ -398,7 +412,7 @@ export class LeaderboardApi extends BaseAPI implements LeaderboardApiInterface {
     teamName: any,
     leaderboardRequest: LeaderboardRequest,
     options?: AxiosRequestConfig,
-) {
+  ) {
     return LeaderboardApiFp(this.configuration)
       .leaderboardTeamNamePost(teamName, leaderboardRequest, options)
       .then((request) => request(this.axios, this.basePath));
