@@ -10,3 +10,5 @@ export * from './user-request';
 export * from './user-response';
 export * from './user-update-request';
 export * from './users-request';
+export * from './leaderboard-new-leader-request';
+export * from './leaderboard-request';
