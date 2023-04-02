@@ -6,6 +6,37 @@ import { resolve } from 'path';
 
 dotenv.config();
 
+function createVitePWAConfig() {
+  if (process.env.WITHOUT_SW) {
+    return undefined;
+  }
+
+  return VitePWA({
+    manifest: {
+      name: 'Shades.',
+      short_name: 'Shades.',
+      description: 'Drawing game',
+      theme_color: '#ffffff',
+      icons: [
+        {
+          src: 'icon-192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: 'icon-512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+      ],
+    },
+    registerType: 'autoUpdate',
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+    },
+  });
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
@@ -28,33 +59,7 @@ export default defineConfig({
       utils: resolve(__dirname, 'src', 'utils'),
     },
   },
-  plugins: [
-    react(),
-    VitePWA({
-      manifest: {
-        name: 'Shades.',
-        short_name: 'Shades.',
-        description: 'Drawing game',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            src: 'icon-192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'icon-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
-      },
-      registerType: 'autoUpdate',
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-      },
-    }),
-  ],
+  plugins: [react(), createVitePWAConfig()],
   css: {
     modules: {
       localsConvention: 'camelCase',

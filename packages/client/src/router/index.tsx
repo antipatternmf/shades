@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { GameLayout } from 'components/GameLayout';
 import { PublicLayout } from 'components/PublicLayout';
 import { ProtectedLayout } from 'components/ProtectedLayout';
 import { lazy } from 'react';
@@ -70,11 +71,15 @@ export function Router() {
           path={Paths.Forum}
           element={<ForumPage />}
         />
+      </Route>
+
+      <Route element={<GameLayout />}>
         <Route
           path={Paths.Game}
           element={<GamePage />}
         />
       </Route>
+
       <Route
         path={'/*'}
         element={<NotFoundPage />}
