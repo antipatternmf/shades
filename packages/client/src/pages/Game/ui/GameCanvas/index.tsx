@@ -18,14 +18,8 @@ type GameCanvasProps = {
   obstaclesConfig: GameElement[];
 };
 
-function GameCanvas({
-  drawablesConfig,
-  obstaclesConfig,
-  targetsConfig,
-}: GameCanvasProps) {
-  const drawables = drawablesConfig.map(
-    (props) => new CanvasPaintableCircle(props),
-  );
+function GameCanvas({ drawablesConfig, obstaclesConfig, targetsConfig }: GameCanvasProps) {
+  const drawables = drawablesConfig.map((props) => new CanvasPaintableCircle(props));
   const obstacles = obstaclesConfig.map((props) => new CanvasCircle(props));
   const targets = targetsConfig.map((props) => new CanvasTargetCircle(props));
 
@@ -33,18 +27,16 @@ function GameCanvas({
   const [ctxTarget, setCtxTarget] = useState<CanvasRenderingContext2D>();
 
   useEffect(() => {
-    return () => {
-      const obstacleContext = (
-        document.getElementById('obstacles') as HTMLCanvasElement
-      )?.getContext('2d');
-      const targetContext = (
-        document.getElementById('targets') as HTMLCanvasElement
-      )?.getContext('2d');
-      if (obstacleContext && targetContext) {
-        setCtxObstacle(obstacleContext);
-        setCtxTarget(targetContext);
-      }
-    };
+    const obstaclesCanvas = document.getElementById('obstacles') as HTMLCanvasElement;
+    const targetCanvas = document.getElementById('targets') as HTMLCanvasElement;
+
+    const obstacleContext = obstaclesCanvas?.getContext('2d');
+    const targetContext = targetCanvas?.getContext('2d');
+
+    if (obstacleContext && targetContext) {
+      setCtxObstacle(obstacleContext);
+      setCtxTarget(targetContext);
+    }
   }, []);
 
   return (
