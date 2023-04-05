@@ -30,15 +30,7 @@ function animate(canvas: HTMLCanvasElement, drawables: CanvasDrawable[]) {
 }
 
 export default function CanvasComponent(props: CanvasProps) {
-  const {
-    width,
-    height,
-    targets,
-    drawables,
-    obstacleContext,
-    obstacles,
-    targetContext,
-  } = props;
+  const { width, height, targets, drawables, obstacleContext, obstacles, targetContext } = props;
 
   const dispatch = useAppDispatch();
 
@@ -68,18 +60,13 @@ export default function CanvasComponent(props: CanvasProps) {
         ref.current?.addEventListener('mousemove', (e) => {
           const mouse = getMouseCoordinates(ctx.canvas, e);
           if (drawable.active) {
-            if (
-              obstacles.some((it) =>
-                obstacleContext?.isPointInPath(it.path, mouse.x, mouse.y))
-            ) {
+            if (obstacles.some((it) => obstacleContext?.isPointInPath(it.path, mouse.x, mouse.y))) {
               drawable.setColor('darkgreen', 'yellowgreen');
             }
-            if (
-              targets.some((it) =>
-                targetContext?.isPointInPath(it.path, mouse.x, mouse.y))
-            ) {
+            if (targets.some((it) => targetContext?.isPointInPath(it.path, mouse.x, mouse.y))) {
               const target = targets.find((it) =>
-                targetContext?.isPointInPath(it.path, mouse.x, mouse.y));
+                targetContext?.isPointInPath(it.path, mouse.x, mouse.y),
+              );
 
               if (targets.every((it) => it.getIsDone())) {
                 dispatch(setGameStatus('win'));
@@ -96,7 +83,7 @@ export default function CanvasComponent(props: CanvasProps) {
             ctx.beginPath();
             ctx.strokeStyle = drawable.secondaryColor;
             ctx.lineWidth = 50;
-            ctx.globalAlpha = 0.01;
+            ctx.globalAlpha = 0.02;
             ctx.moveTo(drawable.x, drawable.y);
             ctx.lineTo(newX, newY);
             ctx.stroke();
@@ -106,16 +93,7 @@ export default function CanvasComponent(props: CanvasProps) {
         animate(ref.current, drawables);
       }
     });
-  }, [
-    props,
-    ctx,
-    dispatch,
-    drawables,
-    obstacles,
-    targets,
-    obstacleContext,
-    targetContext,
-  ]);
+  }, [props, ctx, dispatch, drawables, obstacles, targets, obstacleContext, targetContext]);
 
   return (
     <canvas

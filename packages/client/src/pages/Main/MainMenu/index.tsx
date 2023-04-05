@@ -10,41 +10,25 @@ function MainMenu() {
   return (
     <>
       <Link
-        className={cx(
-          'default-button',
-          styles.mainButton,
-          styles.mainButtonGame,
-        )}
-        to={Paths.Game}
+        className={cx('default-button', styles.mainButton, styles.mainButtonGame)}
+        to={Paths.Levels}
       >
         Играть
       </Link>
       <Link
-        className={cx(
-          'default-button',
-          styles.mainButton,
-          styles.mainButtonLeaderboard,
-        )}
+        className={cx('default-button', styles.mainButton, styles.mainButtonLeaderboard)}
         to={Paths.Leaderboard}
       >
         Таблица лидеров
       </Link>
       <Link
-        className={cx(
-          'default-button',
-          styles.mainButton,
-          styles.mainButtonForum,
-        )}
+        className={cx('default-button', styles.mainButton, styles.mainButtonForum)}
         to={Paths.Forum}
       >
         Форум
       </Link>
       <Link
-        className={cx(
-          'default-button',
-          styles.mainButton,
-          styles.mainButtonProfile,
-        )}
+        className={cx('default-button', styles.mainButton, styles.mainButtonProfile)}
         to={Paths.Profile}
       >
         Профиль

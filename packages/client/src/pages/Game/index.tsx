@@ -4,18 +4,16 @@ import Modal from 'components/Modal';
 import { useSetGameStatus } from 'reducers/game/useSetGameStatus';
 import Button from 'components/Button';
 import GameCanvas from 'pages/Game/ui/GameCanvas';
-import {
-  drawablesConfig,
-  obstaclesConfig,
-  targetsConfig,
-} from 'pages/Game/lib/config/gameElements';
-import { useNavigate } from 'react-router-dom';
+import GameLevels from 'pages/Game/lib/config/gameElements';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from 'components/Header';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
 function Game() {
+  const { lvlId } = useParams();
+  const lvl = lvlId !== undefined ? parseInt(lvlId, 10) : '0';
   const title = 'The best game ♡';
   const { gameStatus, onSetGameStatus } = useSetGameStatus();
 
@@ -48,9 +46,9 @@ function Game() {
 
       {gameStatus === 'started' && (
         <GameCanvas
-          drawablesConfig={drawablesConfig}
-          obstaclesConfig={obstaclesConfig}
-          targetsConfig={targetsConfig}
+          drawablesConfig={GameLevels[lvl].drawables}
+          obstaclesConfig={GameLevels[lvl].obstacles}
+          targetsConfig={GameLevels[lvl].targets}
         />
       )}
     </div>
