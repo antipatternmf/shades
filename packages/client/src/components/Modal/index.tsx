@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
-import Portal from 'hocs/Portal';
 
 import React from 'react';
+import { Portal } from 'hocs/Portal';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);

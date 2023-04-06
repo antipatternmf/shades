@@ -1,20 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 import { PublicLayout } from 'components/PublicLayout';
 import { ProtectedLayout } from 'components/ProtectedLayout';
-import { lazy } from 'react';
 import { useRestoreAuthSession } from 'hooks/auth';
 import { selectUser } from 'reducers/user';
 import { useAppSelector } from 'store/hooks';
 import LoadingOverlay from 'components/LoadingOverlay';
 
-const MainPage = lazy(() => import('pages/Main'));
-const SignUpPage = lazy(() => import('pages/Entry/SignUp'));
-const SignInPage = lazy(() => import('pages/Entry/SignIn'));
-const ProfilePage = lazy(() => import('pages/Profile'));
-const LeaderBoardPage = lazy(() => import('pages/LeaderBoard'));
-const ForumPage = lazy(() => import('pages/Forum'));
-const GamePage = lazy(() => import('pages/Game'));
-const NotFoundPage = lazy(() => import('pages/NotFound'));
+import MainPage from 'pages/Main';
+import SignUpPage from 'pages/Entry/SignUp';
+import SignInPage from 'pages/Entry/SignIn';
+import ProfilePage from 'pages/Profile';
+import LeaderBoardPage from 'pages/LeaderBoard';
+import ForumPage from 'pages/Forum';
+import GamePage from 'pages/Game';
+import NotFoundPage from 'pages/NotFound';
 
 export enum Paths {
   Root = '/',

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 export const useFetchServerData = () => {
   useEffect(() => {
     const fetchServerData = async () => {
-      const url = `http://localhost:${SERVER_PORT}`;
+      const url = `http://localhost:${SERVER_PORT}/api`;
       const response = await fetch(url);
       const data = await response.json();
 

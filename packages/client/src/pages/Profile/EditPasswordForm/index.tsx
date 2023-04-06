@@ -5,12 +5,8 @@ import classNames from 'classnames/bind';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { selectUser, updatePassword } from 'reducers/user';
 import { useAppDispatch, useAppSelector } from 'store';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import {
-  updatePasswordFields,
-  updatePasswordSchema,
-  type UpdatePasswordFields,
-} from './config';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { updatePasswordFields, updatePasswordSchema, type UpdatePasswordFields } from './config';
 import styles from '../styles.module.pcss';
 
 type EditPasswordFormProps = {
@@ -28,9 +24,7 @@ export default function EditPasswordForm({ goBack }: EditPasswordFormProps) {
     mode: 'onBlur',
   });
 
-  const handlePasswordUpdate: SubmitHandler<UpdatePasswordFields> = async (
-    data,
-  ) => {
+  const handlePasswordUpdate: SubmitHandler<UpdatePasswordFields> = async (data) => {
     const result = await dispatch(updatePassword(data));
 
     if (result.meta.requestStatus === 'fulfilled') {

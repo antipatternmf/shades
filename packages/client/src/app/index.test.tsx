@@ -1,4 +1,5 @@
-import { render, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
+import { withRouterAndRedux } from 'utils/withRouterAndRedux';
 import App from './index';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -8,7 +9,7 @@ global.fetch = jest.fn(() => {
 });
 
 test('Example test', async () => {
-  const { getByText } = render(<App />);
+  const { getByText } = withRouterAndRedux(<App />);
 
   await waitFor(() => getByText('Shades.'));
 

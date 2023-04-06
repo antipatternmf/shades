@@ -12,7 +12,7 @@ export default defineConfig({
     port: Number(process.env.CLIENT_PORT) || 3000,
   },
   define: {
-    SERVER_PORT: process.env.SERVER_PORT,
+    SERVER_PORT: process.env.SERVER_PORT || 3001,
   },
   resolve: {
     alias: {

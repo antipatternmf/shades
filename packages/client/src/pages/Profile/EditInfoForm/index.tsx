@@ -5,12 +5,8 @@ import LoadingOverlay from 'components/LoadingOverlay';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { selectUser, updateProfile } from 'reducers/user';
 import { useAppDispatch, useAppSelector } from 'store';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import {
-  updateProfileFields,
-  updateProfileSchema,
-  type UpdateProfileFields,
-} from './config';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { updateProfileFields, updateProfileSchema, type UpdateProfileFields } from './config';
 import styles from '../styles.module.pcss';
 
 type InfoEditFormProps = {
@@ -29,9 +25,7 @@ export default function EditInfoForm({ goBack }: InfoEditFormProps) {
     mode: 'onBlur',
   });
 
-  const handleUpdateProfile: SubmitHandler<UpdateProfileFields> = async (
-    data,
-  ) => {
+  const handleUpdateProfile: SubmitHandler<UpdateProfileFields> = async (data) => {
     const result = await dispatch(updateProfile(data));
 
     if (result.meta.requestStatus === 'fulfilled') {
