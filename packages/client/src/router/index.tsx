@@ -15,6 +15,7 @@ const ProfilePage = lazy(() => import('pages/Profile'));
 const LeaderBoardPage = lazy(() => import('pages/LeaderBoard'));
 const ForumPage = lazy(() => import('pages/Forum'));
 const GamePage = lazy(() => import('pages/Game'));
+const LevelsPage = lazy(() => import('pages/Levels'));
 const NotFoundPage = lazy(() => import('pages/NotFound'));
 
 export enum Paths {
@@ -24,7 +25,8 @@ export enum Paths {
   Profile = 'profile',
   Leaderboard = 'leaderboard',
   Forum = 'forum',
-  Game = 'game',
+  Levels = 'game',
+  Game = 'game/:lvlId',
 }
 
 export function Router() {
@@ -70,6 +72,10 @@ export function Router() {
         <Route
           path={Paths.Forum}
           element={<ForumPage />}
+        />
+        <Route
+          path={Paths.Levels}
+          element={<LevelsPage />}
         />
       </Route>
 

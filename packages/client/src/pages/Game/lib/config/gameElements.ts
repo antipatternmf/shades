@@ -9,49 +9,81 @@ export type GameElement = {
   createSvg?: (color: string) => string;
 };
 
-export const drawablesConfig: GameElement[] = [
+export type GameLevel = {
+  drawables: GameElement[];
+  obstacles: GameElement[];
+  targets: GameElement[];
+};
+
+const GameLevels: GameLevel[] = [
   {
-    x: 300,
-    y: 300,
-    color: 'blue',
-    secondaryColor: 'dodgerblue',
-    radius: 25,
+    drawables: [
+      {
+        x: 247,
+        y: 88,
+        color: 'blue',
+        secondaryColor: 'dodgerblue',
+        radius: 25,
+      },
+    ],
+    obstacles: [],
+    targets: [
+      {
+        x: 450,
+        y: 530,
+        color: 'blue',
+        secondaryColor: 'dodgerblue',
+        radius: 50,
+        createSvg: BlobTarget,
+      },
+    ],
   },
   {
-    x: 400,
-    y: 300,
-    color: 'blue',
-    secondaryColor: 'dodgerblue',
-    radius: 25,
+    drawables: [
+      {
+        x: 247,
+        y: 88,
+        color: 'blue',
+        secondaryColor: 'dodgerblue',
+        radius: 25,
+      },
+      {
+        x: 400,
+        y: 88,
+        color: 'blue',
+        secondaryColor: 'dodgerblue',
+        radius: 25,
+      },
+    ],
+    targets: [
+      {
+        x: 250,
+        y: 530,
+        color: 'darkgreen',
+        secondaryColor: 'darkgreen',
+        radius: 50,
+        createSvg: BlobTarget,
+      },
+      {
+        x: 450,
+        y: 530,
+        color: 'blue',
+        secondaryColor: 'dodgerblue',
+        radius: 50,
+        createSvg: BlobTarget,
+      },
+    ],
+    obstacles: [
+      {
+        x: 450,
+        y: 300,
+        color: 'yellow',
+        secondaryColor: 'yellow',
+        radius: 50,
+        createSvg: BlobTarget,
+      },
+    ],
   },
 ];
 
-export const targetsConfig: GameElement[] = [
-  {
-    x: 250,
-    y: 700,
-    color: 'darkgreen',
-    secondaryColor: 'darkgreen',
-    radius: 50,
-    createSvg: BlobTarget,
-  },
-  {
-    x: 450,
-    y: 700,
-    color: 'blue',
-    secondaryColor: 'dodgerblue',
-    radius: 50,
-    createSvg: BlobTarget,
-  },
-];
-
-export const obstaclesConfig: GameElement[] = [
-  {
-    x: 700,
-    y: 300,
-    color: 'yellow',
-    secondaryColor: 'yellow',
-    radius: 50,
-    createSvg: BlobTarget,
-  },
-];
+export default GameLevels;
