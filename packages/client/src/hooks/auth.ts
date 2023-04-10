@@ -1,19 +1,35 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectUser, userGet } from 'reducers/user';
+import { getCodeFromUrlSearch, authWithCodeFromUrl } from 'utils/oAuth';
 
 export function useRestoreAuthSession() {
   const dispatch = useAppDispatch();
 
   const isAuthorized = useAppSelector(selectUser.isAuth);
-  const authRequestStatus = useAppSelector(selectUser.status);
+  const userDataWasRequested = !!useAppSelector(selectUser.status);
+  const restoreAuthSessionWasCalledRef = useRef(false);
 
-  useEffect(() => {
-    if (!isAuthorized && !authRequestStatus) {
+  const restoreAuthSession = useCallback(async () => {
+    if (restoreAuthSessionWasCalledRef.current) {
+      return;
+    }
+
+    restoreAuthSessionWasCalledRef.current = true;
+
+    if (getCodeFromUrlSearch()) {
+      await authWithCodeFromUrl();
+    }
+
+    if (!isAuthorized && !userDataWasRequested) {
       dispatch(userGet());
     }
-  }, [authRequestStatus, dispatch, isAuthorized]);
+  }, [userDataWasRequested, dispatch, isAuthorized]);
+
+  useEffect(() => {
+    restoreAuthSession();
+  }, [restoreAuthSession]);
 }
 
 export function useProtectRoute() {
