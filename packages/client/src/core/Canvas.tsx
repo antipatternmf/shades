@@ -46,18 +46,17 @@ export default function CanvasComponent(props: CanvasProps) {
     drawables.forEach((drawable) => {
       if (ctx instanceof CanvasRenderingContext2D && ref.current) {
         drawable.draw(ctx);
-        ref.current?.addEventListener('mousedown', (e) => {
+        const mousedownListener = (e: MouseEvent) => {
           const mouse = getMouseCoordinates(ctx.canvas, e);
           if (drawable.pointInDrawable(mouse.x, mouse.y)) {
             drawable.activate();
             drawable.setOffset(mouse.x, mouse.y);
           }
-        });
-        ref.current?.addEventListener('mouseup', () => {
+        };
+        const mouseupListener = () => {
           drawable.disable();
-        });
-
-        ref.current?.addEventListener('mousemove', (e) => {
+        };
+        const mousemoveListener = (e: MouseEvent) => {
           const mouse = getMouseCoordinates(ctx.canvas, e);
           if (drawable.active) {
             if (obstacles.some((it) => obstacleContext?.isPointInPath(it.path, mouse.x, mouse.y))) {
@@ -69,7 +68,10 @@ export default function CanvasComponent(props: CanvasProps) {
               );
 
               if (targets.every((it) => it.getIsDone())) {
-                dispatch(setGameStatus('win'));
+                ref.current?.removeEventListener('mousedown', mousedownListener);
+                ref.current?.removeEventListener('mouseup', mouseupListener);
+                ref.current?.removeEventListener('mousemove', mousemoveListener);
+                setTimeout(() => dispatch(setGameStatus('win')), 3000);
               }
 
               if (target?.color === drawable.color) {
@@ -83,13 +85,18 @@ export default function CanvasComponent(props: CanvasProps) {
             ctx.beginPath();
             ctx.strokeStyle = drawable.secondaryColor;
             ctx.lineWidth = 50;
-            ctx.globalAlpha = 0.02;
+            ctx.globalAlpha = 0.03;
             ctx.moveTo(drawable.x, drawable.y);
             ctx.lineTo(newX, newY);
             ctx.stroke();
             drawable.setCoords(mouse.x, mouse.y);
           }
-        });
+        };
+
+        ref.current?.addEventListener('mousedown', mousedownListener);
+        ref.current?.addEventListener('mouseup', mouseupListener);
+
+        ref.current?.addEventListener('mousemove', mousemoveListener);
         animate(ref.current, drawables);
       }
     });
