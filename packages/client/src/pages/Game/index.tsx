@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'components/Modal';
 import { useSetGameStatus } from 'reducers/game/useSetGameStatus';
 import Button from 'components/Button';
@@ -18,6 +18,7 @@ function Game() {
   const { gameStatus, onSetGameStatus } = useSetGameStatus();
 
   const navigate = useNavigate();
+  const [currLvl, setCurrLvl] = useState(lvl as number);
 
   useEffect(() => {
     onSetGameStatus('started');
@@ -36,6 +37,15 @@ function Game() {
             Restart
           </Button>
           <Button
+            className={cx('end-game-modal__button-restart')}
+            onClick={() => {
+              setCurrLvl(currLvl + 1);
+              onSetGameStatus('started');
+            }}
+          >
+            Next Level
+          </Button>
+          <Button
             className={cx('end-game-modal__button-menu')}
             onClick={() => navigate('/')}
           >
@@ -46,9 +56,9 @@ function Game() {
 
       {gameStatus === 'started' && (
         <GameCanvas
-          drawablesConfig={GameLevels[lvl].drawables}
-          obstaclesConfig={GameLevels[lvl].obstacles}
-          targetsConfig={GameLevels[lvl].targets}
+          drawablesConfig={GameLevels[currLvl].drawables}
+          obstaclesConfig={GameLevels[currLvl].obstacles}
+          targetsConfig={GameLevels[currLvl].targets}
         />
       )}
     </div>
