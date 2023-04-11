@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { GameLayout } from 'components/GameLayout';
 import { PublicLayout } from 'components/PublicLayout';
 import { ProtectedLayout } from 'components/ProtectedLayout';
 import { useRestoreAuthSession } from 'hooks/auth';
@@ -13,6 +14,7 @@ import ProfilePage from 'pages/Profile';
 import LeaderBoardPage from 'pages/LeaderBoard';
 import ForumPage from 'pages/Forum';
 import GamePage from 'pages/Game';
+import LevelsPage from 'pages/Levels';
 import NotFoundPage from 'pages/NotFound';
 
 export enum Paths {
@@ -22,7 +24,8 @@ export enum Paths {
   Profile = 'profile',
   Leaderboard = 'leaderboard',
   Forum = 'forum',
-  Game = 'game',
+  Levels = 'game',
+  Game = 'game/:lvlId',
 }
 
 export function Router() {
@@ -70,10 +73,18 @@ export function Router() {
           element={<ForumPage />}
         />
         <Route
+          path={Paths.Levels}
+          element={<LevelsPage />}
+        />
+      </Route>
+
+      <Route element={<GameLayout />}>
+        <Route
           path={Paths.Game}
           element={<GamePage />}
         />
       </Route>
+
       <Route
         path={'/*'}
         element={<NotFoundPage />}
