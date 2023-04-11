@@ -7,8 +7,8 @@
 4. Выполните команду `yarn dev --scope=server` чтобы запустить только server
 
 ### Запуск SSR в режиме разработки:
-1. Выполните команду `yarn prepare`
-2. Для запуска выполните команду `yarn dev --scope=server`    
+1. Выполните команду `yarn run prepare-ssr`
+2. Для запуска выполните команду `yarn run dev --scope=server`    
 
 ### Как добавить зависимости?
 В этом проекте используется `monorepo` на основе [`lerna`](https://github.com/lerna/lerna)
