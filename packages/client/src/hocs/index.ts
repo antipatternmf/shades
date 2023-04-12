@@ -1,2 +1,1 @@
-export { withRouter } from './withRouter';
-export { withRedux } from './withRedux';
+export { Portal } from './Portal';

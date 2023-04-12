@@ -5,7 +5,7 @@ type PortalProps = {
   children: React.ReactNode;
 };
 
-function Portal({ children }: PortalProps) {
+export function Portal({ children }: PortalProps) {
   const [container] = useState(() => document.createElement('div'));
 
   useEffect(() => {
@@ -17,5 +17,3 @@ function Portal({ children }: PortalProps) {
 
   return ReactDOM.createPortal(children, container);
 }
-
-export default Portal;

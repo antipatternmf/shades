@@ -1,11 +1,16 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit';
 import * as process from 'process';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
 
 import { GameReducer } from 'reducers/game/reducer';
 import { UserReducer } from 'reducers/user/reducer';
+import { createLogger } from 'redux-logger';
 import { rootReducer } from './rootReducer';
+
+export type RootState = {
+  user: UserReducer;
+  game: GameReducer;
+};
 
 const logger = createLogger({
   duration: true,
@@ -27,18 +32,25 @@ if (isDevMode) {
   middleware.push(logger);
 }
 
-const store = configureStore({
-  reducer: rootReducer,
-  devTools: isDevMode,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(middleware),
-});
+export const createStore = (preloadedState: RootState) => {
+  return configureStore({
+    reducer: rootReducer,
+    devTools: isDevMode,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleware),
+    preloadedState,
+  });
+};
+
+let preloadedState;
+
+if (typeof window !== 'undefined') {
+  preloadedState = window.initialState;
+
+  delete window.initialState;
+}
+
+const store = createStore(preloadedState);
 
 export default store;
-
-export type RootState = {
-  user: UserReducer;
-  game: GameReducer;
-};
 
 export type AppDispatch = typeof store.dispatch;

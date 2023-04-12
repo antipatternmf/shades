@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { useAppDispatch } from 'store/hooks';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInFields, signInFields, signInSchema as schema } from 'pages/Entry/config';
 import { signIn, userGet } from 'reducers/user/thunks';
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,7 +20,9 @@ function SignIn() {
 
   const [shouldShowLoader, setShouldShowLoader] = useState(false);
   const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
+
   const { handleSubmit, control } = useForm<SignInFields>({
     resolver: yupResolver(schema),
   });
