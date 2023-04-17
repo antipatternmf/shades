@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
 import DecreaseIcon from 'components/icons/DecreaseIcon';
 import IncreaseIcon from 'components/icons/IncreaseIcon';
-import { useEffect, useState } from 'react';
-import styles from './style.module.css';
+import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
