@@ -35,6 +35,7 @@ module.exports = {
     '@typescript-eslint/indent': 0,
     'operator-linebreak': 0,
     'implicit-arrow-linebreak': 0,
-    'function-paren-newline': 0
+    'function-paren-newline': 0,
+    'react/no-array-index-key': 0
   }
 }
