@@ -1,0 +1,11 @@
+.fullscreenBtn {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  padding: 0;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  user-select: none;
+}

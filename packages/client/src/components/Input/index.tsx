@@ -1,29 +1,39 @@
-import { forwardRef, type InputHTMLAttributes } from 'react';
 import classNames from 'classnames/bind';
-import styles from './styles.module.pcss';
+import { InputHTMLAttributes, RefCallback } from 'react';
+import styles from './style.module.pcss';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  className?: string;
-  label?: string;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  subtitle?: string;
+  innerRef?: RefCallback<HTMLInputElement>;
   error?: string;
-};
+}
 
 const cx = classNames.bind(styles);
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, className, ...props }, ref) => {
-    return (
-      <label className={cx(styles.input__label)}>
-        {label && <p className={cx(styles.input__label__text)}>{label}</p>}
-        <input
-          ref={ref}
-          className={cx(styles.input, className)}
-          {...props}
-        />
-        {error && <p className={cx(styles.input__label__error)}>{error}</p>}
-      </label>
-    );
-  },
-);
+function Input({ type, subtitle, error, innerRef, ...props }: InputProps) {
+  return (
+    <label
+      className={cx(
+        styles.field,
+        'shadow',
+        subtitle && styles.field__profile,
+        error && styles.field__errorField,
+      )}
+    >
+      {subtitle && (
+        <div className={cx(styles.field__subtitle)}>
+          <span>{subtitle}</span>
+        </div>
+      )}
+      <input
+        className={cx(styles.field__input)}
+        type={type}
+        {...props}
+        ref={innerRef}
+      />
+      {error && <span className={cx(styles.field__errorTxt)}>{error}</span>}
+    </label>
+  );
+}
 
 export default Input;

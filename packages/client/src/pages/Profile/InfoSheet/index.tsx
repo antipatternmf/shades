@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 import { selectUser, userLogout } from 'reducers/user';
 import { useAppSelector, useAppDispatch } from 'store';
-import InfoRow from '../InfoRow';
-import ActionButton from '../ActionButton';
+import AvatarUploader from '../AvatarUploader';
 import { infoRows } from './constants';
-import styles from './styles.module.pcss';
+import InfoRow from '../InfoRow';
+import styles from '../style.module.pcss';
 
 type InfoSheetProps = {
   onEdit: () => void;
@@ -14,12 +15,19 @@ type InfoSheetProps = {
 const cx = classNames.bind(styles);
 
 export default function InfoSheet({ onEdit, onEditPassword }: InfoSheetProps) {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(selectUser.info);
 
+  const ExitApp = () => {
+    dispatch(userLogout());
+    navigate(-1);
+  };
+
   return (
     <>
-      <div className={cx(styles.infoRowsContainer)}>
+      <AvatarUploader />
+      <div className={cx(styles.profile__info)}>
         {infoRows.map(({ key, name }) => (
           <InfoRow
             key={key}
@@ -28,16 +36,25 @@ export default function InfoSheet({ onEdit, onEditPassword }: InfoSheetProps) {
           />
         ))}
       </div>
-
-      <div className={cx(styles.actionsContainer)}>
-        <ActionButton onClick={onEdit}>Изменить данные</ActionButton>
-        <ActionButton onClick={onEditPassword}>Изменить пароль</ActionButton>
-        <ActionButton
-          logout
-          onClick={() => dispatch(userLogout())}
+      <div className={cx(styles.profile__actions)}>
+        <button
+          className={cx(styles.profile__actionBtn)}
+          onClick={onEdit}
+        >
+          Изменить данные
+        </button>
+        <button
+          className={cx(styles.profile__actionBtn)}
+          onClick={onEditPassword}
+        >
+          Изменить пароль
+        </button>
+        <button
+          className={cx(styles.profile__actionBtn)}
+          onClick={ExitApp}
         >
           Выйти
-        </ActionButton>
+        </button>
       </div>
     </>
   );

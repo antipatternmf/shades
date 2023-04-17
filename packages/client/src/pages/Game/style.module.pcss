@@ -1,29 +1,82 @@
 .game {
   position: relative;
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
+  width: calc(var(--width-columns) * 12 + var(--width-gutter) * 13);
+  height: 90vh;
+  margin: auto;
+  border-radius: 30px;
+  background-color: var(--canvas-color);
+  overflow: hidden;
 }
 
-.end-game-modal {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  column-gap: 20px;
+.endGame {
+  width: calc(var(--width-columns) * 3 + var(--width-gutter) * 4);
+  padding: 30px 20px;
 
   &__title {
-    justify-self: center;
-    grid-column: 1 / 3;
-    grid-row: 1 / 2;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    user-select: none;
+
+    &.win {
+      color: var(--layout-green);
+    }
+
+    &.lose {
+      color: var(--layout-red);
+    }
   }
 
-  &__button-restart {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
+  &__rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
   }
 
-  &__button-menu {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+  &__rating svg:first-child {
+    transform: translateY(-12px) rotate(25deg) scale(0.8);
+  }
+
+  &__rating svg:last-child {
+    transform: translateY(-12px) rotate(-25deg) scale(0.8);
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: 1px solid var(--layout-black);
+    border-radius: 50%;
+    background-color: var(--layout-white);
+    cursor: pointer;
+    user-select: none;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &.next {
+      width: 50px;
+      height: 50px;
+
+      svg {
+        height: 26px;
+        transform: translateX(2px);
+      }
+    }
   }
 }

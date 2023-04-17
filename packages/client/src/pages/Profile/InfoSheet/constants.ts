@@ -2,23 +2,23 @@ type UserInfoKeys = 'email' | 'login' | 'first_name' | 'second_name' | 'phone';
 
 export const infoRows: Array<{ key: UserInfoKeys; name: string }> = [
   {
-    name: 'Email',
+    name: 'Почта',
     key: 'email',
   },
   {
-    name: 'Login',
+    name: 'Логин',
     key: 'login',
   },
   {
-    name: 'First name',
+    name: 'Имя',
     key: 'first_name',
   },
   {
-    name: 'Second name',
+    name: 'Фамилия',
     key: 'second_name',
   },
   {
-    name: 'Phone',
+    name: 'Телефон',
     key: 'phone',
   },
 ];

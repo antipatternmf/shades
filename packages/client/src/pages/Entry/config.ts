@@ -4,13 +4,7 @@ import { HTMLInputTypeAttribute } from 'react';
 export type SignInFields = Pick<Fields, 'login' | 'password'>;
 export type SignUpFields = Pick<
   Fields,
-  | 'email'
-  | 'login'
-  | 'first_name'
-  | 'second_name'
-  | 'phone'
-  | 'password'
-  | 'confirmPassword'
+  'email' | 'login' | 'first_name' | 'second_name' | 'phone' | 'password' | 'confirmPassword'
 >;
 
 export const signInFields: Array<{

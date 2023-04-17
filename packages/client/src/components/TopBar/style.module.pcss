@@ -1,0 +1,36 @@
+.topbar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  max-height: 50px;
+  border-bottom: 1px solid var(--layout-black);
+  background-color: var(--layout-3-color);
+  overflow: hidden;
+
+  &__backButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 20px;
+    max-height: 20px;
+    outline: none;
+    border: 1px solid var(--layout-black);
+    border-radius: 30px;
+    background-color: var(--layout-white);
+    cursor: pointer;
+  }
+
+  &__title {
+    font-size: 20px;
+    color: var(--layout-black);
+    user-select: none;
+  }
+}

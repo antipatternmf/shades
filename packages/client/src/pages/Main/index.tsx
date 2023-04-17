@@ -1,10 +1,9 @@
 import classNames from 'classnames/bind';
-
-import React from 'react';
 import { useAppSelector } from 'store/hooks';
 import { selectUser } from 'reducers/user';
-import Header from 'components/Header';
-import MainMenu from './MainMenu';
+import TopBar from 'components/TopBar';
+import ToggleTheme from 'components/ToggleTheme';
+import Home from './Home';
 import Welcome from './Welcome';
 import styles from './style.module.pcss';
 
@@ -16,18 +15,16 @@ function Main() {
   const isAuth = useAppSelector(selectUser.isAuth);
 
   return (
-    <div className={cx(styles.main)}>
-      <div className={cx(styles.mainContainer)}>
-        <Header
+    <main className={cx('wrapper')}>
+      {isAuth && <ToggleTheme />}
+      <div className={cx('container', 'shadow')}>
+        <TopBar
           title={title}
-          isShowBackButton={false}
+          isShowBackBtn={false}
         />
-
-        <div className={cx(styles.mainBox)}>
-          {isAuth ? <MainMenu /> : <Welcome />}
-        </div>
+        {isAuth ? <Home /> : <Welcome />}
       </div>
-    </div>
+    </main>
   );
 }
 

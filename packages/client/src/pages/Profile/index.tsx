@@ -1,20 +1,25 @@
 import classNames from 'classnames/bind';
-import React, { useState } from 'react';
-import Header from 'components/Header';
-import styles from './styles.module.pcss';
+import { useState } from 'react';
+import TopBar from 'components/TopBar';
 import InfoSheet from './InfoSheet';
 import EditInfoForm from './EditInfoForm';
 import EditPasswordForm from './EditPasswordForm';
-import AvatarUploader from './AvatarUploader';
+import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
-export default function Profile() {
-  const title = 'Профиль';
+const Titles = {
+  info: 'Профиль',
+  'edit-info': 'Изменить данные',
+  'edit-password': 'Изменить пароль',
+};
 
-  const [currentScreen, setCurrentScreen] = useState<
-    'info' | 'edit-info' | 'edit-password'
-  >('info');
+export default function Profile() {
+  const [currentScreen, setCurrentScreen] = useState<'info' | 'edit-info' | 'edit-password'>(
+    'info',
+  );
+
+  const title = Titles[currentScreen];
 
   const returnToInfoScreen = () => setCurrentScreen('info');
 
@@ -36,20 +41,10 @@ export default function Profile() {
   };
 
   return (
-    <div className={cx(styles.profilePage)}>
-      <Header title={title} />
-
-      <div
-        className={cx(styles.profilePageContentContainerOuter, 'page-content')}
-      >
-        <div className={cx(styles.profilePageHeader)} />
-        <div className={cx(styles.profilePageContentContainerInner)}>
-          <div className={cx(styles.profilePageAvatarWrapper)}>
-            <AvatarUploader />
-          </div>
-
-          {renderScreen()}
-        </div>
+    <div className={cx('container', 'shadow')}>
+      <TopBar title={title} />
+      <div className={cx(styles.profile, currentScreen !== 'info' ? styles.profile__edit : '')}>
+        {renderScreen()}
       </div>
     </div>
   );

@@ -1,39 +1,33 @@
 import { MouseEvent, ReactNode } from 'react';
 import classNames from 'classnames/bind';
-import styles from './styles.module.pcss';
+import styles from './style.module.pcss';
 
 type ButtonProps = {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
   type?: 'submit' | 'button';
-  variant?: 'primary' | 'secondary';
-  className?: string;
+  variant?: 'first' | 'second';
 };
 
 const cx = classNames.bind(styles);
 
-export default function Button({
-  children,
-  onClick,
-  variant,
-  className,
-  type = 'submit',
-}: ButtonProps) {
+function Button({ type = 'submit', variant = 'first', children, onClick }: ButtonProps) {
   const classList = cx(
     styles.button,
-    'default-button',
-    { [styles.button_primary]: variant === 'primary' },
-    { [styles.button_secondary]: variant === 'secondary' },
-    className,
+    'shadow',
+    { [styles.button__first]: variant === 'first' },
+    { [styles.button__second]: variant === 'second' },
   );
 
   return (
     <button
       className={classList}
-      onClick={onClick}
       type={type}
+      onClick={onClick}
     >
       {children}
     </button>
   );
 }
+
+export default Button;

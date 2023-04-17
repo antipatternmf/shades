@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
-import Header from 'components/Header';
-import React from 'react';
+import TopBar from 'components/TopBar';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
@@ -9,10 +8,10 @@ function Forum() {
   const title = 'Форум';
 
   return (
-    <div className={cx(styles.forum)}>
-      <Header title={title} />
+    <div className={cx('container', 'shadow')}>
+      <TopBar title={title} />
 
-      <div className={cx('page-content')}>
+      <div className={cx(styles.forum)}>
         <table>
           <thead>
             <tr>
