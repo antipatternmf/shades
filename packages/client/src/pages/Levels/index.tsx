@@ -3,7 +3,7 @@ import TopBar from 'components/TopBar';
 import { Link } from 'react-router-dom';
 import GameLevels from 'pages/Game/lib/config/gameElements';
 import RatingStar from 'components/icons/RatingStar';
-import styles from './style.module.css';
+import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
