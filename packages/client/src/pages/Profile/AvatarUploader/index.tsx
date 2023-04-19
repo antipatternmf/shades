@@ -3,7 +3,7 @@ import LoadingOverlay from 'components/LoadingOverlay';
 import { type ChangeEvent } from 'react';
 import { selectUser, updateAvatar } from 'reducers/user';
 import { useAppDispatch, useAppSelector } from 'store';
-import styles from './styles.module.pcss';
+import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
@@ -22,19 +22,21 @@ export default function AvatarUploader() {
   };
 
   return (
-    <>
-      <label
-        className={cx(styles.avatarUploader, 'shadow')}
-        style={{ backgroundImage: `url(${avatarSrc})` }}
-      >
-        <input
-          type="file"
-          name="avatar"
-          onChange={onUpload}
-        />
-        <p className={styles.avatarUploaderOverlay}>Изменить</p>
-      </label>
-      {isRequestPending && <LoadingOverlay />}
-    </>
+    <div className={cx(styles.avatar)}>
+      <div className={cx(styles.avatar__container, 'shadow')}>
+        <label
+          className={cx(styles.avatar__uploader)}
+          style={{ backgroundImage: `url(${avatarSrc})` }}
+        >
+          <input
+            type="file"
+            name="avatar"
+            onChange={onUpload}
+          />
+          <p className={styles.avatar__overlay}>Изменить</p>
+        </label>
+        {isRequestPending && <LoadingOverlay />}
+      </div>
+    </div>
   );
 }

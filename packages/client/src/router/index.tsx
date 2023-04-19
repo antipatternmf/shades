@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import { GameLayout } from 'components/GameLayout';
 import { PublicLayout } from 'components/PublicLayout';
 import { ProtectedLayout } from 'components/ProtectedLayout';
 import { useRestoreAuthSession } from 'hooks/auth';
@@ -76,9 +75,6 @@ export function Router() {
           path={Paths.Levels}
           element={<LevelsPage />}
         />
-      </Route>
-
-      <Route element={<GameLayout />}>
         <Route
           path={Paths.Game}
           element={<GamePage />}

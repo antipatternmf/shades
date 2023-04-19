@@ -1,0 +1,50 @@
+.profile {
+  width: calc(var(--width-columns) * 8 + var(--width-gutter) * 9);
+  padding: 30px 20px;
+
+  &__edit {
+    width: calc(var(--width-columns) * 6 + var(--width-gutter) * 7);
+  }
+
+  &__info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--width-gutter);
+    margin-bottom: 30px;
+  }
+
+  &__infoEdit {
+    margin-bottom: 30px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  &__actionBtn {
+    font-size: 14px;
+    padding: 0;
+    margin-left: 20px;
+    outline: none;
+    border: none;
+    background: none;
+    color: var(--layout-black);
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:active {
+      text-decoration: none;
+    }
+
+    &:last-child {
+      color: var(--layout-red);
+    }
+  }
+}

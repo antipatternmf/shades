@@ -2,17 +2,12 @@ import classNames from 'classnames/bind';
 import { useAppDispatch } from 'store/hooks';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  SignUpFields,
-  signUpFields,
-  signUpSchema as schema,
-} from 'pages/Entry/config';
+import { SignUpFields, signUpFields, signUpSchema as schema } from 'pages/Entry/config';
 import { signUp, userGet } from 'reducers/user';
 import { Link, useNavigate } from 'react-router-dom';
-import InputTmp from 'components/InputTmp';
+import EntryField from 'components/Input';
 import Button from 'components/Button';
-import Header from 'components/Header';
-import React from 'react';
+import TopBar from 'components/TopBar';
 import styles from '../style.module.pcss';
 
 const cx = classNames.bind(styles);
@@ -38,10 +33,10 @@ function SignUp() {
   };
 
   return (
-    <div className={cx(styles.sign)}>
-      <Header title={title} />
-      {/* <Link to="/">Main</Link> */}
-      <div className={cx(styles.entry, 'container')}>
+    <div className={cx('container', 'shadow')}>
+      <TopBar title={title} />
+
+      <div className={cx(styles.entry)}>
         <form onSubmit={handleSubmit(onSubmitHandle)}>
           <div className={cx(styles.entry__list)}>
             {signUpFields.map(({ name, type, placeholder }) => {
@@ -50,11 +45,8 @@ function SignUp() {
                   key={name}
                   defaultValue=""
                   control={control}
-                  render={({
-                    field: { ref, ...rest },
-                    fieldState: { error },
-                  }) => (
-                    <InputTmp
+                  render={({ field: { ref, ...rest }, fieldState: { error } }) => (
+                    <EntryField
                       type={type}
                       placeholder={placeholder}
                       error={error?.message}

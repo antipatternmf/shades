@@ -1,16 +1,16 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { useAppDispatch } from 'store/hooks';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInFields, signInFields, signInSchema as schema } from 'pages/Entry/config';
 import { signIn, userGet } from 'reducers/user/thunks';
 import { Link, useNavigate } from 'react-router-dom';
-import EntryTmp from 'components/InputTmp';
-import Button from 'components/Button';
-import Header from 'components/Header';
-import { useState } from 'react';
-import LoadingOverlay from 'components/LoadingOverlay';
 import { goToYandexOAuth } from 'utils/oAuth';
+import EntryField from 'components/Input';
+import Button from 'components/Button';
+import TopBar from 'components/TopBar';
+import LoadingOverlay from 'components/LoadingOverlay';
 import styles from '../style.module.pcss';
 
 const cx = classNames.bind(styles);
@@ -45,11 +45,10 @@ function SignIn() {
 
   return (
     <>
-      <div className={cx(styles.sign)}>
-        <Header title={title} />
+      <div className={cx('container', 'shadow')}>
+        <TopBar title={title} />
 
-        {/* <Link to="/">Main</Link> */}
-        <div className={cx(styles.entry, 'container')}>
+        <div className={cx(styles.entry)}>
           <form onSubmit={handleSubmit(onSubmitHandle)}>
             <div className={cx(styles.entry__list)}>
               {signInFields.map(({ name, type, placeholder }) => {
@@ -59,7 +58,7 @@ function SignIn() {
                     defaultValue=""
                     control={control}
                     render={({ field: { ref, ...rest }, fieldState: { error } }) => (
-                      <EntryTmp
+                      <EntryField
                         type={type}
                         placeholder={placeholder}
                         error={error?.message}
@@ -80,10 +79,9 @@ function SignIn() {
                 >
                   У вас нет аккаунта? Зарегистрируйтесь
                 </Link>
-
                 <button
                   type="button"
-                  className={cx(styles.entry__choiceLink)}
+                  className={cx(styles.entry__choiceLink, styles.entry__oauth_ya)}
                   onClick={handleOAuth}
                 >
                   Войти через Яндекс

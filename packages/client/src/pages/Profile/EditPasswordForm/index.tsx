@@ -1,5 +1,5 @@
 import Button from 'components/Button';
-import Input from 'components/Input';
+import InfoField from 'components/Input';
 import LoadingOverlay from 'components/LoadingOverlay';
 import classNames from 'classnames/bind';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -7,7 +7,7 @@ import { selectUser, updatePassword } from 'reducers/user';
 import { useAppDispatch, useAppSelector } from 'store';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { updatePasswordFields, updatePasswordSchema, type UpdatePasswordFields } from './config';
-import styles from '../styles.module.pcss';
+import styles from '../style.module.pcss';
 
 type EditPasswordFormProps = {
   goBack: () => void;
@@ -15,7 +15,7 @@ type EditPasswordFormProps = {
 
 const cx = classNames.bind(styles);
 
-export default function EditPasswordForm({ goBack }: EditPasswordFormProps) {
+function EditPasswordForm({ goBack }: EditPasswordFormProps) {
   const dispatch = useAppDispatch();
   const isRequestPending = useAppSelector(selectUser.status) === 'pending';
 
@@ -34,42 +34,46 @@ export default function EditPasswordForm({ goBack }: EditPasswordFormProps) {
 
   return (
     <>
-      <form
-        className={cx(styles.profilePageEditForm)}
-        onSubmit={handleSubmit(handlePasswordUpdate)}
-      >
-        {updatePasswordFields.map(({ name, type, label }) => (
-          <Controller
-            key={name}
-            name={name}
-            defaultValue=""
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <Input
-                type={type}
-                label={label}
-                error={error?.message}
-                {...field}
-              />
-            )}
-          />
-        ))}
-
-        <Button
-          variant="primary"
-          type="submit"
-        >
-          Сохранить
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={goBack}
-        >
-          Отмена
-        </Button>
+      <form onSubmit={handleSubmit(handlePasswordUpdate)}>
+        <div className={cx(styles.profile__infoEdit)}>
+          {updatePasswordFields.map(({ name, type, placeholder }) => (
+            <Controller
+              key={name}
+              name={name}
+              defaultValue=""
+              control={control}
+              render={({ field: { ref, ...rest }, fieldState: { error } }) => (
+                <InfoField
+                  type={type}
+                  placeholder={placeholder}
+                  error={error?.message}
+                  innerRef={ref}
+                  subtitle={placeholder}
+                  {...rest}
+                />
+              )}
+            />
+          ))}
+        </div>
+        <div>
+          <Button
+            type="submit"
+            variant="first"
+          >
+            Сохранить
+          </Button>
+          <Button
+            type="button"
+            variant="second"
+            onClick={goBack}
+          >
+            Отмена
+          </Button>
+        </div>
       </form>
       {isRequestPending && <LoadingOverlay />}
     </>
   );
 }
+
+export default EditPasswordForm;

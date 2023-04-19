@@ -1,5 +1,132 @@
 .leaderboard {
   display: flex;
-  flex-grow: 1;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: var(--width-gutter);
+  width: calc(var(--width-columns) * 10 + var(--width-gutter) * 11);
+  padding: 30px 20px;
+
+  &__user {
+    display: flex;
+    align-items: center;
+    width: calc(var(--width-columns) * 5 + var(--width-gutter) * 4);
+    padding: 5px;
+    border: 1px solid var(--layout-black);
+    border-radius: 15px;
+    background-color: var(--layout-white);
+
+    &:nth-child(1) .leaderboard__userPlace {
+      background-color: var(--layout-3-color);
+    }
+
+    &:nth-child(2) .leaderboard__userPlace {
+      background-color: var(--layout-4-color);
+    }
+
+    &:nth-child(3) .leaderboard__userPlace {
+      background-color: var(--layout-5-color);
+    }
+  }
+
+  &__userPlace {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 15px;
+    background-color: var(--layout-gray);
+    color: var(--layout-black);
+    user-select: none;
+  }
+
+  &__userAvatar {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-right: 21px;
+    border-radius: 50%;
+    background-color: var(--layout-black);
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50px;
+      width: 1px;
+      height: 40px;
+      background-color: var(--layout-black);
+    }
+  }
+
+  &__userName {
+    flex: 1;
+    font-size: 16px;
+    color: var(--layout-black);
+  }
+
+  &__userScore {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: var(--layout-black);
+    color: var(--layout-white);
+    user-select: none;
+  }
+
+  &__skelet {
+    display: flex;
+    align-items: center;
+    width: calc(var(--width-columns) * 5 + var(--width-gutter) * 4);
+    padding: 5px;
+    border: 1px solid var(--layout-black);
+    border-radius: 15px;
+    background-color: var(--layout-white);
+    opacity: 0.5;
+  }
+
+  &__skeletPlace {
+    width: 30px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 15px;
+    background-color: var(--layout-gray);
+  }
+
+  &__skeletAvatar {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-right: 21px;
+    border-radius: 50%;
+    background-color: var(--layout-gray);
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50px;
+      width: 1px;
+      height: 40px;
+      background-color: var(--layout-black);
+    }
+  }
+
+  &__skeletName {
+    flex: 1;
+  }
+
+  &__skeletScore {
+    width: 60px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: var(--layout-gray);
+  }
 }

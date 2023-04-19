@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './styles.module.pcss';
+import styles from './style.module.pcss';
 
 type InfoRowProps = {
   name: string;
@@ -8,11 +8,17 @@ type InfoRowProps = {
 
 const cx = classNames.bind(styles);
 
-export default function InfoRow({ name, value }: InfoRowProps) {
+function InfoRow({ name, value }: InfoRowProps) {
   return (
-    <div className={cx(styles.infoRow, 'list-item')}>
-      <div className={cx(styles.infoRowName)}>{name}</div>
-      <div className={cx(styles.infoRowValue)}>{value}</div>
+    <div className={cx(styles.infoRow, 'shadow')}>
+      <div className={cx(styles.infoRow__subtitle)}>
+        <span>{name}</span>
+      </div>
+      <div className={cx(styles.infoRow__value)}>
+        <span>{value}</span>
+      </div>
     </div>
   );
 }
+
+export default InfoRow;

@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
 import Button from 'components/Button';
-import Input from 'components/Input';
+import InfoField from 'components/Input';
 import LoadingOverlay from 'components/LoadingOverlay';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { selectUser, updateProfile } from 'reducers/user';
 import { useAppDispatch, useAppSelector } from 'store';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { updateProfileFields, updateProfileSchema, type UpdateProfileFields } from './config';
-import styles from '../styles.module.pcss';
+import styles from '../style.module.pcss';
 
 type InfoEditFormProps = {
   goBack: () => void;
@@ -35,40 +35,42 @@ export default function EditInfoForm({ goBack }: InfoEditFormProps) {
 
   return (
     <>
-      <form
-        className={cx(styles.profilePageEditForm)}
-        onSubmit={handleSubmit(handleUpdateProfile)}
-      >
-        {updateProfileFields.map(({ name, type, label }) => (
-          <Controller
-            key={name}
-            name={name}
-            defaultValue={userInfo?.[name] || ''}
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <Input
-                type={type}
-                label={label}
-                error={error?.message}
-                {...field}
-              />
-            )}
-          />
-        ))}
-
-        <Button
-          variant="primary"
-          type="submit"
-        >
-          Сохранить
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={goBack}
-        >
-          Отмена
-        </Button>
+      <form onSubmit={handleSubmit(handleUpdateProfile)}>
+        <div className={cx(styles.profile__infoEdit)}>
+          {updateProfileFields.map(({ name, type, placeholder }) => (
+            <Controller
+              key={name}
+              name={name}
+              defaultValue={userInfo?.[name] || ''}
+              control={control}
+              render={({ field: { ref, ...rest }, fieldState: { error } }) => (
+                <InfoField
+                  type={type}
+                  placeholder={placeholder}
+                  error={error?.message}
+                  innerRef={ref}
+                  subtitle={placeholder}
+                  {...rest}
+                />
+              )}
+            />
+          ))}
+        </div>
+        <div>
+          <Button
+            type="submit"
+            variant="first"
+          >
+            Сохранить
+          </Button>
+          <Button
+            type="button"
+            variant="second"
+            onClick={goBack}
+          >
+            Отмена
+          </Button>
+        </div>
       </form>
       {isRequestPending && <LoadingOverlay />}
     </>

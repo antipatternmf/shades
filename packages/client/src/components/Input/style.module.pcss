@@ -1,0 +1,78 @@
+.field {
+  position: relative;
+  display: block;
+  border: 1px solid var(--layout-black);
+  border-radius: 30px;
+  background-color: var(--layout-white);
+
+  &__profile {
+    border-radius: 15px;
+  }
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+
+  &:nth-child(1) &__subtitle {
+    background-color: var(--layout-3-color);
+  }
+
+  &:nth-child(2) &__subtitle {
+    background-color: var(--layout-4-color);
+  }
+
+  &:nth-child(3) &__subtitle {
+    background-color: var(--layout-5-color);
+  }
+
+  &:nth-child(4) &__subtitle {
+    background-color: var(--layout-6-color);
+  }
+
+  &:nth-child(5) &__subtitle {
+    background-color: var(--layout-7-color);
+  }
+
+  &__subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 2);
+    height: 30px;
+    margin: 2px;
+    font-size: 14px;
+    color: var(--layout-black);
+    border-radius: 15px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__input {
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+    padding: 0 20px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    color: var(--layout-black);
+
+    &::placeholder {
+      color: var(--layout-gray);
+    }
+  }
+
+  &__errorField {
+    box-shadow: 4px 17px 0 var(--layout-black);
+  }
+
+  &__errorTxt {
+    position: absolute;
+    bottom: -16px;
+    left: 20px;
+    font-size: 10px;
+    font-weight: normal;
+    color: var(--layout-red);
+  }
+}

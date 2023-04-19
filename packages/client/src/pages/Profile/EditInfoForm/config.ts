@@ -6,13 +6,11 @@ export type UpdateProfileFields = Pick<
 >;
 
 export const updateProfileFields: FormFieldsArray<keyof UpdateProfileFields> = [
-  { name: 'email', type: 'email', label: 'Почта' },
-  { name: 'login', type: 'text', label: 'Логин' },
-  { name: 'first_name', type: 'text', label: 'Имя' },
-  { name: 'second_name', type: 'text', label: 'Фамилия' },
-  { name: 'phone', type: 'phone', label: 'Телефон' },
+  { name: 'email', type: 'email', placeholder: 'Почта' },
+  { name: 'login', type: 'text', placeholder: 'Логин' },
+  { name: 'first_name', type: 'text', placeholder: 'Имя' },
+  { name: 'second_name', type: 'text', placeholder: 'Фамилия' },
+  { name: 'phone', type: 'phone', placeholder: 'Телефон' },
 ];
 
-export const updateProfileSchema = schema.pick(
-  updateProfileFields.map(({ name }) => name),
-);
+export const updateProfileSchema = schema.pick(updateProfileFields.map(({ name }) => name));

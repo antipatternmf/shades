@@ -40,7 +40,7 @@ function GameCanvas({ drawablesConfig, obstaclesConfig, targetsConfig }: GameCan
   }, []);
 
   return (
-    <div className={cx('container')}>
+    <div className={cx(styles.container)}>
       <CanvasObstacles
         id="obstacles"
         width={window.innerWidth}
