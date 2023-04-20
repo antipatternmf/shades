@@ -12,10 +12,10 @@ const cx = classNames.bind(styles);
 function User({ place, name, score }: UserProps) {
   return (
     <div className={cx(styles.leaderboard__user, 'shadow')}>
-      <div className={cx(styles.leaderboard__userPlace)}>{place}</div>
-      <div className={cx(styles.leaderboard__userAvatar)} />
-      <p className={cx(styles.leaderboard__userName)}>{name}</p>
-      <div className={cx(styles.leaderboard__userScore)}>{score}</div>
+      <div className={cx(styles.leaderboardUserPlace)}>{place}</div>
+      <div className={cx(styles.leaderboardUserAvatar)} />
+      <p className={cx(styles.leaderboardUserName)}>{name}</p>
+      <div className={cx(styles.leaderboardUserScore)}>{score}</div>
     </div>
   );
 }

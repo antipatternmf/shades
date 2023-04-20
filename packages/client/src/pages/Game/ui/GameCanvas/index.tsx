@@ -3,12 +3,13 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import { GameElement } from 'pages/Game/lib/config/gameElements';
 
+import CanvasPaintableCircle from 'core/CanvasPaintableCircle';
+import CanvasCircle from 'core/CanvasCircle';
+import CanvasObstacles from 'core/CanvasObstacles';
+import CanvasComponent from 'core/Canvas';
+import { CanvasTargetCircle } from 'core/CanvasTargetCircle';
+
 import styles from './style.module.pcss';
-import CanvasPaintableCircle from '../../../../core/CanvasPaintableCircle';
-import CanvasCircle from '../../../../core/CanvasCircle';
-import CanvasObstacles from '../../../../core/CanvasObstacles';
-import CanvasComponent from '../../../../core/Canvas';
-import { CanvasTargetCircle } from '../../../../core/CanvasTargetCircle';
 
 const cx = classNames.bind(styles);
 

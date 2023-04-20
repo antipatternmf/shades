@@ -1,5 +1,6 @@
 import { fn, col } from 'sequelize';
 import { ErrorEnum } from '../core/enums';
+import { isNumber } from '../core/utils';
 import { LevelScoreModel } from './level-score.model';
 import type { BaseRestService } from '../core/abstract';
 import type {
@@ -19,8 +20,11 @@ export class LevelScoreService implements BaseRestService {
     score,
     username,
   }: SaveLevelScoreDto): Promise<LevelScoreModel> => {
-    if (!(levelId && score && username)) {
-      throw new Error(ErrorEnum.RowsIsEmpty);
+    const isLevelIdValid = isNumber(Number(levelId)) && !isNaN(levelId);
+    const isScoreValid = isNumber(Number(score)) && !isNaN(score);
+
+    if (!(isLevelIdValid && isScoreValid && username)) {
+      throw new Error(ErrorEnum.WrongParams);
     }
 
     const scoreRecord = await LevelScoreModel.create({
@@ -37,17 +41,19 @@ export class LevelScoreService implements BaseRestService {
     username,
     levelId,
   }: FindLevelScoreDto): Promise<LevelScoreModel | null> => {
+    const isLevelIdValid = isNumber(Number(levelId)) && !isNaN(Number(levelId));
+
     if (id) {
       return LevelScoreModel.findByPk(id);
     }
 
-    if (username && levelId) {
+    if (username && isLevelIdValid) {
       return LevelScoreModel.findOne({
         where: { username, levelId },
       });
     }
 
-    throw new Error(ErrorEnum.RowsIsEmpty);
+    throw new Error(ErrorEnum.WrongParams);
   };
 
   public static getAllTotals = async ({
@@ -61,7 +67,7 @@ export class LevelScoreService implements BaseRestService {
     const selectedModels = await LevelScoreModel.findAll({
       attributes: ['username', [fn('SUM', col('score')), 'totalScore']],
       group: 'username',
-      order: col('totalScore'),
+      order: [[col('totalScore'), 'DESC']],
       offset,
       limit,
     });

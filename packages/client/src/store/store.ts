@@ -4,12 +4,14 @@ import thunk from 'redux-thunk';
 
 import { GameReducer } from 'reducers/game/reducer';
 import { UserReducer } from 'reducers/user/reducer';
+import { ScoresSliceState } from 'reducers/scores';
 import { createLogger } from 'redux-logger';
 import { rootReducer } from './rootReducer';
 
 export type RootState = {
   user: UserReducer;
   game: GameReducer;
+  scores: ScoresSliceState;
 };
 
 const logger = createLogger({

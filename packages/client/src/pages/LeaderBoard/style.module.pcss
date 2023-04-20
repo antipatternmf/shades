@@ -5,29 +5,7 @@
   width: calc(var(--width-columns) * 10 + var(--width-gutter) * 11);
   padding: 30px 20px;
 
-  &__user {
-    display: flex;
-    align-items: center;
-    width: calc(var(--width-columns) * 5 + var(--width-gutter) * 4);
-    padding: 5px;
-    border: 1px solid var(--layout-black);
-    border-radius: 15px;
-    background-color: var(--layout-white);
-
-    &:nth-child(1) .leaderboard__userPlace {
-      background-color: var(--layout-3-color);
-    }
-
-    &:nth-child(2) .leaderboard__userPlace {
-      background-color: var(--layout-4-color);
-    }
-
-    &:nth-child(3) .leaderboard__userPlace {
-      background-color: var(--layout-5-color);
-    }
-  }
-
-  &__userPlace {
+  &__user-place {
     font-size: 14px;
     display: flex;
     justify-content: center;
@@ -41,7 +19,29 @@
     user-select: none;
   }
 
-  &__userAvatar {
+  &__user {
+    display: flex;
+    align-items: center;
+    width: calc(var(--width-columns) * 5 + var(--width-gutter) * 4);
+    padding: 5px;
+    border: 1px solid var(--layout-black);
+    border-radius: 15px;
+    background-color: var(--layout-white);
+
+    &:nth-child(1) .leaderboard__user-place {
+      background-color: var(--layout-3-color);
+    }
+
+    &:nth-child(2) .leaderboard__user-place {
+      background-color: var(--layout-4-color);
+    }
+
+    &:nth-child(3) .leaderboard__user-place {
+      background-color: var(--layout-5-color);
+    }
+  }
+
+  &__user-avatar {
     position: relative;
     width: 40px;
     height: 40px;
@@ -61,13 +61,13 @@
     }
   }
 
-  &__userName {
+  &__user-name {
     flex: 1;
     font-size: 16px;
     color: var(--layout-black);
   }
 
-  &__userScore {
+  &__user-score {
     font-size: 14px;
     display: flex;
     justify-content: center;
@@ -91,7 +91,7 @@
     opacity: 0.5;
   }
 
-  &__skeletPlace {
+  &__skelet-place {
     width: 30px;
     height: 40px;
     margin-right: 10px;
@@ -99,7 +99,7 @@
     background-color: var(--layout-gray);
   }
 
-  &__skeletAvatar {
+  &__skelet-avatar {
     position: relative;
     width: 40px;
     height: 40px;
@@ -119,14 +119,47 @@
     }
   }
 
-  &__skeletName {
+  &__skelet-name {
     flex: 1;
   }
 
-  &__skeletScore {
+  &__skelet-score {
     width: 60px;
     height: 40px;
     border-radius: 15px;
     background-color: var(--layout-gray);
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 20px;
+
+    &__button {
+      outline: none;
+      border: 1px solid var(--layout-black);
+      border-radius: 30px;
+      padding: 10px;
+      background-color: var(--layout-white);
+      cursor: pointer;
+
+      &_backward {
+        transform: scaleX(1);
+      }
+
+      &_forward {
+        transform: scaleX(-1);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &__page-counter {
+      display: flex;
+      align-items: center;
+    }
   }
 }

@@ -1,4 +1,11 @@
-function RatingStar() {
+type RatingStarProps = {
+  filled?: boolean;
+};
+
+function RatingStar({ filled }: RatingStarProps) {
+  const filledColor = '#FFD700';
+  const emptyColor = '#D9D9D9';
+
   return (
     <svg
       width="60"
@@ -9,7 +16,7 @@ function RatingStar() {
     >
       <path
         d="M29.9948 0.0356445L36.9359 20.7528L59.3974 20.7528L41.2256 33.5567L48.1666 54.2738L29.9948 41.4699L11.823 54.2738L18.764 33.5567L0.592226 20.7528L23.0538 20.7528L29.9948 0.0356445Z"
-        fill="#D9D9D9"
+        fill={filled ? filledColor : emptyColor}
       />
     </svg>
   );

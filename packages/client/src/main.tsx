@@ -6,13 +6,22 @@ import { Provider } from 'react-redux';
 import { store } from 'store/index';
 import App from './app';
 
-ReactDOM.hydrateRoot(
-  document.getElementById('root') as HTMLElement,
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>,
-);
+const isDev = process.env.NODE_ENV === 'development';
+
+function Root() {
+  return (
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+}
+
+if (isDev) {
+  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<Root />);
+} else {
+  ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, <Root />);
+}
