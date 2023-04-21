@@ -11,23 +11,23 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  timestamps: false,
+  timestamps: true,
   paranoid: true,
   tableName: 'site_theme',
 })
-export class SiteThemeModel extends Model<SiteThemeModel> {
+export class SiteThemeModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-  override id!: number;
+  override id?: number;
 
   @Index
   @AllowNull(false)
   @Unique
   @Column(DataType.STRING)
-  theme!: string;
+  theme?: string;
 
-  @AllowNull(false)
+  @AllowNull(true)
   @Column(DataType.STRING)
-  description!: string;
+  description?: string;
 }

@@ -5,6 +5,7 @@ import {
   DataType,
   ForeignKey,
   Index,
+  Length,
   Model,
   PrimaryKey,
   Table,
@@ -13,11 +14,11 @@ import {
 import { UserModel } from '../user';
 
 @Table({
-  timestamps: false,
+  timestamps: true,
   paranoid: true,
   tableName: 'threads',
 })
-export class ThreadModel extends Model<ThreadModel> {
+export class ThreadModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
@@ -27,9 +28,10 @@ export class ThreadModel extends Model<ThreadModel> {
   @Unique
   @Index
   @Column(DataType.STRING)
+  @Length({ max: 255, min: 1 })
   title!: string;
 
-  @AllowNull(false)
+  @AllowNull(true)
   @Unique
   @Column(DataType.STRING)
   description!: string;

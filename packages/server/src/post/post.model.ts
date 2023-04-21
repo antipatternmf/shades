@@ -14,15 +14,20 @@ import { UserModel } from '../user';
 import { ThreadModel } from '../thread';
 
 @Table({
-  timestamps: false,
+  timestamps: true,
   paranoid: true,
   tableName: 'posts',
 })
-export class PostModel extends Model<PostModel> {
+export class PostModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
   override id!: number;
+
+  @AllowNull(true)
+  @Unique
+  @Column(DataType.STRING)
+  emotions!: string;
 
   @AllowNull(false)
   @Unique
@@ -45,4 +50,12 @@ export class PostModel extends Model<PostModel> {
     field: 'owner_id',
   })
   ownerId!: string;
+
+  @ForeignKey(() => PostModel)
+  @AllowNull(true)
+  @Column({
+    type: DataType.INTEGER,
+    field: 'parent_id',
+  })
+  parentId!: string;
 }

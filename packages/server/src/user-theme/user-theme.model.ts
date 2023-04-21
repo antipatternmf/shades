@@ -12,11 +12,11 @@ import { UserModel } from '../user';
 import { SiteThemeModel } from '../site-theme';
 
 @Table({
-  timestamps: false,
+  timestamps: true,
   paranoid: true,
   tableName: 'user_theme',
 })
-export class UserThemeModel extends Model<UserThemeModel> {
+export class UserThemeModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)

@@ -4,6 +4,7 @@ import {
   Column,
   DataType,
   Index,
+  IsEmail,
   Model,
   PrimaryKey,
   Table,
@@ -11,11 +12,11 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  timestamps: false,
+  timestamps: true,
   paranoid: true,
   tableName: 'users',
 })
-export class UserModel extends Model<UserModel> {
+export class UserModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
@@ -24,6 +25,7 @@ export class UserModel extends Model<UserModel> {
   @AllowNull(false)
   @Unique
   @Index
+  @IsEmail
   @Column(DataType.STRING)
   email!: string;
 }

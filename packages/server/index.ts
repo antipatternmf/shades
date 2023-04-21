@@ -24,7 +24,6 @@ async function startServer() {
     res.json('👋 Howdy from the server :)');
   });
 
-
   let vite: ViteDevServer | undefined;
 
   const srcPath = path.dirname(require.resolve('client'));
