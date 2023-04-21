@@ -20,6 +20,11 @@ async function startServer() {
 
   // createClientAndConnect()
 
+  app.get('/api', (_, res) => {
+    res.json('👋 Howdy from the server :)');
+  });
+
+
   let vite: ViteDevServer | undefined;
 
   const srcPath = path.dirname(require.resolve('client'));
@@ -33,10 +38,6 @@ async function startServer() {
 
     app.use(vite!.middlewares);
   }
-
-  app.get('/api', (_, res) => {
-    res.json('👋 Howdy from the server :)');
-  });
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;

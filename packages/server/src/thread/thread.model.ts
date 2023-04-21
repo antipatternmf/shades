@@ -3,32 +3,36 @@ import {
   AutoIncrement,
   Column,
   DataType,
+  ForeignKey,
+  Index,
+  Model,
   PrimaryKey,
   Table,
-  Model,
-  ForeignKey,
+  Unique,
 } from 'sequelize-typescript';
-import { UserModel } from './user.model';
-import { SiteThemeModel } from './site-theme.model';
+import { UserModel } from '../user';
 
 @Table({
   timestamps: false,
   paranoid: true,
-  tableName: 'user_theme',
+  tableName: 'threads',
 })
-export class UserThemeModel extends Model<UserThemeModel> {
+export class ThreadModel extends Model<ThreadModel> {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
   override id!: number;
 
-  @ForeignKey(() => SiteThemeModel)
   @AllowNull(false)
-  @Column(DataType.INTEGER)
-  themeId!: string;
-
+  @Unique
+  @Index
   @Column(DataType.STRING)
-  device!: string;
+  title!: string;
+
+  @AllowNull(false)
+  @Unique
+  @Column(DataType.STRING)
+  description!: string;
 
   @ForeignKey(() => UserModel)
   @AllowNull(false)

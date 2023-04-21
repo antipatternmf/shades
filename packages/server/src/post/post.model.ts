@@ -10,15 +10,15 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript';
-import { UserModel } from './user.model';
-import { ThreadsModel } from './threads.model';
+import { UserModel } from '../user';
+import { ThreadModel } from '../thread';
 
 @Table({
   timestamps: false,
   paranoid: true,
   tableName: 'posts',
 })
-export class PostsModel extends Model<PostsModel> {
+export class PostModel extends Model<PostModel> {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
@@ -30,7 +30,7 @@ export class PostsModel extends Model<PostsModel> {
   text!: string;
 
   @Index
-  @ForeignKey(() => ThreadsModel)
+  @ForeignKey(() => ThreadModel)
   @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
