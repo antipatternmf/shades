@@ -16,18 +16,14 @@ export const startBD = async (): Promise<Sequelize | null> => {
     password: POSTGRES_PASSWORD,
     database: POSTGRES_DB,
     dialect: 'postgres',
+    sync: {
+      force: true,
+    },
+    models: [EmotionModel, PostModel, SiteThemeModel, ThreadModel, UserModel, UserThemeModel],
   };
 
   try {
     const sequelize = new Sequelize(sequelizeOptions);
-    sequelize.addModels([
-      EmotionModel,
-      PostModel,
-      SiteThemeModel,
-      ThreadModel,
-      UserModel,
-      UserThemeModel,
-    ]);
 
     console.log('DB  ➜ 🎸 Connected');
     return sequelize;

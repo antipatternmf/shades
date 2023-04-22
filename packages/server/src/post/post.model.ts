@@ -6,7 +6,6 @@ import {
   DataType,
   ForeignKey,
   HasMany,
-  Index,
   Model,
   PrimaryKey,
   Table,
@@ -32,7 +31,7 @@ export class PostModel extends Model {
   @Column(DataType.STRING)
   text!: string;
 
-  @Index
+  // @Index
   @ForeignKey(() => ThreadModel)
   @AllowNull(false)
   @Column({
@@ -55,7 +54,6 @@ export class PostModel extends Model {
   @BelongsTo(() => UserModel)
   owner?: UserModel;
 
-  @ForeignKey(() => PostModel)
   @AllowNull(true)
   @Column({
     type: DataType.INTEGER,

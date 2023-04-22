@@ -5,7 +5,6 @@ import {
   Column,
   DataType,
   ForeignKey,
-  Index,
   Model,
   PrimaryKey,
   Table,
@@ -32,7 +31,7 @@ export class EmotionModel extends Model {
 
   @ForeignKey(() => PostModel)
   @AllowNull(false)
-  @Index
+  // @Index
   @Column({
     type: DataType.INTEGER,
     field: 'post_id',
@@ -44,7 +43,7 @@ export class EmotionModel extends Model {
 
   @ForeignKey(() => UserModel)
   @AllowNull(false)
-  @Index
+  // @Index
   @Column({
     type: DataType.INTEGER,
     field: 'owner_id',
