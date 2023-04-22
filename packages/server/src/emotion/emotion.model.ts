@@ -1,41 +1,50 @@
 import {
   AllowNull,
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
+  ForeignKey,
+  Index,
+  Model,
   PrimaryKey,
   Table,
-  Model,
-  ForeignKey,
-  BelongsTo,
+  Unique,
 } from 'sequelize-typescript';
 import { UserModel } from '../user';
-import { SiteThemeModel } from '../site-theme';
+import { PostModel } from '../post';
 
 @Table({
   timestamps: true,
   paranoid: true,
-  tableName: 'user_theme',
+  tableName: 'emotions',
 })
-export class UserThemeModel extends Model {
+export class EmotionModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
   override id!: number;
 
+  @AllowNull(true)
+  @Unique
   @Column(DataType.STRING)
-  device!: string;
+  emotion!: string;
 
-  @ForeignKey(() => SiteThemeModel)
+  @ForeignKey(() => PostModel)
   @AllowNull(false)
-  @Column(DataType.INTEGER)
-  themeId!: number;
+  @Index
+  @Column({
+    type: DataType.INTEGER,
+    field: 'post_id',
+  })
+  postId!: number;
 
-  @BelongsTo(() => SiteThemeModel)
-  theme?: SiteThemeModel;
+  @BelongsTo(() => PostModel)
+  post?: PostModel;
 
   @ForeignKey(() => UserModel)
   @AllowNull(false)
+  @Index
   @Column({
     type: DataType.INTEGER,
     field: 'owner_id',

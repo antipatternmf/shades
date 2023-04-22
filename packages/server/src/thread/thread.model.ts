@@ -48,7 +48,7 @@ export class ThreadModel extends Model {
     type: DataType.INTEGER,
     field: 'owner_id',
   })
-  ownerId!: string;
+  ownerId!: number;
 
   @BelongsTo(() => UserModel)
   owner?: UserModel;

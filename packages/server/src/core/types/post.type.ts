@@ -1,22 +1,24 @@
 import { UserType } from './user.type';
-import type { ThreadModel } from '../../thread';
+import type { PostModel } from '../../post';
+import { ThreadType } from './thread.type';
+import { ListEmotionsType } from './list-emotions.type';
 
-export class ThreadType {
+export class PostType {
   id: number;
-  title: string;
-  description?: string;
-  cover?: string;
+  text: string;
+  thread: ThreadType;
+  emotions?: ListEmotionsType;
   owner: UserType;
   updatedAt: Date;
   createdAt: Date;
 
-  constructor(thread: ThreadModel) {
-    this.id = thread.id;
-    this.title = thread.title;
-    this.description = thread.description ?? '';
-    this.cover = thread.cover ?? '';
-    this.owner = new UserType(thread.owner!);
-    this.updatedAt = new Date(thread.updatedAt ?? null);
-    this.createdAt = new Date(thread.createdAt ?? null);
+  constructor(post: PostModel) {
+    this.id = post.id;
+    this.text = post.text;
+    this.owner = new UserType(post.owner!);
+    this.thread = new ThreadType(post.thread!);
+    this.emotions = post.emotions?.length ? new ListEmotionsType(post.emotions!) : undefined;
+    this.updatedAt = new Date(post.updatedAt ?? null);
+    this.createdAt = new Date(post.createdAt ?? null);
   }
 }

@@ -1,9 +1,11 @@
 import {
   AllowNull,
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Index,
   Model,
   PrimaryKey,
@@ -12,6 +14,7 @@ import {
 } from 'sequelize-typescript';
 import { UserModel } from '../user';
 import { ThreadModel } from '../thread';
+import { EmotionModel } from '../emotion';
 
 @Table({
   timestamps: true,
@@ -23,11 +26,6 @@ export class PostModel extends Model {
   @PrimaryKey
   @Column(DataType.INTEGER)
   override id!: number;
-
-  @AllowNull(true)
-  @Unique
-  @Column(DataType.STRING)
-  emotions!: string;
 
   @AllowNull(false)
   @Unique
@@ -41,7 +39,10 @@ export class PostModel extends Model {
     type: DataType.INTEGER,
     field: 'thread_id',
   })
-  threadId!: string;
+  threadId!: number;
+
+  @BelongsTo(() => ThreadModel)
+  thread?: ThreadModel;
 
   @ForeignKey(() => UserModel)
   @AllowNull(false)
@@ -49,7 +50,10 @@ export class PostModel extends Model {
     type: DataType.INTEGER,
     field: 'owner_id',
   })
-  ownerId!: string;
+  ownerId!: number;
+
+  @BelongsTo(() => UserModel)
+  owner?: UserModel;
 
   @ForeignKey(() => PostModel)
   @AllowNull(true)
@@ -57,5 +61,8 @@ export class PostModel extends Model {
     type: DataType.INTEGER,
     field: 'parent_id',
   })
-  parentId!: string;
+  parentId!: number;
+
+  @HasMany(() => EmotionModel)
+  emotions?: EmotionModel[];
 }
