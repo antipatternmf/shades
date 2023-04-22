@@ -28,8 +28,8 @@ export class ThreadModel extends Model {
   @AllowNull(false)
   @Unique
   @Index
-  @Column(DataType.STRING)
   @Length({ min: 1, max: 255 })
+  @Column(DataType.STRING)
   title!: string;
 
   @AllowNull(true)

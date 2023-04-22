@@ -34,22 +34,22 @@ export class UserModel extends Model {
   @AllowNull(true)
   @Unique
   @Index
-  @Column(DataType.STRING)
   @Length({ min: 1, max: 255 })
+  @Column(DataType.STRING)
   uuid?: string;
 
   // For Auth (If necessary)
   @AllowNull(true)
   @Unique
   @Index
-  @Column(DataType.STRING)
   @Length({ min: 1, max: 255 })
+  @Column(DataType.STRING)
   authCookie?: string;
 
   @AllowNull(true)
   @Unique
   @Index
-  @Column(DataType.STRING)
   @Length({ min: 1, max: 255 })
+  @Column(DataType.STRING)
   login?: string;
 }

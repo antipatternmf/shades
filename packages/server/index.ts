@@ -7,6 +7,7 @@ import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import fs from 'fs';
 import { preloadedState } from './preloadedState';
+import { startBD } from './db';
 
 dotenv.config();
 // import { createClientAndConnect } from './db'
@@ -19,11 +20,13 @@ async function startServer() {
   const port = Number(process.env.SERVER_PORT) || 3001;
 
   // createClientAndConnect()
+  await startBD();
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
 
+  // I didn't touch the code below. ↓
   let vite: ViteDevServer | undefined;
 
   const srcPath = path.dirname(require.resolve('client'));
