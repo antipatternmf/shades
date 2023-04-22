@@ -7,6 +7,7 @@ import {
   Table,
   Model,
   ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { UserModel } from '../user';
 import { SiteThemeModel } from '../site-theme';
@@ -22,13 +23,16 @@ export class UserThemeModel extends Model {
   @Column(DataType.INTEGER)
   override id!: number;
 
+  @Column(DataType.STRING)
+  device!: string;
+
   @ForeignKey(() => SiteThemeModel)
   @AllowNull(false)
   @Column(DataType.INTEGER)
   themeId!: string;
 
-  @Column(DataType.STRING)
-  device!: string;
+  @BelongsTo(() => SiteThemeModel)
+  theme?: SiteThemeModel;
 
   @ForeignKey(() => UserModel)
   @AllowNull(false)
@@ -37,4 +41,7 @@ export class UserThemeModel extends Model {
     field: 'owner_id',
   })
   ownerId!: string;
+
+  @BelongsTo(() => UserModel)
+  owner?: UserModel;
 }

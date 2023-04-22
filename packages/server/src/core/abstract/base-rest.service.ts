@@ -1,7 +1,8 @@
 export abstract class BaseRestService {
-  abstract request?: (...args: any[]) => Promise<any>;
+  abstract getOne?: (...args: any[]) => Promise<any>;
+  abstract getAll?: (...args: any[]) => Promise<any>;
   abstract create?: (...args: any[]) => Promise<any>;
   abstract update?: (...args: any[]) => Promise<any>;
   abstract delete?: (...args: any[]) => Promise<any>;
-  abstract find?: (...args: any[]) => Promise<any>;
+  abstract search?: (...args: any[]) => Promise<any>;
 }

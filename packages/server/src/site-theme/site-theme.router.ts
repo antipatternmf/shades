@@ -6,7 +6,8 @@ export const SiteThemeRouter = (router: Router) => {
 
   themesRouter
     .post('/', SiteThemeController.create)
-    // .get('/', SiteThemeController.find);
+    .patch('/', SiteThemeController.update)
+    .get('/', SiteThemeController.getOne);
 
   router.use('/theme', themesRouter);
 };

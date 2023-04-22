@@ -3,7 +3,7 @@ import { SiteThemeModel } from './site-theme.model';
 import type { CreateSiteThemeDto, FindSiteThemeDto } from './dto';
 
 export class SiteThemeService implements BaseRestService {
-  public find = ({ id, title }: FindSiteThemeDto) => {
+  public search = ({ id, title }: FindSiteThemeDto) => {
     if (id) {
       return SiteThemeModel.findByPk(id);
     }

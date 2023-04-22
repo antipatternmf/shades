@@ -5,6 +5,7 @@ import {
   DataType,
   Index,
   IsEmail,
+  Length,
   Model,
   PrimaryKey,
   Table,
@@ -28,4 +29,27 @@ export class UserModel extends Model {
   @IsEmail
   @Column(DataType.STRING)
   email!: string;
+
+  // For Auth (If necessary)
+  @AllowNull(true)
+  @Unique
+  @Index
+  @Column(DataType.STRING)
+  @Length({ min: 1, max: 255 })
+  uuid?: string;
+
+  // For Auth (If necessary)
+  @AllowNull(true)
+  @Unique
+  @Index
+  @Column(DataType.STRING)
+  @Length({ min: 1, max: 255 })
+  authCookie?: string;
+
+  @AllowNull(true)
+  @Unique
+  @Index
+  @Column(DataType.STRING)
+  @Length({ min: 1, max: 255 })
+  login?: string;
 }

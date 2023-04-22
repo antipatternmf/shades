@@ -19,13 +19,13 @@ export class SiteThemeModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-  override id?: number;
+  override id!: number;
 
   @Index
   @AllowNull(false)
   @Unique
   @Column(DataType.STRING)
-  theme?: string;
+  theme!: string;
 
   @AllowNull(true)
   @Column(DataType.STRING)

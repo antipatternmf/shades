@@ -1,6 +1,7 @@
 import {
   AllowNull,
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
@@ -28,13 +29,18 @@ export class ThreadModel extends Model {
   @Unique
   @Index
   @Column(DataType.STRING)
-  @Length({ max: 255, min: 1 })
+  @Length({ min: 1, max: 255 })
   title!: string;
 
   @AllowNull(true)
   @Unique
   @Column(DataType.STRING)
-  description!: string;
+  description?: string;
+
+  @AllowNull(true)
+  @Unique
+  @Column(DataType.STRING)
+  cover?: string;
 
   @ForeignKey(() => UserModel)
   @AllowNull(false)
@@ -43,4 +49,7 @@ export class ThreadModel extends Model {
     field: 'owner_id',
   })
   ownerId!: string;
+
+  @BelongsTo(() => UserModel)
+  owner?: UserModel;
 }
