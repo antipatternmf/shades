@@ -9,7 +9,7 @@ export class EmotionType {
   createdAt: Date;
 
   constructor(emotion: EmotionModel) {
-    this.id = emotion.id;
+    this.id = emotion.id!;
     this.emotion = emotion.emotion;
     this.owner = new UserType(emotion.owner!);
     this.updatedAt = new Date(emotion.updatedAt ?? null);

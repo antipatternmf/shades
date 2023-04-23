@@ -16,9 +16,6 @@ export const startBD = async (): Promise<Sequelize | null> => {
     password: POSTGRES_PASSWORD,
     database: POSTGRES_DB,
     dialect: 'postgres',
-    sync: {
-      force: true,
-    },
     models: [EmotionModel, PostModel, SiteThemeModel, ThreadModel, UserModel, UserThemeModel],
   };
 
@@ -26,7 +23,7 @@ export const startBD = async (): Promise<Sequelize | null> => {
     const sequelize = new Sequelize(sequelizeOptions);
 
     console.log('DB  ➜ 🎸 Connected');
-    return sequelize;
+    return sequelize.sync({force: true});
   } catch (error) {
     console.log('DB  ➜ 🐒 Error');
     console.error(error);

@@ -8,6 +8,7 @@ import path from 'path';
 import fs from 'fs';
 import { preloadedState } from './preloadedState';
 import { startBD } from './db';
+import router from './src/router';
 
 dotenv.config();
 // import { createClientAndConnect } from './db'
@@ -21,6 +22,9 @@ async function startServer() {
 
   // createClientAndConnect()
   await startBD();
+
+  // Router for API
+  app.use('/api', router);
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');
