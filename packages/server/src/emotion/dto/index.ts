@@ -1,1 +1,1 @@
-export {};
+export * from './add-emotion.dto';

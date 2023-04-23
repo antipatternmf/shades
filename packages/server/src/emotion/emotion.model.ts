@@ -12,17 +12,20 @@ import {
 } from 'sequelize-typescript';
 import { UserModel } from '../user';
 import { PostModel } from '../post';
+import type { AddEmotionDto } from './dto';
+
+type Creation = AddEmotionDto & { ownerId: number };
 
 @Table({
   timestamps: true,
   paranoid: true,
   tableName: 'emotions',
 })
-export class EmotionModel extends Model {
+export class EmotionModel extends Model<EmotionModel, Creation> {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-  override id!: number;
+  override id?: number;
 
   @AllowNull(true)
   @Unique
