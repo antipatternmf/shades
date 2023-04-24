@@ -7,10 +7,10 @@ import { ThreadModel } from './src/thread';
 import { UserModel } from './src/user';
 import { UserThemeModel } from './src/user-theme';
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } = process.env;
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
 export const startBD = async (): Promise<Sequelize | null> => {
   const sequelizeOptions: SequelizeOptions = {
-    host: 'localhost',
+    host: POSTGRES_HOST,
     port: Number(POSTGRES_PORT),
     username: POSTGRES_USER,
     password: POSTGRES_PASSWORD,
@@ -23,7 +23,7 @@ export const startBD = async (): Promise<Sequelize | null> => {
     const sequelize = new Sequelize(sequelizeOptions);
 
     console.log('DB  ➜ 🎸 Connected');
-    return sequelize.sync({force: true});
+    return sequelize.sync({ force: true });
   } catch (error) {
     console.log('DB  ➜ 🐒 Error');
     console.error(error);
