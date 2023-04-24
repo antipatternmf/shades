@@ -23,6 +23,9 @@ async function startServer() {
 
   // createClientAndConnect()
   app.use(errorMiddleware);
+  app.use(express.json());
+  app.use(express.urlencoded());
+
   await startBD();
 
   // Router for API

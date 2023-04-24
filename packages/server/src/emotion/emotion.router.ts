@@ -5,7 +5,9 @@ import { EmotionController } from './emotion.controller';
 export const emotionRouter = (router: Router) => {
   const emoRouter: Router = Router();
 
-  emoRouter.post('/', [authMiddleware], EmotionController.create);
+  emoRouter
+    .post('/', [authMiddleware], EmotionController.create)
+    .delete('/:id', [authMiddleware], EmotionController.delete);
 
   router.use('/emotion', emoRouter);
 };
