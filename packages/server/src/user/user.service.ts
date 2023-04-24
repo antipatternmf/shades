@@ -25,12 +25,17 @@ export class UserService implements BaseRestService {
   };
 
   public static getOneOrCreateByEmail = async (email: string): Promise<UserType | null> => {
-    const [user] = await UserModel.findOrCreate({
-      where: {
-        email: `%${email}%`,
-      },
-      returning: true,
-    });
-    return user ? new UserType(user) : null;
+    try {
+      const [user] = await UserModel.findOrCreate({
+        where: {
+          email: `${email}`,
+        },
+        returning: true,
+      });
+      return user ? new UserType(user) : null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   };
 }

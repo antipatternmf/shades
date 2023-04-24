@@ -4,7 +4,8 @@ import { EmotionType } from '../core/types/emotion.type';
 
 export class EmotionController {
   public static create = async (request: Request, response: Response) => {
-    const { body } = request.body;
+    const { body } = request;
+    console.log('🥝 Body -> ', body);
     const { emotion, postId, user } = body;
 
     try {
@@ -12,7 +13,7 @@ export class EmotionController {
       response.status(201).json(new EmotionType(row));
     } catch (error) {
       console.error(error);
-      response.status(500).json({ error: 'Error =(' });
+      response.status(500).json({ error: 'Server error' });
     }
   };
 }

@@ -57,9 +57,8 @@ services:
       image: dpage/pgadmin4:5.7
       restart: unless-stopped
       environment:
-        PGADMIN_DEFAULT_EMAIL:  ${POSTGRES_USER}
-        PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD}
-        PGADMIN_CONFIG_SERVER_MODE: "False"
+        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
       ports:
         - "${PGADMIN_PORT}:${PGADMIN_LISTEN_PORT}"
       volumes:
@@ -68,6 +67,7 @@ services:
         - postgres
       networks:
         - backend
+      tty: true
 
 networks:
   backend:

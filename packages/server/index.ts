@@ -9,6 +9,7 @@ import fs from 'fs';
 import { preloadedState } from './preloadedState';
 import { startBD } from './db';
 import router from './src/router';
+import { errorMiddleware } from './src/core/middlewares';
 
 dotenv.config();
 // import { createClientAndConnect } from './db'
@@ -21,6 +22,7 @@ async function startServer() {
   const port = Number(process.env.SERVER_PORT) || 3001;
 
   // createClientAndConnect()
+  app.use(errorMiddleware);
   await startBD();
 
   // Router for API
