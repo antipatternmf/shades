@@ -1,6 +1,7 @@
 import type { BaseRestService } from '../core/abstract';
 import type { CreateThreadDto } from './dto/create-thread.dto';
 import { ThreadModel } from './thread.model';
+import { ErrorEnum } from '../core/enums';
 
 type CreatThread = CreateThreadDto & { ownerId: number };
 type DeleteThread = { id: number; ownerId: number };
@@ -18,7 +19,7 @@ export class ThreadService implements BaseRestService {
     ownerId,
   }: CreatThread): Promise<ThreadModel> => {
     if (!title) {
-      throw new Error('Rows is empty');
+      throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
     return await ThreadModel.create(
@@ -37,7 +38,7 @@ export class ThreadService implements BaseRestService {
    */
   public static delete = async ({ id, ownerId }: DeleteThread): Promise<ThreadModel> => {
     if (!id) {
-      throw new Error('Rows is empty');
+      throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
     const thread = await ThreadModel.findOne({
@@ -48,7 +49,7 @@ export class ThreadService implements BaseRestService {
     });
 
     if (!thread) {
-      throw new Error('Thread not found');
+      throw new Error(ErrorEnum.NotFound);
     }
 
     await thread.destroy();
@@ -66,7 +67,7 @@ export class ThreadService implements BaseRestService {
     ownerId,
   }: UpdateThread): Promise<ThreadModel> => {
     if (!title) {
-      throw new Error('Rows is empty');
+      throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
     const [_, [thread]] = await ThreadModel.update(
@@ -92,7 +93,7 @@ export class ThreadService implements BaseRestService {
    */
   public static getOne = async (id: number): Promise<ThreadModel | null> => {
     if (!id) {
-      throw new Error('Rows is empty');
+      throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
     return await ThreadModel.findByPk(id);
