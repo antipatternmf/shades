@@ -21,6 +21,7 @@ export class ThreadController {
         cover,
         ownerId: user.id,
       });
+
       response.status(StatusCodeEnum.SuccessCreated).json(new ThreadType(row));
     } catch (error) {
       console.error(error);

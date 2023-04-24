@@ -1,7 +1,8 @@
 import type { BaseRestService } from '../core/abstract';
-import type { CreateThreadDto } from './dto/create-thread.dto';
+import type { CreateThreadDto } from './dto';
 import { ThreadModel } from './thread.model';
 import { ErrorEnum } from '../core/enums';
+import { UserModel } from '../user';
 
 type CreatThread = CreateThreadDto & { ownerId: number };
 type DeleteThread = { id: number; ownerId: number };
@@ -29,7 +30,7 @@ export class ThreadService implements BaseRestService {
         cover,
         ownerId,
       },
-      { returning: true },
+      { returning: true, include: [UserModel] },
     );
   };
 
@@ -46,6 +47,7 @@ export class ThreadService implements BaseRestService {
         id,
         ownerId,
       },
+      include: [UserModel],
     });
 
     if (!thread) {
@@ -96,7 +98,7 @@ export class ThreadService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await ThreadModel.findByPk(id);
+    return await ThreadModel.findByPk(id, { include: [UserModel] });
   };
 
   /***
@@ -111,6 +113,7 @@ export class ThreadService implements BaseRestService {
       where: title ? { title: `%${title}%` } : {},
       offset,
       limit,
+      include: [UserModel],
     });
   };
 }
