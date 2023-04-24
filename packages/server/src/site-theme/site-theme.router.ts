@@ -1,12 +1,15 @@
 import { Router } from 'express';
+import { authMiddleware } from '../core/middlewares';
 import { SiteThemeController } from './site-theme.controller';
 
-export const SiteThemeRouter = (router: Router) => {
-  const themesRouter: Router = Router();
+export const themeRouter = (router: Router) => {
+  const ThRouter: Router = Router();
 
-  themesRouter.post('/', SiteThemeController.create);
-  // .patch('/', SiteThemeController.update)
-  // .get('/', SiteThemeController.getOne);
+  ThRouter.post('/', [authMiddleware], SiteThemeController.create)
+    .delete('/:id', [authMiddleware], SiteThemeController.delete)
+    .put('/:id', [authMiddleware], SiteThemeController.update)
+    .get('/:id', [authMiddleware], SiteThemeController.getOne)
+    .get('/', [authMiddleware], SiteThemeController.getAll);
 
-  router.use('/theme', themesRouter);
+  router.use('/site-theme', ThRouter);
 };

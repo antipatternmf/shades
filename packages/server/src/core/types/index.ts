@@ -2,6 +2,7 @@ export * from './emotion.type';
 export * from './list-emotions.type';
 export * from './list-posts.type';
 export * from './list-threads.type';
+export * from './list-site-themes.type';
 export * from './post.type';
 export * from './site-theme.type';
 export * from './thread.type';

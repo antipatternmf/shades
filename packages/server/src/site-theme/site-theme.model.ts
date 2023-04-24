@@ -1,14 +1,17 @@
 import {
   AllowNull,
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
+  ForeignKey,
   Index,
   Model,
   PrimaryKey,
   Table,
   Unique,
 } from 'sequelize-typescript';
+import { UserModel } from '../user';
 
 @Table({
   timestamps: true,
@@ -30,4 +33,15 @@ export class SiteThemeModel extends Model {
   @AllowNull(true)
   @Column(DataType.STRING)
   description?: string;
+
+  @ForeignKey(() => UserModel)
+  @AllowNull(false)
+  @Column({
+    type: DataType.INTEGER,
+    field: 'owner_id',
+  })
+  ownerId!: number;
+
+  @BelongsTo(() => UserModel)
+  owner?: UserModel;
 }

@@ -1,21 +1,105 @@
 import type { BaseRestService } from '../core/abstract';
+import { ErrorEnum } from '../core/enums';
+import type { CreateSiteThemeDto } from './dto';
 import { SiteThemeModel } from './site-theme.model';
-import type { CreateSiteThemeDto, FindSiteThemeDto } from './dto';
+
+type CreatSiteTheme = CreateSiteThemeDto & { ownerId: number };
+type DeleteSiteTheme = { id: number }; // Типа все супер-юзеры =)
+type UpdateSiteTheme = CreateSiteThemeDto & { id: number };
+type GetSiteThemes = { limit: number; offset: number; theme?: string };
 
 export class SiteThemeService implements BaseRestService {
-  public search = ({ id, title }: FindSiteThemeDto) => {
-    if (id) {
-      return SiteThemeModel.findByPk(id);
+  /***
+   * Create
+   */
+  public static create = async ({
+    theme,
+    description,
+    ownerId,
+  }: CreatSiteTheme): Promise<SiteThemeModel> => {
+    if (!theme) {
+      throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return SiteThemeModel.findOne({
-      where: {
-        theme: `%${title}%`,
+    return await SiteThemeModel.create(
+      {
+        theme,
+        description,
+        ownerId,
       },
-    });
+      { returning: true },
+    );
   };
 
-  public create = (data: CreateSiteThemeDto) => {
-    return SiteThemeModel.create(data);
+  /***
+   * Delete
+   */
+  public static delete = async ({ id }: DeleteSiteTheme): Promise<SiteThemeModel> => {
+    if (!id) {
+      throw new Error(ErrorEnum.RowsIsEmpty);
+    }
+
+    const siteTheme = await SiteThemeModel.findByPk(id);
+
+    if (!siteTheme) {
+      throw new Error(ErrorEnum.NotFound);
+    }
+
+    await siteTheme.destroy();
+    return siteTheme;
+  };
+
+  /***
+   * Update
+   */
+  public static update = async ({
+    id,
+    theme,
+    description,
+  }: UpdateSiteTheme): Promise<SiteThemeModel> => {
+    if (!theme) {
+      throw new Error(ErrorEnum.RowsIsEmpty);
+    }
+
+    const [_, [siteTheme]] = await SiteThemeModel.update(
+      {
+        theme,
+        description,
+      },
+      {
+        where: {
+          id,
+        },
+        returning: true,
+      },
+    );
+
+    return siteTheme;
+  };
+
+  /***
+   * Get one
+   */
+  public static getOne = async (id: number): Promise<SiteThemeModel | null> => {
+    if (!id) {
+      throw new Error(ErrorEnum.RowsIsEmpty);
+    }
+
+    return await SiteThemeModel.findByPk(id);
+  };
+
+  /***
+   * Get all
+   */
+  public static getAll = async ({
+    offset,
+    limit,
+    theme,
+  }: GetSiteThemes): Promise<SiteThemeModel[] | null> => {
+    return await SiteThemeModel.findAll({
+      where: theme ? { title: `%${theme}%` } : {},
+      offset,
+      limit,
+    });
   };
 }
