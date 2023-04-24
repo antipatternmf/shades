@@ -5,6 +5,7 @@
 3. Выполните команду `yarn dev`
 3. Выполните команду `yarn dev --scope=client` чтобы запустить только клиент
 4. Выполните команду `yarn dev --scope=server` чтобы запустить только server
+5. NEW: Не забываем `fs.copyFileSync('.env.sample', '.env')`
 
 ### Запуск SSR в режиме разработки:
 1. Выполните команду `yarn run prepare-ssr`

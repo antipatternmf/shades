@@ -2,11 +2,12 @@ import type { BaseRestService } from '../core/abstract';
 import { ErrorEnum } from '../core/enums';
 import type { CreatePostDto } from './dto';
 import { PostModel } from './post.model';
+import type { WhereOptions } from 'sequelize/types/model';
 
 type CreatPost = CreatePostDto & { ownerId: number };
 type DeletePost = { id: number; ownerId: number };
 type UpdatePost = Omit<CreatePostDto, 'parentId' | 'threadId'> & { id: number; ownerId: number };
-type GetPosts = { limit: number; offset: number; threadId: number };
+type GetPosts = { limit: number; offset: number; threadId: number; parentId?: number };
 
 export class PostService implements BaseRestService {
   /***
@@ -83,7 +84,6 @@ export class PostService implements BaseRestService {
   /***
    * Get one
    */
-  // todo: Need join!
   public static getOne = async (id: number): Promise<PostModel | null> => {
     if (!id) {
       throw new Error(ErrorEnum.RowsIsEmpty);
@@ -100,11 +100,17 @@ export class PostService implements BaseRestService {
     offset,
     limit,
     threadId,
+    parentId,
   }: GetPosts): Promise<PostModel[] | null> => {
+    const where: WhereOptions = {
+      threadId,
+    };
+    if (parentId) {
+      where.parentId = parentId;
+    }
+
     return await PostModel.findAll({
-      where: {
-        threadId,
-      },
+      where,
       offset,
       limit,
     });

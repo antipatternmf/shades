@@ -3,5 +3,4 @@ export type CreateUserDto = {
   uuid?: string;
   authCookie?: string;
   login?: string;
-
-}
+};
