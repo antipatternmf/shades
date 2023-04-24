@@ -23,9 +23,6 @@ export class UserThemeModel extends Model {
   @Column(DataType.INTEGER)
   override id!: number;
 
-  @Column(DataType.STRING)
-  device!: string;
-
   @ForeignKey(() => SiteThemeModel)
   @AllowNull(false)
   @Column(DataType.INTEGER)

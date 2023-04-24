@@ -4,7 +4,6 @@ import { UserType } from './user.type';
 
 export class UserThemeType {
   id: number;
-  device: string;
   theme: SiteThemeType;
   owner: UserType;
   updatedAt: Date;
@@ -12,7 +11,6 @@ export class UserThemeType {
 
   constructor(theme: UserThemeModel) {
     this.id = theme.id;
-    this.device = theme.device;
     this.theme = new SiteThemeType(theme.theme!);
     this.owner = new UserType(theme.owner!);
     this.updatedAt = new Date(theme.updatedAt ?? null);

@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { UserService } from '../../user/user.service';
+import { UserService } from '../../user';
 import { StatusCodeEnum } from '../enums';
 
 export const authMiddleware = async (
