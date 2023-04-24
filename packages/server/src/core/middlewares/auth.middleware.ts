@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import { UserService } from '../../user/user.service';
+import { StatusCodeEnum } from '../enums';
 
 export const authMiddleware = async (
   request: Request,
@@ -8,14 +9,14 @@ export const authMiddleware = async (
 ): Promise<void> => {
   const email = request.headers['shades-email'] as string | undefined;
   if (!email) {
-    response.status(403).send();
+    response.status(StatusCodeEnum.ClientErrorForbidden).send();
     return;
   }
 
   try {
     const user = await UserService.getOneOrCreateByEmail(email);
     if (!user) {
-      response.status(403).send();
+      response.status(StatusCodeEnum.ClientErrorForbidden).send();
       return;
     }
 
@@ -26,7 +27,7 @@ export const authMiddleware = async (
     next();
   } catch (error) {
     console.error(error);
-    response.status(500).send();
+    response.status(StatusCodeEnum.ClientErrorBadRequest).send();
     return;
   }
 };

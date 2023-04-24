@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
+import { StatusCodeEnum } from '../enums';
 
 export const errorMiddleware = async (
   _request: Request,
@@ -9,7 +10,7 @@ export const errorMiddleware = async (
     await next();
   } catch (error) {
     console.error(error);
-    response.status(500).send();
+    response.status(StatusCodeEnum.ServerErrorInternal).send();
     return;
   }
 };

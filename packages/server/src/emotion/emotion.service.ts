@@ -1,15 +1,19 @@
 import type { BaseRestService } from '../core/abstract';
 import type { AddEmotionDto } from './dto';
 import { EmotionModel } from './emotion.model';
+import { ErrorEnum } from '../core/enums';
+
+type CreateEmotion = AddEmotionDto & { ownerId: number };
+type DeleteEmotion = { id: number; ownerId: number };
 
 export class EmotionService implements BaseRestService {
   public static create = async ({
     emotion,
     postId,
     ownerId,
-  }: AddEmotionDto & { ownerId: number }): Promise<EmotionModel> => {
+  }: CreateEmotion): Promise<EmotionModel> => {
     if (!emotion || !postId) {
-      throw new Error('Rows is empty');
+      throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
     return await EmotionModel.create(
@@ -22,15 +26,9 @@ export class EmotionService implements BaseRestService {
     );
   };
 
-  public static delete = async ({
-    id,
-    ownerId,
-  }: {
-    id: number;
-    ownerId: number;
-  }): Promise<EmotionModel> => {
+  public static delete = async ({ id, ownerId }: DeleteEmotion): Promise<EmotionModel> => {
     if (!id) {
-      throw new Error('Rows is empty');
+      throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
     const emotion = await EmotionModel.findOne({
@@ -41,7 +39,7 @@ export class EmotionService implements BaseRestService {
     });
 
     if (!emotion) {
-      throw new Error('Emotion not found');
+      throw new Error(ErrorEnum.NotFound);
     }
 
     await emotion.destroy();
