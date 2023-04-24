@@ -99,9 +99,6 @@ export class ThreadController {
     const { query } = request;
     const { offset, limit, title } = query;
 
-    console.log('🧀 -> ', { offset, limit, title }, QUERY_OFFSET);
-    console.log('🧀222 -> ', parseInt((offset ? offset : QUERY_OFFSET) as string, 10));
-
     try {
       const row = await ThreadService.getAll({
         offset: parseInt((offset ? offset : QUERY_OFFSET) as string, 10),
