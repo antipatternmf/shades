@@ -9,6 +9,13 @@ import fs from 'fs';
 import { preloadedState } from './preloadedState';
 import { startBD } from './db';
 import router from './src/router';
+import swaggerUi from 'swagger-ui-express';
+
+// todo: Only for swagger
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import swaggerDocument from './openapi.json';
+
 import { errorMiddleware } from './src/core/middlewares';
 
 dotenv.config();
@@ -26,7 +33,7 @@ async function startServer() {
   app.use(express.json());
   app.use(express.urlencoded());
 
-  await startBD();
+  await startBD(isDev());
 
   // Router for API
   app.use('/api', router);
@@ -34,6 +41,8 @@ async function startServer() {
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
+
+  app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   // I didn't touch the code below. ↓
   let vite: ViteDevServer | undefined;

@@ -1,0 +1,1279 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Shades",
+    "description": "Web middle chats API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001/api/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Emotion",
+      "description": "Emotions for post"
+    },
+    {
+      "name": "Post",
+      "description": "Posts for thread"
+    },
+    {
+      "name": "SiteTheme",
+      "description": "Site Theme"
+    },
+    {
+      "name": "Thread",
+      "description": "Thread"
+    },
+    {
+      "name": "UserTheme",
+      "description": "User Theme"
+    }
+  ],
+  "paths": {
+    "/emotion": {
+      "post": {
+        "tags": [
+          "Emotion"
+        ],
+        "summary": "Add emotion",
+        "operationId": "addEmotion",
+        "requestBody": {
+          "description": "Add emotion",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEmotionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmotionType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/emotion/{id}": {
+      "delete": {
+        "tags": [
+          "Emotion"
+        ],
+        "summary": "Delete emotion",
+        "operationId": "deleteEmotion",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Emotion ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmotionType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/thread": {
+      "post": {
+        "tags": [
+          "Thread"
+        ],
+        "summary": "Add Thread",
+        "operationId": "addThread",
+        "requestBody": {
+          "description": "Add Thread",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThreadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreadType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Thread"
+        ],
+        "summary": "Get all Threads",
+        "operationId": "getAllThreads",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ThreadType"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/thread/{id}": {
+      "delete": {
+        "tags": [
+          "Thread"
+        ],
+        "summary": "Delete Thread",
+        "operationId": "deleteThread",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Thread ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreadType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Thread"
+        ],
+        "summary": "Update Thread",
+        "operationId": "updateThread",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Thread ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThreadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreadType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Thread"
+        ],
+        "summary": "Get one Thread",
+        "operationId": "getOneThread",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Thread ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreadType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/post": {
+      "post": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Add post",
+        "operationId": "addPost",
+        "requestBody": {
+          "description": "Add post",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePostDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/post/{id}": {
+      "delete": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Delete post",
+        "operationId": "deletePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Update post",
+        "operationId": "updatePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Get one post",
+        "operationId": "getOnePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/post/thread/{id}": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Get all posts of thread",
+        "operationId": "getAllPostsOfThread",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Thread ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostType"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/site-theme": {
+      "post": {
+        "tags": [
+          "SiteTheme"
+        ],
+        "summary": "Add Site Theme",
+        "operationId": "addSiteTheme",
+        "requestBody": {
+          "description": "Add Site Theme",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSiteThemeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "SiteTheme"
+        ],
+        "summary": "Get all Site Themes",
+        "operationId": "getAllSiteThemes",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "theme",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SiteThemeType"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/site-theme/{id}": {
+      "delete": {
+        "tags": [
+          "SiteTheme"
+        ],
+        "summary": "Delete Site Theme",
+        "operationId": "deleteSiteTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Site Theme ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "SiteTheme"
+        ],
+        "summary": "Update Site Theme",
+        "operationId": "updateSiteTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Site Theme ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSiteThemeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "SiteTheme"
+        ],
+        "summary": "Get one Site Theme",
+        "operationId": "getOneSiteTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Site Theme ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/user-theme": {
+      "post": {
+        "tags": [
+          "UserTheme"
+        ],
+        "summary": "Add User Theme",
+        "operationId": "addUserTheme",
+        "requestBody": {
+          "description": "Add User Theme",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SelectUserThemeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "UserTheme"
+        ],
+        "summary": "Get User Theme",
+        "operationId": "getUserTheme",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/user-theme/{id}": {
+      "delete": {
+        "tags": [
+          "UserTheme"
+        ],
+        "summary": "Delete User Theme",
+        "operationId": "deleteUserTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Theme ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "UserTheme"
+        ],
+        "summary": "Update User Theme",
+        "operationId": "updateUserTheme",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Theme ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "themeId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteThemeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserType": {
+        "required": [
+          "id",
+          "email",
+          "updatedAt",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10
+          },
+          "email": {
+            "type": "string",
+            "example": "test@email.com"
+          },
+          "login": {
+            "type": "string",
+            "example": "login"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "23d3-23qeqa-sd121"
+          },
+          "authCookie": {
+            "type": "string",
+            "example": "qweqweqweqwe"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          }
+        }
+      },
+      "EmotionType": {
+        "required": [
+          "id",
+          "emotion",
+          "owner",
+          "updatedAt",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10
+          },
+          "emotion": {
+            "type": "string",
+            "example": "🤘"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/UserType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          }
+        }
+      },
+      "PostType": {
+        "required": [
+          "id",
+          "text",
+          "owner",
+          "updatedAt",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10
+          },
+          "text": {
+            "type": "string",
+            "example": "This is a comment for thread"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/UserType"
+          },
+          "emotions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmotionType"
+            }
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          }
+        }
+      },
+      "SiteThemeType": {
+        "required": [
+          "id",
+          "theme",
+          "owner",
+          "updatedAt",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10
+          },
+          "theme": {
+            "type": "string",
+            "example": "Dark"
+          },
+          "description": {
+            "type": "string",
+            "example": "Bla bla bla"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/UserType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          }
+        }
+      },
+      "ThreadType": {
+        "required": [
+          "id",
+          "title",
+          "owner",
+          "updatedAt",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10
+          },
+          "title": {
+            "type": "string",
+            "example": "How did you manage to create such a miracle?"
+          },
+          "cover": {
+            "type": "string",
+            "example": "/image.jpg"
+          },
+          "description": {
+            "type": "string",
+            "example": "Bla bla bla"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/UserType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          }
+        }
+      },
+      "UserThemeType": {
+        "required": [
+          "id",
+          "theme",
+          "owner",
+          "updatedAt",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10
+          },
+          "theme": {
+            "$ref": "#/components/schemas/SiteThemeType"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/UserType"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-02T14:22:22.000Z"
+          }
+        }
+      },
+      "AddEmotionDto": {
+        "required": [
+          "emotion",
+          "postId"
+        ],
+        "type": "object",
+        "properties": {
+          "emotion": {
+            "type": "string",
+            "example": "🤘"
+          },
+          "postId": {
+            "type": "integer",
+            "example": 10
+          }
+        }
+      },
+      "CreateSiteThemeDto": {
+        "required": [
+          "theme"
+        ],
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "example": "Dark"
+          },
+          "description": {
+            "type": "string",
+            "example": "description"
+          }
+        }
+      },
+      "CreateThreadDto": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Dark"
+          },
+          "description": {
+            "type": "string",
+            "example": "description"
+          },
+          "cover": {
+            "type": "string",
+            "example": "/image.png"
+          }
+        }
+      },
+      "CreatePostDto": {
+        "required": [
+          "text",
+          "threadId"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "example": "This is a comment"
+          },
+          "threadId": {
+            "type": "integer",
+            "example": 10
+          },
+          "parentId": {
+            "description": "Parent comment (ID)",
+            "type": "integer",
+            "example": 10
+          }
+        }
+      },
+      "CreateUserDto": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "test@email.com"
+          },
+          "login": {
+            "type": "string",
+            "example": "login"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "23d3-23qeqa-sd121"
+          },
+          "authCookie": {
+            "type": "string",
+            "example": "qweqweqweqwe"
+          }
+        }
+      },
+      "SelectUserThemeDto": {
+        "required": [
+          "themeId"
+        ],
+        "type": "object",
+        "properties": {
+          "themeId": {
+            "type": "integer",
+            "example": 10
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
