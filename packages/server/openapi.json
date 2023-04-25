@@ -504,7 +504,7 @@
           "Post"
         ],
         "summary": "Get all posts of thread",
-        "operationId": "getAllPostsOfThread",
+        "operationId": "getAllAnswersOfPosts",
         "parameters": [
           {
             "name": "id",
