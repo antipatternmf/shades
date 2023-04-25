@@ -3,6 +3,9 @@ import { ErrorEnum } from '../core/enums';
 import type { CreatePostDto } from './dto';
 import { PostModel } from './post.model';
 import type { WhereOptions } from 'sequelize/types/model';
+import { UserModel } from '../user';
+import { EmotionModel } from '../emotion';
+import { ThreadModel } from '../thread';
 
 type CreatPost = CreatePostDto & { ownerId: number };
 type DeletePost = { id: number; ownerId: number };
@@ -23,15 +26,14 @@ export class PostService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await PostModel.create(
-      {
-        text,
-        threadId,
-        parentId,
-        ownerId,
-      },
-      { returning: true },
-    );
+    const post = await PostModel.create({
+      text,
+      threadId,
+      parentId,
+      ownerId,
+    });
+
+    return (await PostService.getOne(post.id)) as PostModel;
   };
 
   /***
@@ -47,6 +49,7 @@ export class PostService implements BaseRestService {
         id,
         ownerId,
       },
+      include: [UserModel, EmotionModel, ThreadModel],
     });
 
     if (!post) {
@@ -78,7 +81,7 @@ export class PostService implements BaseRestService {
       },
     );
 
-    return post;
+    return (await PostService.getOne(post.id)) as PostModel;
   };
 
   /***
@@ -89,7 +92,7 @@ export class PostService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await PostModel.findByPk(id);
+    return await PostModel.findByPk(id, { include: [UserModel, EmotionModel, ThreadModel] });
   };
 
   /***
@@ -113,6 +116,7 @@ export class PostService implements BaseRestService {
       where,
       offset,
       limit,
+      include: [UserModel, EmotionModel, ThreadModel],
     });
   };
 }

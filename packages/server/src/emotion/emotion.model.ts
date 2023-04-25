@@ -8,7 +8,6 @@ import {
   Model,
   PrimaryKey,
   Table,
-  Unique,
 } from 'sequelize-typescript';
 import { UserModel } from '../user';
 import { PostModel } from '../post';
@@ -25,10 +24,9 @@ export class EmotionModel extends Model<EmotionModel, Creation> {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-  override id?: number;
+  override id!: number;
 
   @AllowNull(true)
-  @Unique
   @Column(DataType.STRING)
   emotion!: string;
 

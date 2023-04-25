@@ -9,7 +9,6 @@ import {
   Model,
   PrimaryKey,
   Table,
-  Unique,
 } from 'sequelize-typescript';
 import { UserModel } from '../user';
 import { ThreadModel } from '../thread';
@@ -27,7 +26,6 @@ export class PostModel extends Model {
   override id!: number;
 
   @AllowNull(false)
-  @Unique
   @Column(DataType.STRING)
   text!: string;
 

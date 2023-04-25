@@ -2,6 +2,7 @@ import type { BaseRestService } from '../core/abstract';
 import { ErrorEnum } from '../core/enums';
 import type { CreateSiteThemeDto } from './dto';
 import { SiteThemeModel } from './site-theme.model';
+import { UserModel } from '../user';
 
 type CreatSiteTheme = CreateSiteThemeDto & { ownerId: number };
 type DeleteSiteTheme = { id: number }; // Типа все супер-юзеры =)
@@ -21,14 +22,13 @@ export class SiteThemeService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await SiteThemeModel.create(
-      {
-        theme,
-        description,
-        ownerId,
-      },
-      { returning: true },
-    );
+    const siteTheme = await SiteThemeModel.create({
+      theme,
+      description,
+      ownerId,
+    });
+
+    return (await SiteThemeService.getOne(siteTheme.id)) as SiteThemeModel;
   };
 
   /***
@@ -39,7 +39,7 @@ export class SiteThemeService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    const siteTheme = await SiteThemeModel.findByPk(id);
+    const siteTheme = await SiteThemeModel.findByPk(id, { include: [UserModel] });
 
     if (!siteTheme) {
       throw new Error(ErrorEnum.NotFound);
@@ -74,7 +74,7 @@ export class SiteThemeService implements BaseRestService {
       },
     );
 
-    return siteTheme;
+    return (await SiteThemeService.getOne(siteTheme.id)) as SiteThemeModel;
   };
 
   /***
@@ -85,7 +85,7 @@ export class SiteThemeService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await SiteThemeModel.findByPk(id);
+    return await SiteThemeModel.findByPk(id, { include: [UserModel] });
   };
 
   /***
@@ -100,6 +100,7 @@ export class SiteThemeService implements BaseRestService {
       where: theme ? { title: `%${theme}%` } : {},
       offset,
       limit,
+      include: [UserModel],
     });
   };
 }

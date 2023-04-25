@@ -23,15 +23,13 @@ export class ThreadService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await ThreadModel.create(
-      {
-        title,
-        description,
-        cover,
-        ownerId,
-      },
-      { returning: true, include: [UserModel] },
-    );
+    const thread = await ThreadModel.create({
+      title,
+      description,
+      cover,
+      ownerId,
+    });
+    return (await ThreadService.getOne(thread.id)) as ThreadModel;
   };
 
   /***
@@ -87,7 +85,7 @@ export class ThreadService implements BaseRestService {
       },
     );
 
-    return thread;
+    return (await ThreadService.getOne(thread.id)) as ThreadModel;
   };
 
   /***

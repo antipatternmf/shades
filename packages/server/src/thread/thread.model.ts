@@ -10,7 +10,6 @@ import {
   Model,
   PrimaryKey,
   Table,
-  Unique,
 } from 'sequelize-typescript';
 import { UserModel } from '../user';
 
@@ -26,19 +25,16 @@ export class ThreadModel extends Model {
   override id!: number;
 
   @AllowNull(false)
-  @Unique
   @Index
   @Length({ min: 1, max: 255 })
   @Column(DataType.STRING)
   title!: string;
 
   @AllowNull(true)
-  @Unique
   @Column(DataType.STRING)
   description?: string;
 
   @AllowNull(true)
-  @Unique
   @Column(DataType.STRING)
   cover?: string;
 
