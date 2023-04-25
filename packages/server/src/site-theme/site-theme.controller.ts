@@ -59,7 +59,7 @@ export class SiteThemeController {
         theme,
         description,
       });
-      response.status(StatusCodeEnum.SuccessCreated).json(new SiteThemeType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new SiteThemeType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -80,7 +80,7 @@ export class SiteThemeController {
         return;
       }
 
-      response.status(StatusCodeEnum.SuccessCreated).json(new SiteThemeType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new SiteThemeType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -105,7 +105,7 @@ export class SiteThemeController {
         return;
       }
 
-      response.status(StatusCodeEnum.SuccessCreated).json(new ListSiteThemesType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new ListSiteThemesType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });

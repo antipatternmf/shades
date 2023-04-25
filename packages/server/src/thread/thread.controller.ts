@@ -65,7 +65,7 @@ export class ThreadController {
         cover,
         ownerId: user.id,
       });
-      response.status(StatusCodeEnum.SuccessCreated).json(new ThreadType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new ThreadType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -86,7 +86,7 @@ export class ThreadController {
         return;
       }
 
-      response.status(StatusCodeEnum.SuccessCreated).json(new ThreadType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new ThreadType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -111,7 +111,7 @@ export class ThreadController {
         return;
       }
 
-      response.status(StatusCodeEnum.SuccessCreated).json(new ListThreadsType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new ListThreadsType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });

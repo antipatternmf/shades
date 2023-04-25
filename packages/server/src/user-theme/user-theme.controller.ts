@@ -58,7 +58,7 @@ export class UserThemeController {
         themeId: themeId,
         ownerId: user.id,
       });
-      response.status(StatusCodeEnum.SuccessCreated).json(new UserThemeType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new UserThemeType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -79,7 +79,7 @@ export class UserThemeController {
         return;
       }
 
-      response.status(StatusCodeEnum.SuccessCreated).json(new UserThemeType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new UserThemeType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });

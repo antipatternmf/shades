@@ -62,7 +62,7 @@ export class PostController {
         text,
         ownerId: user.id,
       });
-      response.status(StatusCodeEnum.SuccessCreated).json(new PostType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new PostType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -83,7 +83,7 @@ export class PostController {
         return;
       }
 
-      response.status(StatusCodeEnum.SuccessCreated).json(new PostType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new PostType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -109,7 +109,7 @@ export class PostController {
         return;
       }
 
-      response.status(StatusCodeEnum.SuccessCreated).json(new ListPostsType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new ListPostsType(row));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });

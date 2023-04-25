@@ -8,6 +8,10 @@ servers:
 tags:
   - name: Emotion
     description: Emotions for post
+  - name: Post
+    description: Posts for thread
+  - name: SiteTheme
+    description: Site Theme
 paths:
   #### Emotion ####
   /emotion:
@@ -64,6 +68,165 @@ paths:
       security:
         - Authorization: [ ]
 
+  #### Post ####
+  /post:
+    post:
+      tags:
+        - Post
+      summary: Add post
+      operationId: addPost
+      requestBody:
+        description: Add post
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostDto'
+
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+  /post/{id}:
+    delete:
+      tags:
+        - Post
+      summary: Delete post
+      operationId: deletePost
+      parameters:
+        - name: id
+          in: path
+          description: Post ID
+          required: true
+          schema:
+            type:
+              integer
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+    put:
+      tags:
+        - Post
+      summary: Update post
+      operationId: updatePost
+      parameters:
+        - name: id
+          in: path
+          description: Post ID
+          required: true
+          schema:
+            type:
+              integer
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+    get:
+      tags:
+        - Post
+      summary: Get one post
+      operationId: getOnePost
+      parameters:
+        - name: id
+          in: path
+          description: Post ID
+          required: true
+          schema:
+            type:
+              integer
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+  /post/thread/{id}:
+    get:
+      tags:
+        - Post
+      summary: Get all posts of thread
+      operationId: getAllPostsOfThread
+      parameters:
+        - name: id
+          in: path
+          description: Thread ID
+          required: true
+          schema:
+            type:
+              integer
+        - name: offset
+          in: query
+          schema:
+            type:
+              integer
+        - name: limit
+          in: query
+          schema:
+            type:
+              integer
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+  #### Site Theme ####
 
 
 
