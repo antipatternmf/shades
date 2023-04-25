@@ -227,6 +227,156 @@ paths:
         - Authorization: [ ]
 
   #### Site Theme ####
+  /site-theme:
+    post:
+      tags:
+        - SiteTheme
+      summary: Add Site Theme
+      operationId: addSiteTheme
+      requestBody:
+        description: Add Site Theme
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSiteThemeDto'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiteThemeType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+    get:
+      tags:
+        - SiteTheme
+      summary: Get all Site Themes
+      operationId: getAllSiteThemes
+      parameters:
+        - name: offset
+          in: query
+          schema:
+            type:
+              integer
+        - name: limit
+          in: query
+          schema:
+            type:
+              integer
+        - name: theme
+          in: query
+          schema:
+            type:
+              string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SiteThemeType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+  /site-theme/{id}:
+    delete:
+      tags:
+        - SiteTheme
+      summary: Delete Site Theme
+      operationId: deleteSiteTheme
+      parameters:
+        - name: id
+          in: path
+          description: Site Theme ID
+          required: true
+          schema:
+            type:
+              integer
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiteThemeType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+    put:
+      tags:
+        - SiteTheme
+      summary: Update Site Theme
+      operationId: updateSiteTheme
+      parameters:
+        - name: id
+          in: path
+          description: Site Theme ID
+          required: true
+          schema:
+            type:
+              integer
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSiteThemeDto'
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiteThemeType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+    get:
+      tags:
+        - SiteTheme
+      summary: Get one Site Theme
+      operationId: getOneSiteTheme
+      parameters:
+        - name: id
+          in: path
+          description: Site Theme ID
+          required: true
+          schema:
+            type:
+              integer
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiteThemeType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+
 
 
 
