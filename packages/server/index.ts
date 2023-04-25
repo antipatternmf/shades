@@ -33,7 +33,7 @@ async function startServer() {
   app.use(express.json());
   app.use(express.urlencoded());
 
-  await startBD(isDev());
+  await startBD();
 
   // Router for API
   app.use('/api', router);

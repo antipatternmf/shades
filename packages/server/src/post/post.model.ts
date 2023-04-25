@@ -61,4 +61,6 @@ export class PostModel extends Model {
 
   @HasMany(() => EmotionModel)
   emotions?: EmotionModel[];
+
+  countAnswers?: number;
 }

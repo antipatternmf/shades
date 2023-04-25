@@ -8,7 +8,7 @@ import { UserModel } from './src/user';
 import { UserThemeModel } from './src/user-theme';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
-export const startBD = async (isDev: boolean): Promise<Sequelize | null> => {
+export const startBD = async (): Promise<Sequelize | null> => {
   const sequelizeOptions: SequelizeOptions = {
     host: POSTGRES_HOST,
     port: Number(POSTGRES_PORT),
@@ -23,7 +23,7 @@ export const startBD = async (isDev: boolean): Promise<Sequelize | null> => {
     const sequelize = new Sequelize(sequelizeOptions);
 
     console.log('DB  ➜ 🎸 Connected');
-    return sequelize.sync({ force: isDev });
+    return sequelize.sync(); // { force: isDev }
   } catch (error) {
     console.log('DB  ➜ 🐒 Error');
     console.error(error);

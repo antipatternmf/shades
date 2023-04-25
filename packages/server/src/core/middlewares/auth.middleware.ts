@@ -7,7 +7,7 @@ export const authMiddleware = async (
   response: Response,
   next: NextFunction,
 ): Promise<void> => {
-  const email = request.headers['Authorization'] as string | undefined;
+  const email = request.headers['authorization'] as string | undefined;
   if (!email) {
     response.status(StatusCodeEnum.ClientErrorForbidden).send();
     return;

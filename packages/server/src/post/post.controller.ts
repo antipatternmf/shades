@@ -115,4 +115,30 @@ export class PostController {
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
     }
   };
+
+  /***
+   * Get Answers
+   */
+  public static getAnswers = async (request: Request, response: Response) => {
+    const { query, params } = request;
+    const { offset, limit } = query;
+    const { id } = params;
+
+    try {
+      const row = await PostService.getAll({
+        offset: parseInt((offset ? offset : QUERY_OFFSET) as string, 10),
+        limit: parseInt((limit ? limit : QUERY_LIMIT) as string, 10),
+        parentId: parseInt(id, 10),
+      });
+      if (!row) {
+        response.status(StatusCodeEnum.ClientErrorNotFound).json();
+        return;
+      }
+
+      response.status(StatusCodeEnum.SuccessOK).json(new ListPostsType(row));
+    } catch (error) {
+      console.error(error);
+      response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
+    }
+  };
 }

@@ -498,6 +498,63 @@
         ]
       }
     },
+    "/post/answers/{id}": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Get all posts of thread",
+        "operationId": "getAllPostsOfThread",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Thread ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PostType"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
     "/post/thread/{id}": {
       "get": {
         "tags": [
@@ -1024,6 +1081,10 @@
           "text": {
             "type": "string",
             "example": "This is a comment for thread"
+          },
+          "countAnswers": {
+            "type": "integer",
+            "example": "2"
           },
           "owner": {
             "$ref": "#/components/schemas/UserType"

@@ -9,7 +9,7 @@ import { EmotionModel } from '../emotion';
 type CreatPost = CreatePostDto & { ownerId: number };
 type DeletePost = { id: number; ownerId: number };
 type UpdatePost = Omit<CreatePostDto, 'parentId' | 'threadId'> & { id: number; ownerId: number };
-type GetPosts = { limit: number; offset: number; threadId: number; parentId?: number };
+type GetPosts = { limit: number; offset: number; threadId?: number; parentId?: number };
 
 export class PostService implements BaseRestService {
   /***
@@ -97,25 +97,55 @@ export class PostService implements BaseRestService {
   /***
    * Get all
    */
-  // todo: Need join!
   public static getAll = async ({
     offset,
     limit,
     threadId,
     parentId,
   }: GetPosts): Promise<PostModel[] | null> => {
-    const where: WhereOptions = {
-      threadId,
-    };
+    const where: WhereOptions = {};
     if (parentId) {
       where.parentId = parentId;
     }
+    if (threadId) {
+      where.threadId = threadId;
+      where.parentId = null;
+    }
 
-    return await PostModel.findAll({
+    const posts = await PostModel.findAll({
+      // attributes: {
+      //   include: [
+      //     [
+      //       Sequelize.literal(
+      //         '(SELECT count(id) FROM post.model.ts WHERE parent_id=id)',
+      //       ),
+      //       'countAnswers',
+      //     ],
+      //   ],
+      // },
       where,
       offset,
       limit,
       include: [UserModel, EmotionModel],
+    });
+
+    // todo: Да да и еще раз да, лучще оптимизируй запрос выше =)
+    for (let i = 0; i < posts?.length ?? 0; i++) {
+      posts[i].countAnswers = await PostModel.count({
+        where: {
+          parentId: posts[i].id,
+        },
+      });
+    }
+
+    return posts;
+  };
+
+  public static getCountAnswers = async (parentId: number): Promise<number> => {
+    return await PostModel.count({
+      where: {
+        parentId,
+      },
     });
   };
 }
