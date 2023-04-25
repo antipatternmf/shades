@@ -1,0 +1,357 @@
+openapi: 3.0.1
+info:
+  title: Shades
+  description: Web middle chats API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001/api/
+tags:
+  - name: Emotion
+    description: Emotions for post
+paths:
+  #### Emotion ####
+  /emotion:
+    post:
+      tags:
+        - Emotion
+      summary: Add emotion
+      operationId: addEmotion
+      requestBody:
+        description: Add emotion
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEmotionDto'
+
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmotionType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+  /emotion/{id}:
+    delete:
+      tags:
+        - Emotion
+      summary: Delete emotion
+      operationId: deleteEmotion
+      parameters:
+        - name: id
+          in: path
+          description: Emotion ID
+          required: true
+          schema:
+            type:
+              integer
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmotionType'
+        '400':
+          description: Bad request
+
+      security:
+        - Authorization: [ ]
+
+
+
+
+
+
+components:
+  schemas:
+    #### User ####
+    UserType:
+      required:
+        - id
+        - email
+        - updatedAt
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        email:
+          type: string
+          example: test@email.com
+        login:
+          type: string
+          example: login
+        uuid:
+          type: string
+          example: 23d3-23qeqa-sd121
+        authCookie:
+          type: string
+          example: qweqweqweqwe
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+        createdAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+
+    #### Emotion ####
+    EmotionType:
+      required:
+        - id
+        - emotion
+        - owner
+        - updatedAt
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        emotion:
+          type: string
+          example: 🤘
+        owner:
+          $ref: '#/components/schemas/UserType'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+        createdAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+
+    #### Post ####
+    PostType:
+      required:
+        - id
+        - text
+        - owner
+        - updatedAt
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        text:
+          type: string
+          example: This is a comment for thread
+        owner:
+          $ref: '#/components/schemas/UserType'
+        emotions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmotionType'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+        createdAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+
+
+    #### Site Theme ####
+    SiteThemeType:
+      required:
+        - id
+        - theme
+        - owner
+        - updatedAt
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        theme:
+          type: string
+          example: Dark
+        description:
+          type: string
+          example: Bla bla bla
+        owner:
+          $ref: '#/components/schemas/UserType'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+        createdAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+
+
+    #### Thread ####
+    ThreadType:
+      required:
+        - id
+        - title
+        - owner
+        - updatedAt
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        title:
+          type: string
+          example: How did you manage to create such a miracle?
+        cover:
+          type: string
+          example: '/image.jpg'
+        description:
+          type: string
+          example: Bla bla bla
+        owner:
+          $ref: '#/components/schemas/UserType'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+        createdAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+
+
+    #### User Theme  ####
+    UserThemeType:
+      required:
+        - id
+        - theme
+        - owner
+        - updatedAt
+        - createdAt
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        theme:
+          $ref: '#/components/schemas/SiteThemeType'
+        owner:
+          $ref: '#/components/schemas/UserType'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+        createdAt:
+          type: string
+          format: date-time
+          example: '2020-01-02T14:22:22.000Z'
+
+    #### DTO Emotion ####
+    AddEmotionDto:
+      required:
+        - emotion
+        - postId
+      type: object
+      properties:
+        emotion:
+          type: string
+          example: 🤘
+        postId:
+          type: integer
+          example: 10
+
+
+    #### DTO Site Theme ####
+    CreateSiteThemeDto:
+      required:
+        - theme
+      type: object
+      properties:
+        theme:
+          type: string
+          example: Dark
+        description:
+          type: string
+          example: description
+
+
+    #### DTO Thread ####
+    CreateThreadDto:
+      required:
+        - title
+      type: object
+      properties:
+        title:
+          type: string
+          example: Dark
+        description:
+          type: string
+          example: description
+        cover:
+          type: string
+          example: '/image.png'
+
+
+    #### DTO Post ####
+    CreatePostDto:
+      required:
+        - text
+        - threadId
+      type: object
+      properties:
+        text:
+          type: string
+          example: This is a comment
+        threadId:
+          type: integer
+          example: 10
+        parentId:
+          description: Parent comment (ID)
+          type: integer
+          example: 10
+
+
+    #### DTO User ####
+    CreateUserDto:
+      required:
+        - email
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@email.com
+        login:
+          type: string
+          example: login
+        uuid:
+          type: string
+          example: 23d3-23qeqa-sd121
+        authCookie:
+          type: string
+          example: qweqweqweqwe
+
+
+    #### DTO User Theme ####
+    SelectUserThemeDto:
+      required:
+        - themeId
+      type: object
+      properties:
+        themeId:
+          type: integer
+          example: 10
+
+
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      name: Authorization
+      in: header

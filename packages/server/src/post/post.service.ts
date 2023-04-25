@@ -5,7 +5,6 @@ import { PostModel } from './post.model';
 import type { WhereOptions } from 'sequelize/types/model';
 import { UserModel } from '../user';
 import { EmotionModel } from '../emotion';
-import { ThreadModel } from '../thread';
 
 type CreatPost = CreatePostDto & { ownerId: number };
 type DeletePost = { id: number; ownerId: number };
@@ -49,7 +48,7 @@ export class PostService implements BaseRestService {
         id,
         ownerId,
       },
-      include: [UserModel, EmotionModel, ThreadModel],
+      include: [UserModel, EmotionModel],
     });
 
     if (!post) {
@@ -92,7 +91,7 @@ export class PostService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await PostModel.findByPk(id, { include: [UserModel, EmotionModel, ThreadModel] });
+    return await PostModel.findByPk(id, { include: [UserModel, EmotionModel] });
   };
 
   /***
@@ -116,7 +115,7 @@ export class PostService implements BaseRestService {
       where,
       offset,
       limit,
-      include: [UserModel, EmotionModel, ThreadModel],
+      include: [UserModel, EmotionModel],
     });
   };
 }
