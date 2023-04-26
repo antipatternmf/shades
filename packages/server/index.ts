@@ -7,6 +7,16 @@ import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import fs from 'fs';
 import { preloadedState } from './preloadedState';
+import { startBD } from './db';
+import router from './src/router';
+import swaggerUi from 'swagger-ui-express';
+
+// todo: Only for swagger
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import swaggerDocument from './openapi.json';
+
+import { errorMiddleware } from './src/core/middlewares';
 
 dotenv.config();
 // import { createClientAndConnect } from './db'
@@ -19,11 +29,25 @@ async function startServer() {
   const port = Number(process.env.SERVER_PORT) || 3001;
 
   // createClientAndConnect()
+  app.use(errorMiddleware);
+  app.use(express.json());
+  app.use(express.urlencoded());
 
+  await startBD();
+
+  // Router for API
+  app.use('/api', router);
+
+  app.get('/api', (_, res) => {
+    res.json('👋 Howdy from the server :)');
+  });
+
+  app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+  // I didn't touch the code below. ↓
   let vite: ViteDevServer | undefined;
 
   const srcPath = path.dirname(require.resolve('client'));
-  const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
 
   if (isDev()) {
     vite = await createViteServer({
@@ -34,10 +58,6 @@ async function startServer() {
 
     app.use(vite!.middlewares);
   }
-
-  app.get('/api', (_, res) => {
-    res.json('👋 Howdy from the server :)');
-  });
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
@@ -60,6 +80,7 @@ async function startServer() {
       let render: (preloadedState: object, url: string) => Promise<string>;
 
       if (!isDev()) {
+        const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
         render = (await import(ssrClientPath)).render;
       } else {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'src/ssr.tsx'))).render;
