@@ -100,6 +100,7 @@ export class SiteThemeService implements BaseRestService {
       where: theme ? { title: `%${theme}%` } : {},
       offset,
       limit,
+      order: [['createdAt', 'DESC']],
       include: [UserModel],
     });
   };

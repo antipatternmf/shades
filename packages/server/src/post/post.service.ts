@@ -126,6 +126,7 @@ export class PostService implements BaseRestService {
       where,
       offset,
       limit,
+      order: [['createdAt', 'DESC']],
       include: [UserModel, EmotionModel],
     });
 

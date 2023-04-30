@@ -6,6 +6,7 @@ import { SiteThemeModel } from './src/site-theme';
 import { ThreadModel } from './src/thread';
 import { UserModel } from './src/user';
 import { UserThemeModel } from './src/user-theme';
+import { ScoresModel } from './src/scores';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
 export const startBD = async (): Promise<Sequelize | null> => {
@@ -16,14 +17,22 @@ export const startBD = async (): Promise<Sequelize | null> => {
     password: POSTGRES_PASSWORD,
     database: POSTGRES_DB,
     dialect: 'postgres',
-    models: [EmotionModel, PostModel, SiteThemeModel, ThreadModel, UserModel, UserThemeModel],
+    models: [
+      EmotionModel,
+      PostModel,
+      SiteThemeModel,
+      ThreadModel,
+      UserModel,
+      UserThemeModel,
+      ScoresModel,
+    ],
   };
 
   try {
     const sequelize = new Sequelize(sequelizeOptions);
 
     console.log('DB  ➜ 🎸 Connected');
-    return sequelize.sync(); // { force: isDev }
+    return sequelize.sync({ force: false }); //
   } catch (error) {
     console.log('DB  ➜ 🐒 Error');
     console.error(error);

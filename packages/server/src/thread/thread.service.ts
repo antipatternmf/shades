@@ -111,6 +111,7 @@ export class ThreadService implements BaseRestService {
       where: title ? { title: `%${title}%` } : {},
       offset,
       limit,
+      order: [['createdAt', 'DESC']],
       include: [UserModel],
     });
   };
