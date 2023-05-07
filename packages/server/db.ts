@@ -6,6 +6,7 @@ import { SiteThemeModel } from './src/site-theme';
 import { ThreadModel } from './src/thread';
 import { UserModel } from './src/user';
 import { UserThemeModel } from './src/user-theme';
+import { LevelScoreModel } from './src/level-score';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
 export const startBD = async (): Promise<Sequelize | null> => {
@@ -16,7 +17,15 @@ export const startBD = async (): Promise<Sequelize | null> => {
     password: POSTGRES_PASSWORD,
     database: POSTGRES_DB,
     dialect: 'postgres',
-    models: [EmotionModel, PostModel, SiteThemeModel, ThreadModel, UserModel, UserThemeModel],
+    models: [
+      EmotionModel,
+      PostModel,
+      SiteThemeModel,
+      ThreadModel,
+      UserModel,
+      UserThemeModel,
+      LevelScoreModel,
+    ],
   };
 
   try {
