@@ -12,6 +12,7 @@ import SignInPage from 'pages/Entry/SignIn';
 import ProfilePage from 'pages/Profile';
 import LeaderBoardPage from 'pages/LeaderBoard';
 import ForumPage from 'pages/Forum';
+import TopicPage from 'pages/Topic';
 import GamePage from 'pages/Game';
 import LevelsPage from 'pages/Levels';
 import NotFoundPage from 'pages/NotFound';
@@ -23,6 +24,7 @@ export enum Paths {
   Profile = 'profile',
   Leaderboard = 'leaderboard',
   Forum = 'forum',
+  Topic = 'forum/:topicId',
   Levels = 'game',
   Game = 'game/:lvlId',
 }
@@ -70,6 +72,10 @@ export function Router() {
         <Route
           path={Paths.Forum}
           element={<ForumPage />}
+        />
+        <Route
+          path={Paths.Topic}
+          element={<TopicPage />}
         />
         <Route
           path={Paths.Levels}
