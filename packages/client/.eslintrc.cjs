@@ -30,6 +30,8 @@ module.exports = {
     'react/require-default-props': 0,
     'react/button-has-type': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
     'react/jsx-props-no-spreading': 0,
     'object-curly-newline': 0,
     '@typescript-eslint/indent': 0,
@@ -37,6 +39,6 @@ module.exports = {
     'implicit-arrow-linebreak': 0,
     'function-paren-newline': 0,
     'react/no-array-index-key': 0,
-    'react/jsx-one-expression-per-line': 0
+    'react/jsx-one-expression-per-line': 0,
   }
 }
