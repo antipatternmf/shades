@@ -50,6 +50,7 @@ export default defineConfig({
       api: resolve(__dirname, 'src', 'api'),
       assets: resolve(__dirname, 'src', 'assets'),
       components: resolve(__dirname, 'src', 'components'),
+      core: resolve(__dirname, 'src', 'core'),
       hocs: resolve(__dirname, 'src', 'hocs'),
       hooks: resolve(__dirname, 'src', 'hooks'),
       pages: resolve(__dirname, 'src', 'pages'),

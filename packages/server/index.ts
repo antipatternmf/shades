@@ -36,7 +36,7 @@ async function startServer() {
   await startBD();
 
   // Router for API
-  app.use('/api', router);
+  app.use('/api', cors(), router);
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');

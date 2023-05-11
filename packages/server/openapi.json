@@ -30,6 +30,10 @@
     {
       "name": "UserTheme",
       "description": "User Theme"
+    },
+    {
+      "name": "LevelScore",
+      "description": "Level Score"
     }
   ],
   "paths": {
@@ -110,6 +114,151 @@
             "Authorization": []
           }
         ]
+      }
+    },
+    "/level-score": {
+      "post": {
+        "tags": ["LevelScore"],
+        "summary": "Save level score",
+        "operationId": "saveLevelScore",
+        "requestBody": {
+          "description": "Save level score",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveLevelScoreDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelScoreDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["LevelScore"],
+        "summary": "Delete level score",
+        "operationId": "deleteLevelScore",
+        "parameters": [
+          {
+            "name": "username",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "level_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LevelScoreDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/level-score/all-totals": {
+      "get": {
+        "tags": ["LevelScore"],
+        "summary": "Get data for leaderboard",
+        "operationId": "getAllTotals",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllTotalsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/level-score/{username}": {
+      "get": {
+        "tags": ["LevelScore"],
+        "summary": "Get scores of levels",
+        "operationId": "getLevelScores",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "Username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LevelScoreDto"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/thread": {
@@ -1325,6 +1474,72 @@
           "themeId": {
             "type": "integer",
             "example": 10
+          }
+        }
+      },
+      "SaveLevelScoreDto": {
+        "type": "object",
+        "required": ["levelId","score","username"],
+        "properties": {
+          "levelId": {
+            "type": "integer"
+          },
+          "score": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "LevelScoreDto": {
+        "type": "object",
+        "required": ["id","levelId","score","username"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "levelId": {
+            "type": "integer"
+          },
+          "score": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "TotalScoreDto": {
+        "required": ["username","totalScore"],
+        "type": "object",
+        "properties": {
+          "totalScore": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "AllTotalsDto": {
+        "required": ["items","total","offset","limit"],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TotalScoreDto"
+            }
+          },
+          "total": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
           }
         }
       }

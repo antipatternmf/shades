@@ -1,71 +1,67 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import ArrowBackIcon from 'components/icons/ArrowBackIcon';
 import TopBar from 'components/TopBar';
+import LoadingOverlay from 'components/LoadingOverlay';
 import User from 'pages/LeaderBoard/User';
-import SkeletUser from 'pages/LeaderBoard/SkeletUser';
+import { useGetLeaderboard } from './lib/hooks';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
 
-const usersList = [
-  {
-    id: 1,
-    name: 'John',
-    score: 76,
-  },
-  {
-    id: 2,
-    name: 'Erik',
-    score: 61,
-  },
-  {
-    id: 3,
-    name: 'Sven',
-    score: 54,
-  },
-  {
-    id: 4,
-    name: 'Muller',
-    score: 42,
-  },
-  {
-    id: 5,
-    name: 'Conor',
-    score: 33,
-  },
-  null,
-  null,
-  null,
-  null,
-  null,
-];
-
 function LeaderBoard() {
   const title = 'Доска лидеров';
 
-  const [users] = useState(usersList);
+  const { records, page, totalPages, forward, backward, isLoading } = useGetLeaderboard();
 
   return (
-    <div className={cx('container', 'shadow')}>
-      <TopBar title={title} />
+    <>
+      <div className={cx('container', 'shadow')}>
+        <TopBar title={title} />
 
-      <div className={cx(styles.leaderboard)}>
-        {users.map((user, i) => {
-          if (user === null) {
-            return <SkeletUser key={i} />;
-          }
+        <div className={cx(styles.leaderboard)}>
+          {records.map((record, index) => {
+            return (
+              <User
+                key={record.username}
+                place={index + 1}
+                name={record.username}
+                score={record.score}
+              />
+            );
+          })}
+        </div>
+        <div className={cx(styles.leaderboardPagination)}>
+          <button
+            className={cx(
+              styles.leaderboardPaginationButton,
+              styles.leaderboardPaginationButtonBackward,
+              'shadow',
+            )}
+            disabled={page === 0}
+            onClick={backward}
+          >
+            <ArrowBackIcon />
+          </button>
 
-          return (
-            <User
-              key={user.id}
-              place={i + 1}
-              name={user.name}
-              score={user.score}
-            />
-          );
-        })}
+          <div className={cx(styles.leaderboardPaginationPageCounter)}>
+            {page + 1} / {totalPages}
+          </div>
+
+          <button
+            className={cx(
+              styles.leaderboardPaginationButton,
+              styles.leaderboardPaginationButtonForward,
+              'shadow',
+            )}
+            disabled={page === totalPages - 1}
+            onClick={forward}
+          >
+            <ArrowBackIcon />
+          </button>
+        </div>
       </div>
-    </div>
+      {isLoading && <LoadingOverlay />}
+    </>
   );
 }
 

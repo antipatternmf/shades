@@ -1,8 +1,7 @@
 import classNames from 'classnames/bind';
 import TopBar from 'components/TopBar';
-import { Link } from 'react-router-dom';
 import GameLevels from 'pages/Game/lib/config/gameElements';
-import RatingStar from 'components/icons/RatingStar';
+import { LevelTile } from './LevelTile';
 import styles from './style.module.pcss';
 
 const cx = classNames.bind(styles);
@@ -13,19 +12,11 @@ export default function Levels() {
       <TopBar title="Выбрать уровень" />
 
       <div className={cx(styles.levels)}>
-        {GameLevels.map((it, index) => (
-          <Link
+        {GameLevels.map((_, index) => (
+          <LevelTile
             key={index}
-            className={cx(styles.levels__level, 'shadow')}
-            to={`${index}`}
-          >
-            <div className={cx(styles.levels__subtitle)}>{index}</div>
-            <div className={cx(styles.levels__rating)}>
-              <RatingStar />
-              <RatingStar />
-              <RatingStar />
-            </div>
-          </Link>
+            levelId={index}
+          />
         ))}
       </div>
     </div>
