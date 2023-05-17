@@ -29,6 +29,7 @@ export class ThreadService implements BaseRestService {
       cover,
       ownerId,
     });
+
     return (await ThreadService.getOne(thread.id)) as ThreadModel;
   };
 
@@ -102,16 +103,25 @@ export class ThreadService implements BaseRestService {
   /***
    * Get all
    */
-  public static getAll = async ({
-    offset,
-    limit,
-    title,
-  }: GetThreads): Promise<ThreadModel[] | null> => {
-    return await ThreadModel.findAll({
-      where: title ? { title: `%${title}%` } : {},
+  public static getAll = async ({ offset, limit, title }: GetThreads) => {
+    const [total, items] = await Promise.all([
+      ThreadModel.count({
+        distinct: true,
+        col: 'id',
+      }),
+      ThreadModel.findAll({
+        where: title ? { title: `%${title}%` } : {},
+        offset,
+        limit,
+        include: [UserModel],
+      }),
+    ]);
+
+    return {
+      items: items || [],
+      total,
       offset,
       limit,
-      include: [UserModel],
-    });
+    };
   };
 }

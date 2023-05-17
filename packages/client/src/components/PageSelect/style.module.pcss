@@ -1,0 +1,24 @@
+.page-select {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  align-items: center;
+
+  &__page {
+    padding: 10px;
+    border: 1px solid var(--layout-black);
+    border-radius: 6px;
+    background-color: var(--layout-white);
+    font-weight: 700;
+    cursor: pointer;
+
+    &_current {
+      background: var(--layout-3-color);
+      cursor: default;
+    }
+  }
+
+  &__dots {
+    font-weight: 700;
+  }
+}

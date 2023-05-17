@@ -1,4 +1,7 @@
 export * from './add-emotion-dto';
+export * from './all-answers-dto';
+export * from './all-posts-dto';
+export * from './all-threads-dto';
 export * from './create-post-dto';
 export * from './create-site-theme-dto';
 export * from './create-thread-dto';

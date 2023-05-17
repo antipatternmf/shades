@@ -91,18 +91,15 @@ export class PostService implements BaseRestService {
       throw new Error(ErrorEnum.RowsIsEmpty);
     }
 
-    return await PostModel.findByPk(id, { include: [UserModel, EmotionModel] });
+    return await PostModel.findByPk(id, {
+      include: [{ model: UserModel }, { model: EmotionModel, include: [UserModel] }],
+    });
   };
 
   /***
    * Get all
    */
-  public static getAll = async ({
-    offset,
-    limit,
-    threadId,
-    parentId,
-  }: GetPosts): Promise<PostModel[] | null> => {
+  public static getAll = async ({ offset, limit, threadId, parentId }: GetPosts) => {
     const where: WhereOptions = {};
     if (parentId) {
       where.parentId = parentId;
@@ -112,22 +109,19 @@ export class PostService implements BaseRestService {
       where.parentId = null;
     }
 
-    const posts = await PostModel.findAll({
-      // attributes: {
-      //   include: [
-      //     [
-      //       Sequelize.literal(
-      //         '(SELECT count(id) FROM post.model.ts WHERE parent_id=id)',
-      //       ),
-      //       'countAnswers',
-      //     ],
-      //   ],
-      // },
-      where,
-      offset,
-      limit,
-      include: [UserModel, EmotionModel],
-    });
+    const [total, posts] = await Promise.all([
+      PostModel.count({
+        distinct: true,
+        col: 'id',
+        where,
+      }),
+      PostModel.findAll({
+        where,
+        offset,
+        limit,
+        include: [{ model: UserModel }, { model: EmotionModel, include: [UserModel] }],
+      }),
+    ]);
 
     // todo: Да да и еще раз да, лучще оптимизируй запрос выше =)
     for (let i = 0; i < posts?.length ?? 0; i++) {
@@ -138,7 +132,12 @@ export class PostService implements BaseRestService {
       });
     }
 
-    return posts;
+    return {
+      items: posts || [],
+      total,
+      offset,
+      limit,
+    };
   };
 
   public static getCountAnswers = async (parentId: number): Promise<number> => {

@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { ListPostsType, PostType, UserType } from '../core/types';
+import { PostType, UserType, AllPostsType, AllAnswersType } from '../core/types';
 import { ErrorEnum, StatusCodeEnum } from '../core/enums';
 import type { CreatePostDto } from './dto';
 import { PostService } from './post.service';
@@ -99,17 +99,13 @@ export class PostController {
     const { id } = params;
 
     try {
-      const row = await PostService.getAll({
+      const data = await PostService.getAll({
         offset: parseInt((offset ? offset : QUERY_OFFSET) as string, 10),
         limit: parseInt((limit ? limit : QUERY_LIMIT) as string, 10),
         threadId: parseInt(id, 10),
       });
-      if (!row) {
-        response.status(StatusCodeEnum.ClientErrorNotFound).json();
-        return;
-      }
 
-      response.status(StatusCodeEnum.SuccessOK).json(new ListPostsType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new AllPostsType(data));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });
@@ -123,19 +119,18 @@ export class PostController {
     const { query, params } = request;
     const { offset, limit } = query;
     const { id } = params;
+    const parentId = parseInt(id, 10);
 
     try {
-      const row = await PostService.getAll({
+      const answersData = await PostService.getAll({
         offset: parseInt((offset ? offset : QUERY_OFFSET) as string, 10),
         limit: parseInt((limit ? limit : QUERY_LIMIT) as string, 10),
-        parentId: parseInt(id, 10),
+        parentId,
       });
-      if (!row) {
-        response.status(StatusCodeEnum.ClientErrorNotFound).json();
-        return;
-      }
 
-      response.status(StatusCodeEnum.SuccessOK).json(new ListPostsType(row));
+      response
+        .status(StatusCodeEnum.SuccessOK)
+        .json(new AllAnswersType({ ...answersData, parentId }));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });

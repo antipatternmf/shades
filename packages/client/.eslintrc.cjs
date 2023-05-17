@@ -40,5 +40,6 @@ module.exports = {
     'function-paren-newline': 0,
     'react/no-array-index-key': 0,
     'react/jsx-one-expression-per-line': 0,
+    'react/jsx-wrap-multilines': 0,
   }
 }
