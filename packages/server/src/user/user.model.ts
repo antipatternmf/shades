@@ -38,18 +38,30 @@ export class UserModel extends Model {
   @Column(DataType.STRING)
   uuid?: string;
 
-  // For Auth (If necessary)
   @AllowNull(true)
   @Unique
   @Index
   @Length({ min: 1, max: 255 })
   @Column(DataType.STRING)
-  authCookie?: string;
+  login!: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  first_name!: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  second_name!: string;
 
   @AllowNull(true)
-  @Unique
-  @Index
-  @Length({ min: 1, max: 255 })
   @Column(DataType.STRING)
-  login?: string;
+  display_name?: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  phone?: string;
+
+  @AllowNull(true)
+  @Column(DataType.STRING)
+  avatar?: string;
 }

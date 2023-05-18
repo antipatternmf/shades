@@ -1,40 +1,107 @@
 .forum {
+  position: relative;
   display: flex;
-  flex-grow: 1;
   flex-direction: column;
+  flex-grow: 1;
+  max-height: calc(100% - 50px);
+  padding: 30px 20px;
 
-  & table {
+  &__page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     width: 100%;
-    border-spacing: 10px 25px;
+    max-width: calc(100% - 140px);
+    padding: 70px 0 20px;
+    margin: 0 auto;
   }
 
-  & th {
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
+  &__page-block-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: var(--layout-2-color);
   }
 
-  & th:first-child {
-    padding-left: 15px;
+  &__main-block {
+    flex-grow: 1;
   }
 
-  & td {
-    font-size: 18px;
-    height: 60px;
-    padding: 0 15px;
-    color: #ffffff;
-    background-color: #000000;
-    border-radius: 25px;
+  &__pagination-wrapper {
+    flex-shrink: 0;
   }
 
-  & th:first-child,
-  & td:first-child {
-    text-align: left;
+  &__add-topic {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & span {
+      font-size: 16px;
+      user-select: none;
+    }
+
+    & button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 20px;
+      max-width: 20px;
+      min-height: 20px;
+      max-height: 20px;
+      padding: 0;
+      outline: none;
+      border: 1px solid var(--layout-black);
+      border-radius: 5px;
+      background-color: var(--layout-white);
+      cursor: pointer;
+    }
   }
 
-  & th:not(:first-child),
-  & td:not(:first-child) {
-    width: 120px;
+  &__head {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    user-select: none;
+  }
+
+  &__body {
+    flex-grow: 1;
+    padding: 0 5px 5px 0;
+    margin: 0 -5px -5px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &.scroll {
+      margin-right: -10px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--layout-2-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: 2px solid var(--layout-2-color);
+      border-radius: 20px;
+      background-color: var(--layout-black);
+    }
+  }
+
+  &__not-found {
+    font-size: 22px;
     text-align: center;
+
+    & svg {
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
   }
 }

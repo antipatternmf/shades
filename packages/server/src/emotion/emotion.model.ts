@@ -44,7 +44,6 @@ export class EmotionModel extends Model<EmotionModel, Creation> {
 
   @ForeignKey(() => UserModel)
   @AllowNull(false)
-  // @Index
   @Column({
     type: DataType.INTEGER,
     field: 'owner_id',

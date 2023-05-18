@@ -329,15 +329,12 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
             "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ThreadType"
-                  }
+                  "$ref": "#/components/schemas/AllThreadsDto"
                 }
               }
             }
@@ -652,13 +649,13 @@
         "tags": [
           "Post"
         ],
-        "summary": "Get all posts of thread",
+        "summary": "Get all answers to post",
         "operationId": "getAllAnswersOfPosts",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Thread ID",
+            "description": "Parent ID",
             "required": true,
             "schema": {
               "type": "integer"
@@ -680,15 +677,12 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
             "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PostType"
-                  }
+                  "$ref": "#/components/schemas/AllAnswersDto"
                 }
               }
             }
@@ -737,15 +731,12 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
             "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PostType"
-                  }
+                  "$ref": "#/components/schemas/AllPostsDto"
                 }
               }
             }
@@ -1135,6 +1126,45 @@
           }
         ]
       }
+    },
+    "/user/set-user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add or update user info",
+        "operationId": "setUser",
+        "requestBody": {
+          "description": "Add or update user info",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1142,9 +1172,12 @@
       "UserType": {
         "required": [
           "id",
+          "login",
           "email",
           "updatedAt",
-          "createdAt"
+          "createdAt",
+          "first_name",
+          "second_name"
         ],
         "type": "object",
         "properties": {
@@ -1177,6 +1210,26 @@
             "type": "string",
             "format": "date-time",
             "example": "2020-01-02T14:22:22.000Z"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "second_name": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "display_name": {
+            "type": "string",
+            "example": ""
+          },
+          "phone": {
+            "type": "string",
+            "example": ""
+          },
+          "avatar": {
+            "type": "string",
+            "example": ""
           }
         }
       },
@@ -1256,6 +1309,51 @@
           }
         }
       },
+      "AllPostsDto": {
+        "type": "object",
+        "required": ["items", "total", "offset", "limit"],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostType"
+            }
+          },
+          "total": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "AllAnswersDto": {
+        "type": "object",
+        "required": ["items", "total", "offset", "limit", "parentId"],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostType"
+            }
+          },
+          "parentId": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        }
+      },
       "SiteThemeType": {
         "required": [
           "id",
@@ -1331,6 +1429,27 @@
             "type": "string",
             "format": "date-time",
             "example": "2020-01-02T14:22:22.000Z"
+          }
+        }
+      },
+      "AllThreadsDto": {
+        "type": "object",
+        "required": ["items", "total", "offset", "limit"],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ThreadType"
+            }
+          },
+          "total": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
           }
         }
       },
@@ -1443,7 +1562,10 @@
       },
       "CreateUserDto": {
         "required": [
-          "email"
+          "email",
+          "login",
+          "first_name",
+          "second_name"
         ],
         "type": "object",
         "properties": {
@@ -1455,13 +1577,25 @@
             "type": "string",
             "example": "login"
           },
-          "uuid": {
+          "first_name": {
             "type": "string",
-            "example": "23d3-23qeqa-sd121"
+            "example": "John"
           },
-          "authCookie": {
+          "second_name": {
             "type": "string",
-            "example": "qweqweqweqwe"
+            "example": "Doe"
+          },
+          "display_name": {
+            "type": "string",
+            "example": ""
+          },
+          "phone": {
+            "type": "string",
+            "example": ""
+          },
+          "avatar": {
+            "type": "string",
+            "example": ""
           }
         }
       },

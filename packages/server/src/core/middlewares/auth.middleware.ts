@@ -8,15 +8,18 @@ export const authMiddleware = async (
   next: NextFunction,
 ): Promise<void> => {
   const email = request.headers['authorization'] as string | undefined;
+
   if (!email) {
     response.status(StatusCodeEnum.ClientErrorForbidden).send();
     return;
   }
 
   try {
-    const user = await UserService.getOneOrCreateByEmail(email);
+    const user = await UserService.getOneByEmail(email);
+
     if (!user) {
       response.status(StatusCodeEnum.ClientErrorForbidden).send();
+
       return;
     }
 
@@ -24,6 +27,7 @@ export const authMiddleware = async (
       ...(request.body ?? {}),
       user,
     };
+
     next();
   } catch (error) {
     console.error(error);

@@ -9,9 +9,9 @@ export const postRouter = (router: Router) => {
     .post('/', [authMiddleware], PostController.create)
     .delete('/:id', [authMiddleware], PostController.delete)
     .put('/:id', [authMiddleware], PostController.update)
-    .get('/:id', [authMiddleware], PostController.getOne)
-    .get('/thread/:id', [authMiddleware], PostController.getAll)
-    .get('/answers/:id', [authMiddleware], PostController.getAnswers);
+    .get('/:id', [], PostController.getOne)
+    .get('/thread/:id', [], PostController.getAll)
+    .get('/answers/:id', [], PostController.getAnswers);
 
   router.use('/post', pRouter);
 };

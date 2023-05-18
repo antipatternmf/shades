@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   authApi,
   usersApi,
+  ForumApi,
   ChangePasswordRequest,
   SignInRequest,
   SignUpRequest,
@@ -12,31 +13,35 @@ import { requestErrorHandler } from 'utils/requestErrorHandler';
 
 const sliceName = 'user';
 
-export const userGet = createAsyncThunk(
-  `${sliceName}/userGet`,
-  async (data, thunkAPI) => {
-    try {
-      const res = await authApi.authUserGet();
-      return thunkAPI.fulfillWithValue(
-        transformAvatarUrlInUserResponse(res.data),
-      );
-    } catch (e) {
-      return thunkAPI.rejectWithValue(requestErrorHandler(e));
-    }
-  },
-);
+export const userGet = createAsyncThunk(`${sliceName}/userGet`, async (data, thunkAPI) => {
+  try {
+    const res = await authApi.authUserGet();
+    const { data: userData } = res;
 
-export const userLogout = createAsyncThunk(
-  `${sliceName}/userLeave`,
-  async (data, thunkAPI) => {
-    try {
-      const res = await authApi.authLogoutPost();
-      return res.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(requestErrorHandler(e));
-    }
-  },
-);
+    await ForumApi.userApi.setUser({
+      email: userData.email,
+      login: userData.login,
+      first_name: userData.first_name,
+      second_name: userData.second_name,
+      display_name: userData.display_name,
+      phone: userData.phone,
+      avatar: userData.avatar,
+    });
+
+    return thunkAPI.fulfillWithValue(transformAvatarUrlInUserResponse(res.data));
+  } catch (e) {
+    return thunkAPI.rejectWithValue(requestErrorHandler(e));
+  }
+});
+
+export const userLogout = createAsyncThunk(`${sliceName}/userLeave`, async (data, thunkAPI) => {
+  try {
+    const res = await authApi.authLogoutPost();
+    return res.data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue(requestErrorHandler(e));
+  }
+});
 
 export const signUp = createAsyncThunk(
   `${sliceName}/signUp`,
@@ -71,9 +76,7 @@ export const updateProfile = createAsyncThunk(
         display_name: '',
       });
 
-      return thunkAPI.fulfillWithValue(
-        transformAvatarUrlInUserResponse(response.data),
-      );
+      return thunkAPI.fulfillWithValue(transformAvatarUrlInUserResponse(response.data));
     } catch (error) {
       return thunkAPI.rejectWithValue(requestErrorHandler(error));
     }
@@ -99,9 +102,7 @@ export const updateAvatar = createAsyncThunk(
     try {
       const response = await usersApi.userProfileAvatarPut(data);
 
-      return thunkAPI.fulfillWithValue(
-        transformAvatarUrlInUserResponse(response.data),
-      );
+      return thunkAPI.fulfillWithValue(transformAvatarUrlInUserResponse(response.data));
     } catch (error) {
       return thunkAPI.rejectWithValue(requestErrorHandler(error));
     }

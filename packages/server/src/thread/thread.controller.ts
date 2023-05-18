@@ -101,17 +101,13 @@ export class ThreadController {
     const { offset, limit, title } = query;
 
     try {
-      const row = await ThreadService.getAll({
+      const allThreadsData = await ThreadService.getAll({
         offset: parseInt((offset ? offset : QUERY_OFFSET) as string, 10),
         limit: parseInt((limit ? limit : QUERY_LIMIT) as string, 10),
         title: title as string,
       });
-      if (!row) {
-        response.status(StatusCodeEnum.ClientErrorNotFound).json();
-        return;
-      }
 
-      response.status(StatusCodeEnum.SuccessOK).json(new ListThreadsType(row));
+      response.status(StatusCodeEnum.SuccessOK).json(new ListThreadsType(allThreadsData));
     } catch (error) {
       console.error(error);
       response.status(StatusCodeEnum.ClientErrorBadRequest).json({ error: ErrorEnum.ServerError });

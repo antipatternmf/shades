@@ -1,0 +1,123 @@
+.thread-post {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #eeeeee;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__reaction {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      &__emotion-button-wrapper {
+        position: relative;
+      }
+
+      &__emotion-button {
+        border: none;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        color: var(--layout-black);
+        cursor: pointer;
+      }
+
+      &__emotion-popup {
+        position: absolute;
+        z-index: 1;
+        top: 34px;
+        right: 0;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        width: calc(25px * 5 + 10px * 4 + 10px * 2 + 2px * 2);
+        padding: 10px;
+        border: 2px solid var(--layout-black);
+        border-radius: 15px;
+        background-color: var(--layout-white);
+
+        &__item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 25px;
+          height: 25px;
+          border-radius: 6px;
+          border: none;
+          font-size: 18px;
+          background: transparent;
+          cursor: pointer;
+
+          &:hover {
+            background: var(--layout-gray);
+          }
+
+          &_active {
+            background: var(--layout-3-color);
+          }
+        }
+      }
+    }
+  }
+
+  &__text {
+    font-size: 14px;
+    color: var(--layout-black);
+  }
+
+  &__emotions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 4px 10px;
+    border: 1px solid var(--layout-black);
+    border-radius: 6px;
+    background-color: var(--layout-white);
+
+    &__item {
+      position: relative;
+      user-select: none;
+      cursor: pointer;
+
+      &__counter {
+        position: absolute;
+        right: -5px;
+        bottom: -5px;
+        padding: 0 5px;
+        border-radius: 5px;
+        background-color: var(--layout-black);
+        color: var(--layout-white);
+        font-size: 10px;
+      }
+    }
+  }
+
+  &__replies-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      background: var(--layout-white);
+
+      &__load-more-button {
+        align-self: flex-start;
+      }
+    }
+  }
+}
